@@ -24,12 +24,6 @@ const app = express();
 // Never advertise the framework.
 app.disable('x-powered-by');
 
-// Trust the first proxy hop when deployed behind a load balancer/CDN, so the
-// real client IP (rate limiting) and protocol (secure cookies) are honoured.
-if (config.trustProxy) {
-  app.set('trust proxy', 1);
-}
-
 // ── View engine ────────────────────────────────────────────────────────────
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
@@ -44,7 +38,7 @@ app.use(compression());
 // Strict body-size limits; the form is small.
 app.use(express.urlencoded({ extended: false, limit: '32kb', parameterLimit: 50 }));
 app.use(express.json({ limit: '16kb' }));
-app.use(cookieParser(config.cookieSecret));
+app.use(cookieParser());
 
 if (config.isDev) {
   app.use(morgan('dev'));

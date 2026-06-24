@@ -11,9 +11,9 @@ const config = require('../config');
  *  - verifyToken(): on unsafe requests, checks the form/header token against
  *    the cookie using a constant-time comparison.
  *
- * Because the cookie is HttpOnly + SameSite=Lax and the token is also signed,
- * a cross-site attacker can neither read nor forge it. No server-side session
- * store is required.
+ * Because the cookie is HttpOnly + SameSite=Lax (and Secure in production), a
+ * cross-site attacker can neither read it (to copy the token into a forged
+ * form) nor set it. No server-side session store or signing secret is required.
  */
 
 const COOKIE_NAME = 'veylrio.csrf';
@@ -22,7 +22,6 @@ const cookieOptions = {
   httpOnly: true,
   sameSite: 'lax',
   secure: config.isProd,
-  signed: true,
   path: '/',
   maxAge: 1000 * 60 * 60 * 4, // 4 hours
 };
@@ -40,7 +39,7 @@ function safeEqual(a, b) {
 }
 
 function provideToken(req, res, next) {
-  let token = req.signedCookies && req.signedCookies[COOKIE_NAME];
+  let token = req.cookies && req.cookies[COOKIE_NAME];
   if (!token || typeof token !== 'string' || token.length !== 64) {
     token = generateToken();
     res.cookie(COOKIE_NAME, token, cookieOptions);
@@ -50,7 +49,7 @@ function provideToken(req, res, next) {
 }
 
 function verifyToken(req, res, next) {
-  const cookieToken = req.signedCookies && req.signedCookies[COOKIE_NAME];
+  const cookieToken = req.cookies && req.cookies[COOKIE_NAME];
   const submitted =
     (req.body && req.body._csrf) ||
     req.get('x-csrf-token') ||

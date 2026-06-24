@@ -15,10 +15,8 @@ Built as a server-rendered **Node.js + Express (MVC)** application with **Tailwi
 # 1. Install dependencies
 npm install
 
-# 2. Create your local environment file
+# 2. Create your local environment file (defaults work as-is for local dev)
 cp .env.example .env
-#    then generate a cookie secret and paste it into COOKIE_SECRET:
-node -e "console.log(require('crypto').randomBytes(48).toString('hex'))"
 
 # 3. Run in development (Tailwind watch + auto-reloading server)
 npm run dev
@@ -43,11 +41,11 @@ Open **http://localhost:3000**.
 ### Production run
 
 ```bash
-# Set real values in .env (NODE_ENV=production, SITE_URL, COOKIE_SECRET, TRUST_PROXY=1 behind a proxy)
+# Set real values in .env (NODE_ENV=production, SITE_URL, and the Gmail vars)
 npm start
 ```
 
-In production the app **requires** a real `COOKIE_SECRET` and will refuse to start with the placeholder.
+`NODE_ENV=production` enables HSTS, secure cookies and JSON logging.
 
 ---
 
@@ -103,7 +101,7 @@ veylrio/
 │  └─ projectValidator.js     # express-validator rules + error collector
 ├─ utils/
 │  ├─ icons.js                # Inline SVG line-icon set (CSP-clean, lightweight)
-│  ├─ notifier.js             # Inquiry delivery (log by default; SMTP/SendGrid/Resend ready)
+│  ├─ notifier.js             # Inquiry delivery (Gmail SMTP; records locally if unset)
 │  ├─ logger.js · asyncHandler.js
 ├─ views/
 │  ├─ layout.ejs              # HTML shell (express-ejs-layouts)
@@ -133,10 +131,11 @@ veylrio/
 The **Start a Project** form posts to `/start-a-project`. The flow is:
 `rate-limit → CSRF verify → validate/sanitise → notifier → 303 redirect to /thank-you`.
 
-Delivery is **safe by default** and pluggable (`utils/notifier.js`):
+Delivery uses **Gmail SMTP** via `nodemailer` (`utils/notifier.js`):
 
-- `MAIL_PROVIDER=log` (default) — records each inquiry to `logs/submissions.log` (git-ignored) and the console. **No email is sent.**
-- `MAIL_PROVIDER=smtp | sendgrid | resend` — stubs are in place with documented steps; install the provider SDK and fill the matching env vars to enable. No email dependency is bundled and no keys are hard-coded.
+- **Email is sent** when `GMAIL_USER` and `GMAIL_APP_PASSWORD` are set. Gmail requires an **App Password** (Google Account → 2-Step Verification → App passwords) — not your normal password. Replies go to the submitter (`replyTo`).
+- **If those are blank** (e.g. local dev), each inquiry is recorded to `logs/submissions.log` (git-ignored) and the console — **no email is sent**, nothing is lost.
+- Every submission is always appended to the local log as a safety net, even when email is enabled.
 
 ---
 
@@ -148,18 +147,18 @@ Delivery is **safe by default** and pluggable (`utils/notifier.js`):
 | ✅ | Strict CSP, **no `unsafe-inline`**, per-request nonce for inline JSON-LD | `middleware/security.js`, `views/partials/structured-data.ejs` |
 | ✅ | HSTS (production), `X-Content-Type-Options`, referrer policy, `frame-ancestors 'none'` | `middleware/security.js` |
 | ✅ | `X-Powered-By` disabled | `app.js` |
-| ✅ | CSRF protection (signed double-submit cookie, constant-time compare) | `middleware/csrf.js` |
+| ✅ | CSRF protection (double-submit cookie: HttpOnly + SameSite + Secure, constant-time compare) | `middleware/csrf.js` |
 | ✅ | Rate limiting on the form + global limiter | `middleware/rateLimiter.js` |
 | ✅ | Server-side validation **and** sanitisation of every field | `validators/projectValidator.js` |
 | ✅ | XSS defense: EJS auto-escaping (`<%= %>`) + `.escape()` on free-text | views + validator |
 | ✅ | Honeypot anti-spam field | `views/pages/start.ejs`, validator, controller |
 | ✅ | Body-size limits (`32kb`/`16kb`) + parameter limit | `app.js` |
-| ✅ | Secure cookie flags: `HttpOnly`, `SameSite=Lax`, `Secure` (prod), signed | `middleware/csrf.js` |
+| ✅ | Secure cookie flags: `HttpOnly`, `SameSite=Lax`, `Secure` (prod) | `middleware/csrf.js` |
 | ✅ | Safe, internal-only redirects | `controllers/projectController.js` |
 | ✅ | No stack traces leaked in production | `middleware/errorHandler.js` |
-| ✅ | No hardcoded secrets; `dotenv`; prod refuses placeholder secret | `config/index.js`, `.env.example` |
+| ✅ | No hardcoded secrets; credentials via `dotenv` / env vars only | `config/index.js`, `.env.example` |
 | ✅ | Graceful shutdown; async errors funneled to handler | `app.js`, `utils/asyncHandler.js` |
-| ⏳ | **Serve over HTTPS** (terminate TLS at your proxy/host) and set `TRUST_PROXY=1` | deployment |
+| ⏳ | **Serve over HTTPS** (terminate TLS at your proxy/host) | deployment |
 | ⏳ | Run `npm audit` regularly; keep dependencies patched | ops |
 
 ---
@@ -187,9 +186,9 @@ Delivery is **safe by default** and pluggable (`utils/notifier.js`):
 
 ## 7. Launch checklist
 
-- [ ] Set production env: `NODE_ENV=production`, real `SITE_URL=https://veylrio.com`, strong `COOKIE_SECRET`, `TRUST_PROXY=1` if behind a proxy/CDN.
+- [ ] Set production env: `NODE_ENV=production`, real `SITE_URL=https://veylrio.com`.
 - [ ] Serve over **HTTPS** with HTTP→HTTPS redirect at the proxy/host.
-- [ ] Choose & wire an email provider (`MAIL_PROVIDER`) and set `INQUIRY_NOTIFY_TO`; send a real test submission.
+- [ ] Set `GMAIL_USER` + `GMAIL_APP_PASSWORD` (Gmail App Password) and `INQUIRY_NOTIFY_TO`; send a real test submission.
 - [ ] Replace `public/images/veylrio-og.jpg` with a 1200×630 social image; preview on Slack/X/LinkedIn.
 - [ ] Confirm DNS, set up email for `contact@veylrio.com`, and add SPF/DKIM/DMARC for whatever sends mail.
 - [ ] Have **Privacy Policy** and **Terms** reviewed by a legal professional (they are clean starters — see the on-page notes).
