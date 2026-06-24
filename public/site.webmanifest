@@ -1,0 +1,14 @@
+{
+  "name": "Veylrio",
+  "short_name": "Veylrio",
+  "description": "Outbound infrastructure and operations systems for outbound-heavy teams.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#F0EBE1",
+  "theme_color": "#123A36",
+  "icons": [
+    { "src": "/images/icon-256.png", "sizes": "256x256", "type": "image/png" },
+    { "src": "/images/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ]
+}

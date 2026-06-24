@@ -1,0 +1,273 @@
+<!-- ══ HERO ════════════════════════════════════════════════════════════════ -->
+<section class="hero-screen relative isolate flex items-center overflow-hidden">
+  <!-- Brand "signal-fan" pattern on paper (dialed back so the headline pops) -->
+  <div class="absolute inset-0 -z-10 bg-paper" aria-hidden="true"></div>
+  <div class="hero-pattern absolute inset-0 -z-10 opacity-50" aria-hidden="true"></div>
+  <!-- Soft fade into the paper section that follows -->
+  <div class="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-32 bg-gradient-to-b from-transparent to-paper" aria-hidden="true"></div>
+
+  <div class="container relative w-full">
+    <div class="grid items-center gap-10 py-14 lg:grid-cols-12 lg:gap-8">
+      <!-- Copy -->
+      <div class="lg:col-span-7">
+        <!-- Brand mark (mobile/tablet — desktop shows the large mark at right) -->
+        <img
+          src="/logos/veylrio-mark-fullcolor.svg"
+          alt="Veylrio"
+          width="128"
+          height="128"
+          class="mb-7 h-14 w-14 lg:hidden"
+        />
+
+        <p class="eyebrow">Outbound Infrastructure &amp; Operations</p>
+
+        <h1 class="mt-6">
+          <span class="block font-display font-bold tracking-tight text-ink-700 leading-[1.02] text-[clamp(2.5rem,1.1rem+5vw,4.75rem)]">Less weight,</span>
+          <span class="mt-1 block font-serif italic font-medium text-clay-600 leading-[1.06] text-[clamp(2.5rem,1.1rem+5vw,4.75rem)]">more momentum.</span>
+        </h1>
+
+        <p class="lead mt-7 max-w-xl text-ink-600">
+          Systems that make business feel lighter. We help outbound-heavy teams clean up messy
+          operations and build the workflows, QA, data and dashboards needed to run with control.
+        </p>
+
+        <div class="mt-9 flex flex-col gap-3 sm:flex-row">
+          <a href="<%= site.cta.primary.href %>" class="btn-primary">
+            <%= site.cta.primary.label %>
+            <%- icon('arrow-right', 'arrow h-4 w-4') %>
+          </a>
+          <a href="<%= site.cta.secondary.href %>" class="btn-secondary">
+            <%= site.cta.secondary.label %>
+          </a>
+        </div>
+
+        <p class="mt-10 text-sm font-medium text-ink-500">
+          Built for real estate investors, roofing companies, recruiters, BPOs and outbound agencies.
+        </p>
+      </div>
+
+      <!-- Brand mark medallion (desktop) — the signal-fan mark with radiating rings -->
+      <div class="hidden lg:col-span-5 lg:flex lg:items-center lg:justify-center">
+        <div class="relative flex aspect-square w-full max-w-sm items-center justify-center">
+          <span class="absolute h-[28rem] w-[28rem] rounded-full border border-ink-700/5" aria-hidden="true"></span>
+          <span class="absolute h-[21rem] w-[21rem] rounded-full border border-ink-700/10" aria-hidden="true"></span>
+          <span class="absolute h-60 w-60 rounded-full bg-paper-100/70 blur-2xl" aria-hidden="true"></span>
+          <img
+            src="/logos/veylrio-mark-fullcolor.svg"
+            alt=""
+            aria-hidden="true"
+            width="128"
+            height="128"
+            class="relative h-44 w-44 xl:h-52 xl:w-52"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ PROBLEM ═════════════════════════════════════════════════════════════ -->
+<section class="section-y bg-paper">
+  <div class="container">
+    <div class="mx-auto max-w-3xl text-center">
+      <p class="eyebrow">The weight outbound teams carry</p>
+      <h2 class="mt-4 text-display-sm">Most outbound problems are not effort problems. They are system problems.</h2>
+      <p class="lead mt-5">
+        Teams dial hard and still lose money — because the dialer, the data, the QA and the
+        tracking were never set up to work together. The weight is in the operation, not the people.
+      </p>
+    </div>
+
+    <ul class="mx-auto mt-12 grid max-w-5xl gap-4 sm:grid-cols-2">
+      <% site.problems.forEach(function (problem) { %>
+        <li class="card-pad flex items-start gap-4">
+          <span class="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-clay-600/10 text-clay-700">
+            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+          </span>
+          <span class="text-ink-600"><%= problem %></span>
+        </li>
+      <% }); %>
+    </ul>
+  </div>
+</section>
+
+<!-- ══ WHAT VEYLRIO BUILDS ═════════════════════════════════════════════════ -->
+<section class="section-y bg-paper-100">
+  <div class="container">
+    <div class="grid gap-10 lg:grid-cols-12 lg:items-end">
+      <div class="lg:col-span-7">
+        <p class="eyebrow">What Veylrio builds</p>
+        <h2 class="mt-4 text-display-sm">The infrastructure your outbound runs on — set up, cleaned up, and built to be owned.</h2>
+      </div>
+      <div class="lg:col-span-5">
+        <p class="text-ink-500">
+          We do not provide callers by default. We build the systems, tracking, QA, dialer setup,
+          dashboards and workflows that make outbound teams work properly. Caller hiring support is
+          available as an add-on.
+        </p>
+      </div>
+    </div>
+
+    <div class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+      <% site.buildsHighlights.forEach(function (b) { %>
+        <div class="card-pad card-hover h-full">
+          <span class="icon-badge icon-badge--clay"><%- icon(b.icon, 'h-6 w-6') %></span>
+          <h3 class="mt-5 text-lg font-semibold text-ink-700"><%= b.title %></h3>
+          <p class="mt-2 text-sm leading-relaxed text-ink-500"><%= b.text %></p>
+        </div>
+      <% }); %>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SOLUTIONS OVERVIEW ══════════════════════════════════════════════════ -->
+<section class="section-y bg-paper">
+  <div class="container">
+    <div class="mx-auto max-w-3xl text-center">
+      <p class="eyebrow">Solutions</p>
+      <h2 class="mt-4 text-display-sm">Five connected systems, not a menu of one-off tasks.</h2>
+      <p class="lead mt-5">
+        Each system stands on its own and works better with the others. Start where it hurts most,
+        then build outward at a pace you control.
+      </p>
+    </div>
+
+    <div class="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+      <% site.solutionGroups.forEach(function (group) { %>
+        <a href="/solutions#<%= group.id %>" class="card-pad card-hover group flex h-full flex-col">
+          <div class="flex items-center justify-between">
+            <span class="icon-badge"><%- icon(group.icon, 'h-6 w-6') %></span>
+            <span class="font-display font-semibold text-sm text-ink-200"><%= group.number %></span>
+          </div>
+          <h3 class="mt-5 text-lg font-semibold text-ink-700"><%= group.title %></h3>
+          <p class="mt-2 flex-1 text-sm leading-relaxed text-ink-500"><%= group.summary %></p>
+          <span class="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-clay-700">
+            Explore
+            <%- icon('arrow-right', 'arrow h-4 w-4') %>
+          </span>
+        </a>
+      <% }); %>
+
+      <!-- CTA card -->
+      <div class="card-pad flex h-full flex-col justify-between bg-ink-700 text-cream">
+        <div>
+          <h3 class="text-lg font-semibold text-cream">Not sure where to start?</h3>
+          <p class="mt-2 text-sm leading-relaxed text-paper-200/80">
+            Tell us how your outbound runs today. We will point to the system that will take the
+            most weight off first.
+          </p>
+        </div>
+        <a href="<%= site.cta.primary.href %>" class="btn-on-dark mt-6 w-full">
+          <%= site.cta.primary.label %>
+          <%- icon('arrow-right', 'arrow h-4 w-4') %>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ OPERATING PHILOSOPHY ════════════════════════════════════════════════ -->
+<section class="relative overflow-hidden bg-ink-700 text-cream">
+  <div class="pointer-events-none absolute inset-0 pattern-tile opacity-[0.05] mask-fade-y" aria-hidden="true"></div>
+  <div class="container relative section-y">
+    <div class="grid gap-12 lg:grid-cols-12">
+      <div class="lg:col-span-5">
+        <p class="eyebrow eyebrow--on-dark">How we operate</p>
+        <h2 class="mt-4 text-display-sm text-cream">We remove weight before we add anything.</h2>
+        <p class="lead lead--on-dark mt-5">
+          Veylrio does not sell noise, hype or fake transformation. We build clean systems, clear
+          workflows and usable infrastructure — the kind your team can run without us in the room.
+        </p>
+        <p class="mt-6 font-serif text-xl italic text-clay-400">Less Weight, More Momentum</p>
+      </div>
+
+      <div class="lg:col-span-7">
+        <div class="grid gap-px overflow-hidden rounded-2xl border border-cream/10 bg-cream/10 sm:grid-cols-2">
+          <% site.principles.forEach(function (p) { %>
+            <div class="bg-ink-700 p-6 md:p-7">
+              <h3 class="text-base font-semibold text-cream"><%= p.title %></h3>
+              <p class="mt-2 text-sm leading-relaxed text-paper-200/80"><%= p.text %></p>
+            </div>
+          <% }); %>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ PROCESS ═════════════════════════════════════════════════════════════ -->
+<section class="section-y bg-paper">
+  <div class="container">
+    <div class="mx-auto max-w-3xl text-center">
+      <p class="eyebrow">How engagements run</p>
+      <h2 class="mt-4 text-display-sm">A clear path from messy to managed.</h2>
+      <p class="lead mt-5">No black-box setup. Every step is visible, practical and handed back to you.</p>
+    </div>
+
+    <ol class="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+      <% site.process.forEach(function (step, i) { %>
+        <li class="relative card-pad h-full">
+          <span class="font-display font-semibold text-3xl text-clay-600/30"><%= step.number %></span>
+          <h3 class="mt-3 text-lg font-semibold text-ink-700"><%= step.title %></h3>
+          <p class="mt-2 text-sm leading-relaxed text-ink-500"><%= step.text %></p>
+        </li>
+      <% }); %>
+    </ol>
+  </div>
+</section>
+
+<!-- ══ WHY VEYLRIO ═════════════════════════════════════════════════════════ -->
+<section class="section-y bg-paper-100">
+  <div class="container">
+    <div class="grid gap-12 lg:grid-cols-12 lg:items-center">
+      <div class="lg:col-span-5">
+        <p class="eyebrow">Why Veylrio</p>
+        <h2 class="mt-4 text-display-sm">Operators who build systems you actually own.</h2>
+        <p class="lead mt-5">
+          We have run the workflows we build. That means infrastructure grounded in how outbound
+          really works — and clean handover, so the systems keep working long after we step back.
+        </p>
+        <a href="/why-veylrio" class="mt-7 inline-flex items-center gap-2 font-semibold text-clay-700 hover:text-clay-800">
+          Why teams choose Veylrio
+          <%- icon('arrow-right', 'arrow h-4 w-4') %>
+        </a>
+      </div>
+
+      <div class="lg:col-span-7">
+        <ul class="grid gap-4 sm:grid-cols-2">
+          <% site.trustPoints.slice(0, 4).forEach(function (point) { %>
+            <li class="card-pad h-full">
+              <span class="flex h-9 w-9 items-center justify-center rounded-lg bg-ink-700/[0.06] text-ink-700">
+                <%- icon('check', 'h-5 w-5') %>
+              </span>
+              <h3 class="mt-4 text-base font-semibold text-ink-700"><%= point.title %></h3>
+              <p class="mt-2 text-sm leading-relaxed text-ink-500"><%= point.text %></p>
+            </li>
+          <% }); %>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ WHO WE HELP ═════════════════════════════════════════════════════════ -->
+<section class="section-y bg-paper">
+  <div class="container">
+    <div class="mx-auto max-w-3xl text-center">
+      <p class="eyebrow">Who we help</p>
+      <h2 class="mt-4 text-display-sm">Outbound-heavy teams with operations worth getting right.</h2>
+      <p class="lead mt-5">
+        If your team lives on the phones — and money leaks when the dialer, data, QA or tracking
+        breaks — you are who we build for.
+      </p>
+    </div>
+    <div class="mx-auto mt-10 flex max-w-4xl flex-wrap justify-center gap-3">
+      <% site.audiences.forEach(function (audience) { %>
+        <span class="chip"><%= audience %></span>
+      <% }); %>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FINAL CTA ═══════════════════════════════════════════════════════════ -->
+<%- include('../partials/cta') %>

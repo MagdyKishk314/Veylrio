@@ -1,0 +1,62 @@
+<%
+  const orgId = site.siteUrl + '/#organization';
+  const siteId = site.siteUrl + '/#website';
+  const serviceId = site.siteUrl + '/#service';
+
+  const graph = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'Organization',
+        '@id': orgId,
+        name: site.brand.name,
+        url: site.siteUrl + '/',
+        email: site.brand.email,
+        slogan: site.brand.slogan,
+        description: site.brand.descriptor,
+        logo: {
+          '@type': 'ImageObject',
+          url: site.siteUrl + '/images/icon-512.png',
+          width: 512,
+          height: 512
+        }
+      },
+      {
+        '@type': 'WebSite',
+        '@id': siteId,
+        url: site.siteUrl + '/',
+        name: site.brand.name,
+        publisher: { '@id': orgId },
+        inLanguage: 'en'
+      },
+      {
+        '@type': 'ProfessionalService',
+        '@id': serviceId,
+        name: site.brand.name,
+        url: site.siteUrl + '/',
+        image: site.siteUrl + '/images/veylrio-og.jpg',
+        email: site.brand.email,
+        description: site.brand.descriptor,
+        parentOrganization: { '@id': orgId },
+        areaServed: 'Worldwide',
+        serviceType: [
+          'Outbound infrastructure consulting',
+          'Outbound operations systems',
+          'Dialer setup and optimization',
+          'CRM workflow setup',
+          'QA scorecards for call centers',
+          'Caller performance tracking',
+          'Sales operations systems'
+        ],
+        knowsAbout: [
+          'Outbound operations',
+          'Cold calling systems',
+          'Call center operations consulting',
+          'Outbound sales operations',
+          'Business operations systems'
+        ]
+      }
+    ]
+  };
+%>
+<script type="application/ld+json" nonce="<%= cspNonce %>"><%- JSON.stringify(graph) %></script>

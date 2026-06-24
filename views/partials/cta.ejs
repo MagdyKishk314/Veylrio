@@ -1,0 +1,26 @@
+<%
+  const ctaHeading = (typeof heading !== 'undefined' && heading) ? heading : 'Ready to take the weight off your operation?';
+  const ctaText = (typeof text !== 'undefined' && text) ? text : 'Tell us how your outbound runs today and what is slowing it down. We will review the details and reply with a clear, practical next step — no pressure, no pitch deck.';
+%>
+<section class="relative overflow-hidden bg-ink-800 text-cream">
+  <div class="pointer-events-none absolute inset-0 pattern-tile opacity-[0.06] mask-fade-y" aria-hidden="true"></div>
+  <div class="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-clay-600/15 blur-3xl" aria-hidden="true"></div>
+
+  <div class="container relative">
+    <div class="mx-auto max-w-3xl py-20 text-center md:py-28">
+      <p class="eyebrow eyebrow--on-dark justify-center">Start a Project</p>
+      <h2 class="mt-4 text-display-sm text-cream"><%= ctaHeading %></h2>
+      <p class="lead lead--on-dark mx-auto mt-5 max-w-2xl"><%= ctaText %></p>
+      <div class="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
+        <a href="<%= site.cta.primary.href %>" class="btn-on-dark w-full sm:w-auto">
+          <%= site.cta.primary.label %>
+          <%- icon('arrow-right', 'arrow h-4 w-4') %>
+        </a>
+        <a href="mailto:<%= site.contactEmail %>" class="btn-outline-on-dark w-full sm:w-auto">
+          <%- icon('mail', 'h-4 w-4') %>
+          Email us directly
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

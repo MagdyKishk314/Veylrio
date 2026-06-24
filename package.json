@@ -1,0 +1,42 @@
+{
+  "name": "veylrio-website",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Veylrio — premium operations & outbound infrastructure consulting. Production website (Node.js + Express MVC + Tailwind CSS).",
+  "license": "UNLICENSED",
+  "author": "Veylrio",
+  "engines": {
+    "node": ">=18.18.0"
+  },
+  "main": "app.js",
+  "scripts": {
+    "build:css": "tailwindcss -i ./src/styles/tailwind.css -o ./public/css/styles.css --minify",
+    "watch:css": "tailwindcss -i ./src/styles/tailwind.css -o ./public/css/styles.css --watch",
+    "dev:server": "cross-env NODE_ENV=development nodemon app.js",
+    "dev": "cross-env NODE_ENV=development concurrently -k -n \"css,server\" -c \"yellow,cyan\" \"npm:watch:css\" \"npm:dev:server\"",
+    "prestart": "npm run build:css",
+    "start": "cross-env NODE_ENV=production node app.js"
+  },
+  "dependencies": {
+    "compression": "^1.7.4",
+    "cookie-parser": "^1.4.7",
+    "dotenv": "^16.4.5",
+    "ejs": "^3.1.10",
+    "express": "^4.21.2",
+    "express-ejs-layouts": "^2.5.1",
+    "express-rate-limit": "^7.5.0",
+    "express-validator": "^7.2.1",
+    "helmet": "^7.2.0",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/forms": "^0.5.10",
+    "@tailwindcss/typography": "^0.5.16",
+    "autoprefixer": "^10.4.20",
+    "concurrently": "^9.1.2",
+    "cross-env": "^7.0.3",
+    "nodemon": "^3.1.9",
+    "postcss": "^8.4.49",
+    "tailwindcss": "^3.4.17"
+  }
+}

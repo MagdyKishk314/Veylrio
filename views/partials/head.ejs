@@ -1,0 +1,70 @@
+<%
+  const s = (typeof seo !== 'undefined' && seo) ? seo : {};
+  const pageTitle = s.title || (site.brand.name + ' — ' + site.brand.slogan);
+  const pageDesc = s.description || site.brand.descriptor;
+  const canonical = site.siteUrl + (s.path || currentPath || '/');
+  const ogImage = site.siteUrl + (s.ogImage || '/images/veylrio-og.jpg');
+  const robots = s.noindex ? 'noindex, nofollow' : 'index, follow';
+%>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+<title><%= pageTitle %></title>
+<meta name="description" content="<%= pageDesc %>" />
+<meta name="robots" content="<%= robots %>" />
+<% if (!s.noindex) { %>
+<link rel="canonical" href="<%= canonical %>" />
+<% } %>
+<meta name="theme-color" content="#123A36" />
+<meta name="color-scheme" content="light" />
+
+<!-- Open Graph -->
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="<%= site.brand.name %>" />
+<meta property="og:title" content="<%= pageTitle %>" />
+<meta property="og:description" content="<%= pageDesc %>" />
+<meta property="og:url" content="<%= s.noindex ? site.siteUrl + '/' : canonical %>" />
+<meta property="og:image" content="<%= ogImage %>" />
+<meta property="og:image:type" content="image/jpeg" />
+<meta property="og:image:alt" content="Veylrio — Less Weight, More Momentum" />
+<meta property="og:locale" content="en_US" />
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="<%= pageTitle %>" />
+<meta name="twitter:description" content="<%= pageDesc %>" />
+<meta name="twitter:image" content="<%= ogImage %>" />
+<meta name="twitter:image:alt" content="Veylrio — Less Weight, More Momentum" />
+
+<!-- Icons & manifest -->
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+<link rel="manifest" href="/site.webmanifest" />
+
+<!-- First-party styles first so they are not queued behind the font request -->
+<link rel="stylesheet" href="/css/styles.css" />
+
+<!--
+  Fonts: preconnect, then load NON-render-blocking. The stylesheet is preloaded
+  and flipped to rel="stylesheet" by main.js (CSP-safe: no inline handler).
+  <noscript> guarantees fonts for users without JavaScript.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  id="veylrio-fonts"
+  rel="preload"
+  as="style"
+  href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Sora:wght@600;700&family=Newsreader:ital,wght@1,400;1,500&display=swap"
+/>
+<noscript>
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Sora:wght@600;700&family=Newsreader:ital,wght@1,400;1,500&display=swap"
+  />
+</noscript>
+
+<!-- Structured data -->
+<%- include('structured-data') %>

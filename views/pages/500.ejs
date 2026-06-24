@@ -1,0 +1,20 @@
+<section class="relative overflow-hidden bg-ink-700 text-cream">
+  <div class="pointer-events-none absolute inset-0 pattern-tile opacity-[0.06]" aria-hidden="true"></div>
+  <div class="container relative">
+    <div class="mx-auto max-w-xl py-28 text-center md:py-36">
+      <p class="font-display font-bold text-6xl text-clay-400"><%= typeof statusCode !== 'undefined' ? statusCode : 500 %></p>
+      <h1 class="mt-4 text-display-sm text-cream">Something went wrong.</h1>
+      <p class="lead lead--on-dark mx-auto mt-5 max-w-md">
+        <%= typeof safeMessage !== 'undefined' ? safeMessage : 'An unexpected error occurred. Please try again, or email us directly.' %>
+      </p>
+      <div class="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
+        <a href="/" class="btn-on-dark">Back to home</a>
+        <a href="mailto:<%= site.contactEmail %>" class="btn-outline-on-dark">Email us</a>
+      </div>
+
+      <% if (typeof detail !== 'undefined' && detail) { %>
+        <pre class="mt-10 overflow-auto rounded-xl border border-cream/10 bg-ink-900/60 p-4 text-left text-xs text-paper-200/70"><%= detail %></pre>
+      <% } %>
+    </div>
+  </div>
+</section>

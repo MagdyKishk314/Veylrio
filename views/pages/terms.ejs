@@ -1,0 +1,99 @@
+<section class="bg-ink-800 text-cream">
+  <div class="container">
+    <div class="max-w-3xl py-16 md:py-20">
+      <p class="eyebrow eyebrow--on-dark">Legal</p>
+      <h1 class="mt-5 text-display-sm text-cream">Terms of Use</h1>
+      <p class="mt-4 text-paper-200/70">Last updated: <%= updated %></p>
+    </div>
+  </div>
+</section>
+
+<section class="section-y bg-paper">
+  <div class="container">
+    <div class="mx-auto max-w-prose">
+<% if (!isProd) { %>
+      <%# Owner-facing reminder — only renders in non-production builds. %>
+      <div class="mb-10 rounded-2xl border border-clay-600/30 bg-clay-600/[0.06] p-5">
+        <p class="text-sm text-ink-600">
+          <strong class="font-semibold text-ink-700">Dev note (hidden in production):</strong> These are
+          clean starter terms. Have them reviewed by a qualified legal professional and tailored to your
+          jurisdiction and engagement model before launch.
+        </p>
+      </div>
+<% } %>
+
+      <div class="prose max-w-none prose-headings:font-display prose-headings:text-ink-700 prose-h2:text-2xl prose-h2:mt-12 prose-h3:text-lg prose-a:text-clay-700 prose-a:no-underline hover:prose-a:underline prose-strong:text-ink-700 text-ink-600">
+        <p>
+          These Terms of Use (“Terms”) govern your access to and use of the
+          <%= site.brand.domain %> website operated by <%= site.brand.legalName %>
+          (“Veylrio”, “we”, “us”). By using this website, you agree to these Terms.
+        </p>
+
+        <h2>Use of the website</h2>
+        <p>
+          You may use this website for lawful purposes only. You agree not to misuse the site,
+          interfere with its operation or security, attempt unauthorised access, or use it to transmit
+          harmful or unlawful content.
+        </p>
+
+        <h2>Inquiries and no obligation</h2>
+        <p>
+          Submitting the “Start a Project” form, or otherwise contacting us, does not create a
+          contract or any obligation on either side. Any engagement is subject to a separate written
+          agreement that defines scope, deliverables, fees and terms.
+        </p>
+
+        <h2>Information on this site</h2>
+        <p>
+          The content on this website is provided for general information about our services. It does
+          not constitute professional, legal, financial or business advice, and we make no warranty
+          that it is complete, current or error-free.
+        </p>
+
+        <h2>Intellectual property</h2>
+        <p>
+          The Veylrio name, logo, brand assets, text, design and other materials on this site are
+          owned by or licensed to us and are protected by applicable intellectual-property laws. You
+          may not copy, reproduce or reuse them without our prior written permission.
+        </p>
+
+        <h2>Third-party links</h2>
+        <p>
+          This site may contain links to third-party websites. We do not control and are not
+          responsible for their content, products or practices, and links do not imply endorsement.
+        </p>
+
+        <h2>Disclaimer of warranties</h2>
+        <p>
+          This website is provided on an “as is” and “as available” basis without warranties of any
+          kind, whether express or implied, to the fullest extent permitted by law.
+        </p>
+
+        <h2>Limitation of liability</h2>
+        <p>
+          To the fullest extent permitted by law, Veylrio will not be liable for any indirect,
+          incidental, special or consequential damages arising from your use of, or inability to use,
+          this website.
+        </p>
+
+        <h2>Changes to these Terms</h2>
+        <p>
+          We may update these Terms from time to time. Continued use of the site after changes take
+          effect constitutes acceptance of the revised Terms.
+        </p>
+
+        <h2>Governing law</h2>
+        <p>
+          These Terms are governed by the laws of the jurisdiction in which Veylrio operates, without
+          regard to conflict-of-law principles.
+        </p>
+
+        <h2>Contact</h2>
+        <p>
+          Questions about these Terms? Email
+          <a href="mailto:<%= site.contactEmail %>"><%= site.contactEmail %></a>.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>

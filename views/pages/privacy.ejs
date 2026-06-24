@@ -1,0 +1,119 @@
+<section class="bg-ink-800 text-cream">
+  <div class="container">
+    <div class="max-w-3xl py-16 md:py-20">
+      <p class="eyebrow eyebrow--on-dark">Legal</p>
+      <h1 class="mt-5 text-display-sm text-cream">Privacy Policy</h1>
+      <p class="mt-4 text-paper-200/70">Last updated: <%= updated %></p>
+    </div>
+  </div>
+</section>
+
+<section class="section-y bg-paper">
+  <div class="container">
+    <div class="mx-auto max-w-prose">
+<% if (!isProd) { %>
+      <%# Owner-facing reminder — only renders in non-production builds. %>
+      <div class="mb-10 rounded-2xl border border-clay-600/30 bg-clay-600/[0.06] p-5">
+        <p class="text-sm text-ink-600">
+          <strong class="font-semibold text-ink-700">Dev note (hidden in production):</strong> This is a
+          clean starter policy. Have it reviewed by a qualified legal professional and tailored to your
+          jurisdiction and actual data practices before launch.
+        </p>
+      </div>
+<% } %>
+
+      <div class="prose max-w-none prose-headings:font-display prose-headings:text-ink-700 prose-h2:text-2xl prose-h2:mt-12 prose-h3:text-lg prose-a:text-clay-700 prose-a:no-underline hover:prose-a:underline prose-strong:text-ink-700 text-ink-600">
+        <p>
+          This Privacy Policy explains how <%= site.brand.legalName %> (“Veylrio”, “we”, “us”) collects,
+          uses and protects information when you visit <%= site.brand.domain %> or contact us through
+          this website.
+        </p>
+
+        <h2>Information we collect</h2>
+        <p>We collect only what we need to respond to you and operate this site:</p>
+        <ul>
+          <li><strong>Information you provide.</strong> When you submit the “Start a Project” form, we collect the details you enter — such as your name, company, work email, phone or WhatsApp number, website, industry, team size, current tools, your message, preferred contact method, timeline and optional budget range.</li>
+          <li><strong>Technical information.</strong> Standard server logs may record information such as your IP address, browser type and the pages you request, used to keep the site secure and reliable.</li>
+        </ul>
+
+        <h2>How we use your information</h2>
+        <ul>
+          <li>To review your inquiry and respond through your preferred contact method.</li>
+          <li>To understand your operation so we can suggest a practical next step.</li>
+          <li>To operate, secure and improve this website.</li>
+          <li>To comply with legal obligations where they apply.</li>
+        </ul>
+
+        <h2>Legal basis for processing</h2>
+        <p>
+          Where applicable law (such as the GDPR) requires a legal basis, we rely on your consent and
+          on our legitimate interest in responding to inquiries and running our business. You can
+          withdraw consent or object at any time by contacting us.
+        </p>
+
+        <h2>How we share information</h2>
+        <p>
+          We do not sell your personal information. We may share it with trusted service providers who
+          help us operate the site and communicate with you (for example, email or hosting providers),
+          and only as needed to provide those services. We may also disclose information where required
+          by law.
+        </p>
+
+        <h2>Data retention</h2>
+        <p>
+          We keep inquiry details for as long as needed to respond and to maintain a reasonable record
+          of our communications, after which we delete or anonymise them, unless a longer period is
+          required by law.
+        </p>
+
+        <h2>Security</h2>
+        <p>
+          We apply reasonable technical and organisational measures to protect your information,
+          including secure transport (HTTPS), restricted access and input validation. No method of
+          transmission or storage is completely secure, however, and we cannot guarantee absolute
+          security.
+        </p>
+
+        <h2>Your rights</h2>
+        <p>
+          Depending on your location, you may have rights to access, correct, delete or restrict the
+          use of your personal information, or to object to processing and request portability. To
+          exercise any of these, email us at
+          <a href="mailto:<%= site.contactEmail %>"><%= site.contactEmail %></a>.
+        </p>
+
+        <h2>Cookies</h2>
+        <p>
+          This site uses a single, strictly necessary cookie to protect forms against cross-site
+          request forgery. It is not used for advertising or cross-site tracking. We do not load
+          third-party advertising or analytics cookies by default; if that changes, this policy will be
+          updated.
+        </p>
+
+        <h2>Third-party links</h2>
+        <p>
+          Our site may link to third-party websites. We are not responsible for their content or
+          privacy practices, and we encourage you to review their policies.
+        </p>
+
+        <h2>Children</h2>
+        <p>
+          This site is intended for businesses and is not directed to children. We do not knowingly
+          collect personal information from children.
+        </p>
+
+        <h2>Changes to this policy</h2>
+        <p>
+          We may update this policy from time to time. We will revise the “Last updated” date above
+          when we do.
+        </p>
+
+        <h2>Contact</h2>
+        <p>
+          Questions about this policy or your information? Email
+          <a href="mailto:<%= site.contactEmail %>"><%= site.contactEmail %></a>.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>

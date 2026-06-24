@@ -1,0 +1,72 @@
+<%
+  function isActive(href) {
+    if (href === '/') return currentPath === '/';
+    return currentPath === href || currentPath.indexOf(href + '/') === 0;
+  }
+%>
+<header class="site-header" data-header>
+  <div class="container">
+    <div class="flex h-16 items-center justify-between gap-4 md:h-20">
+      <!-- Logo -->
+      <a href="/" class="flex items-center" aria-label="Veylrio — home">
+        <img
+          src="/logos/veylrio-horizontal-reversed.svg"
+          alt="Veylrio"
+          width="224"
+          height="71"
+          class="h-8 w-auto md:h-9"
+        />
+      </a>
+
+      <!-- Desktop nav -->
+      <nav class="hidden items-center gap-1 md:flex" aria-label="Primary">
+        <% site.nav.forEach(function (item) { %>
+          <a
+            href="<%= item.href %>"
+            class="nav-link"
+            <%= isActive(item.href) ? 'aria-current="page"' : '' %>
+          ><%= item.label %></a>
+        <% }); %>
+      </nav>
+
+      <!-- Desktop CTA -->
+      <div class="hidden md:block">
+        <a href="<%= site.cta.primary.href %>" class="btn-primary">
+          <%= site.cta.primary.label %>
+          <%- icon('arrow-right', 'arrow h-4 w-4') %>
+        </a>
+      </div>
+
+      <!-- Mobile toggle -->
+      <button
+        type="button"
+        class="inline-flex items-center justify-center rounded-lg p-2 text-cream focus-visible:ring-offset-ink-700 md:hidden"
+        data-nav-toggle
+        aria-expanded="false"
+        aria-controls="mobile-nav"
+        aria-label="Open menu"
+      >
+        <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
+          <path d="M4 7h16M4 12h16M4 17h16" />
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile nav panel -->
+  <div id="mobile-nav" class="border-t border-cream/10 bg-ink-800 md:hidden" hidden>
+    <nav class="container flex flex-col gap-1 py-4" aria-label="Mobile">
+      <% site.nav.forEach(function (item) { %>
+        <a
+          href="<%= item.href %>"
+          class="rounded-lg px-3 py-3 text-base font-medium text-paper-200/80 hover:bg-cream/[0.06] hover:text-cream <%= isActive(item.href) ? 'text-cream' : '' %>"
+          <%= isActive(item.href) ? 'aria-current="page"' : '' %>
+        ><%= item.label %></a>
+      <% }); %>
+      <a href="<%= site.cta.primary.href %>" class="btn-primary mt-2 w-full">
+        <%= site.cta.primary.label %>
+        <%- icon('arrow-right', 'arrow h-4 w-4') %>
+      </a>
+    </nav>
+  </div>
+</header>
