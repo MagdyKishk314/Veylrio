@@ -172,6 +172,20 @@
     @apply h-px w-full bg-ink-700/10;
   }
 
+  /* ── Slider (testimonials) — controls on dark ───────────────────────────── */
+  .slider-btn {
+    @apply inline-flex h-11 w-11 items-center justify-center rounded-full border border-cream/25 text-cream
+           transition hover:border-cream/60 hover:bg-cream/[0.06]
+           focus-visible:ring-cream focus-visible:ring-offset-ink-700;
+  }
+  .slider-dot {
+    @apply h-2 w-2 rounded-full bg-cream/30 transition hover:bg-cream/60
+           focus-visible:ring-cream focus-visible:ring-offset-ink-700;
+  }
+  .slider-dot[aria-current='true'] {
+    @apply w-6 bg-clay-400;
+  }
+
   /* ── Forms ──────────────────────────────────────────────────────────────── */
   .field-label {
     @apply mb-1.5 block text-sm font-semibold text-ink-700;
@@ -237,6 +251,14 @@
   .mask-fade-y {
     -webkit-mask-image: linear-gradient(to bottom, transparent, #000 18%, #000 82%, transparent);
     mask-image: linear-gradient(to bottom, transparent, #000 18%, #000 82%, transparent);
+  }
+  /* Hide scrollbars on the snap-scroll slider track (still keyboard/touch scrollable) */
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
   }
 }
 
