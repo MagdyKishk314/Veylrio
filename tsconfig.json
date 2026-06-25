@@ -17,6 +17,7 @@
   },
   "include": [
     "app.ts",
+    "api/**/*.ts",
     "config/**/*.ts",
     "controllers/**/*.ts",
     "middleware/**/*.ts",

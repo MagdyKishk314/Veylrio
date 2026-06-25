@@ -12,6 +12,9 @@ public/css/styles.css
 # Compiled TypeScript output
 dist/
 
+# Vercel
+.vercel
+
 # Logs
 logs/
 *.log
