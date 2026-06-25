@@ -9,9 +9,9 @@ import site from '../config/site';
 export const home: RequestHandler = (req, res) => {
   res.render('pages/home', {
     seo: {
-      title: 'Veylrio — Outbound Infrastructure & Operations Systems',
+      title: 'Veylrio — Build Your Own Outbound Operation. Stop Renting One.',
       description:
-        'Veylrio helps outbound-heavy businesses clean up messy operations and build the dialer setup, CRM workflows, QA, dashboards and data systems needed to run with control and momentum.',
+        'Veylrio helps businesses build their own outbound sales operation — dialer, CRM, caller workflow, data process, reporting and operating structure — so you run outbound with visibility and control instead of renting a black box.',
       path: '/',
     },
   });
@@ -20,9 +20,9 @@ export const home: RequestHandler = (req, res) => {
 export const solutions: RequestHandler = (req, res) => {
   res.render('pages/solutions', {
     seo: {
-      title: 'Solutions — Outbound Infrastructure, QA & Reporting Systems | Veylrio',
+      title: 'Solutions — Build & Own Your Outbound Setup | Veylrio',
       description:
-        'Five connected operational systems for outbound teams: outbound infrastructure, performance visibility, quality & control, data & workflow systems, and advisory & build support.',
+        'Ways to build and own your outbound: Owned Outbound Setup, Vendor Exit Buildout, Caller + System Launch, Data + Dialer Management, and Outbound Advisory. We build the dialer, CRM, caller workflow, data and reporting you keep.',
       path: '/solutions',
     },
   });
@@ -31,9 +31,9 @@ export const solutions: RequestHandler = (req, res) => {
 export const why: RequestHandler = (req, res) => {
   res.render('pages/why', {
     seo: {
-      title: 'Why Veylrio — Operator-Built Outbound Systems You Own',
+      title: 'Why Veylrio — The Outbound System You Own, Not Rent',
       description:
-        'Veylrio is built by operators, not theory-only consultants. We build practical, client-owned outbound systems with no black boxes — clear process, clean handover, infrastructure you can run yourself.',
+        'Paying for outbound is not the same as owning it. Veylrio builds operator-level outbound systems with no black boxes — you own the caller workflow, CRM, data, recordings and reporting, documented and handed back to you.',
       path: '/why-veylrio',
     },
   });

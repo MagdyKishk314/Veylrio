@@ -52,6 +52,12 @@ const rules = [
     .custom((v) => inSet(v, site.form.industries)).withMessage('Please choose an industry.')
     .escape(),
 
+  body('outboundStatus')
+    .trim()
+    .optional({ checkFalsy: true })
+    .custom((v) => inSet(v, site.form.outboundStatus)).withMessage('Please choose a valid option.')
+    .escape(),
+
   body('teamSize')
     .trim()
     .custom((v) => inSet(v, site.form.teamSizes)).withMessage('Please choose a team size.')

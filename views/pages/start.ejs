@@ -14,11 +14,11 @@
   <div class="container relative">
     <div class="max-w-3xl py-16 md:py-20">
       <p class="eyebrow eyebrow--on-dark">Start a Project</p>
-      <h1 class="mt-5 text-display text-cream">Tell us what your outbound needs.</h1>
+      <h1 class="mt-5 text-display text-cream">Let’s scope your outbound system.</h1>
       <p class="lead lead--on-dark mt-6 max-w-2xl">
-        Share a little about your operation and what is broken or messy. There is no obligation and
-        no pitch deck — we will review the details and reply through your preferred contact method
-        with a clear, practical next step.
+        Tell us how you get customers today and what you have already tried. There is no obligation and
+        no pitch deck — we will review the details and reply through your preferred contact method with
+        a clear, practical next step.
       </p>
     </div>
   </div>
@@ -120,6 +120,18 @@
               </div>
 
               <div class="sm:col-span-2">
+                <label for="outboundStatus" class="field-label">Where are you with outbound today? <span class="text-ink-400 font-normal">(optional)</span></label>
+                <select id="outboundStatus" name="outboundStatus" class="<%= selectClass('outboundStatus') %>"
+                  <%= err('outboundStatus') ? 'aria-invalid="true" aria-describedby="outboundStatus-error"' : '' %>>
+                  <option value="" <%= val('outboundStatus') ? '' : 'selected' %>>Select one…</option>
+                  <% options.outboundStatus.forEach(function (opt) { %>
+                    <option value="<%= opt %>" <%= val('outboundStatus') === opt ? 'selected' : '' %>><%= opt %></option>
+                  <% }); %>
+                </select>
+                <% if (err('outboundStatus')) { %><p id="outboundStatus-error" class="field-error"><%= err('outboundStatus') %></p><% } %>
+              </div>
+
+              <div class="sm:col-span-2">
                 <label for="stack" class="field-label">Current dialer or CRM <span class="text-ink-400 font-normal">(optional)</span></label>
                 <input type="text" id="stack" name="stack" value="<%= val('stack') %>" maxlength="160" placeholder="e.g. a power dialer + a CRM, or “not sure”"
                   class="<%= inputClass('stack') %>" <%= err('stack') ? 'aria-invalid="true" aria-describedby="stack-error"' : '' %> />
@@ -137,7 +149,7 @@
             <div>
               <label for="needs" class="field-label">What do you need help with? <span class="text-clay-700">*</span></label>
               <textarea id="needs" name="needs" required maxlength="2000" data-counter="needs-count" rows="4"
-                placeholder="Dialer setup, dashboards, QA, data cleanup, advisory — whatever is on your mind."
+                placeholder="Building from scratch, leaving a vendor, hiring a caller, cleaner reporting — whatever is on your mind."
                 class="<%= textareaClass('needs') %>" <%= err('needs') ? 'aria-invalid="true" aria-describedby="needs-error needs-count"' : 'aria-describedby="needs-count"' %>><%= val('needs') %></textarea>
               <div class="flex items-center justify-between">
                 <% if (err('needs')) { %><p id="needs-error" class="field-error"><%= err('needs') %></p><% } else { %><span></span><% } %>
@@ -146,9 +158,9 @@
             </div>
 
             <div>
-              <label for="broken" class="field-label">What is currently broken or messy? <span class="text-ink-400 font-normal">(optional)</span></label>
+              <label for="broken" class="field-label">What have you tried, and what frustrated you? <span class="text-ink-400 font-normal">(optional)</span></label>
               <textarea id="broken" name="broken" maxlength="2000" data-counter="broken-count" rows="4"
-                placeholder="Where is money or time leaking today? What have you already tried?"
+                placeholder="Vendors, networks, callers, data… what did and didn’t work, and where money or time is leaking."
                 class="<%= textareaClass('broken') %>" <%= err('broken') ? 'aria-invalid="true" aria-describedby="broken-error broken-count"' : 'aria-describedby="broken-count"' %>><%= val('broken') %></textarea>
               <div class="flex items-center justify-between">
                 <% if (err('broken')) { %><p id="broken-error" class="field-error"><%= err('broken') %></p><% } else { %><span></span><% } %>
@@ -223,7 +235,7 @@
               <% [
                    {n: '1', t: 'We read it properly', d: 'A person reviews your details — not a bot, not a generic auto-reply.'},
                    {n: '2', t: 'We reply your way', d: 'We respond through your preferred contact method with a clear next step.'},
-                   {n: '3', t: 'We map the priority', d: 'If it is a fit, we point to the system that takes the most weight off first.'}
+                   {n: '3', t: 'We scope the setup', d: 'If it is a fit, we map what to build, what you already have, and what you should own by the end.'}
                  ].forEach(function (s) { %>
                 <li class="flex items-start gap-3">
                   <span class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-clay-600/10 font-display font-semibold text-sm text-clay-800"><%= s.n %></span>

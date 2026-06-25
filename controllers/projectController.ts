@@ -6,15 +6,15 @@ import asyncHandler from '../utils/asyncHandler';
 import logger from '../utils/logger';
 
 const SEO = {
-  title: 'Start a Project — Veylrio',
+  title: 'Start a Project — Build My Outbound System | Veylrio',
   description:
-    'Tell us about your outbound operation and what is broken or messy. We will review the details and reply through your preferred contact method.',
+    'Tell us how you get customers today and what you have already tried. We will scope the outbound setup you should own and reply through your preferred contact method.',
   path: '/start-a-project',
 };
 
 /** Fields we echo back into the form when validation fails (never the honeypot). */
 const ECHO_FIELDS = [
-  'name', 'company', 'email', 'phone', 'website', 'industry',
+  'name', 'company', 'email', 'phone', 'website', 'industry', 'outboundStatus',
   'teamSize', 'stack', 'needs', 'broken', 'contactMethod', 'timeline', 'budget',
 ] as const;
 
@@ -62,6 +62,7 @@ export const submitForm = asyncHandler(async (req, res) => {
     phone: b.phone,
     website: b.website || '',
     industry: b.industry,
+    outboundStatus: b.outboundStatus || '',
     teamSize: b.teamSize,
     stack: b.stack || '',
     needs: b.needs,

@@ -1,4 +1,5 @@
 import fs from 'fs';
+import os from 'os';
 import path from 'path';
 import type { Transporter } from 'nodemailer';
 import config from '../config';
@@ -24,6 +25,7 @@ export interface Submission {
   phone: string;
   website: string;
   industry: string;
+  outboundStatus: string;
   teamSize: string;
   stack: string;
   needs: string;
@@ -37,9 +39,13 @@ export interface Submission {
   };
 }
 
-// Resolve relative to the working directory so logs land at the project root
-// in both `tsx` dev runs and compiled (dist/) production runs.
-const LOG_DIR = path.join(process.cwd(), 'logs');
+// Local, append-only record of submissions. On serverless platforms (Vercel)
+// the project filesystem is read-only, so fall back to the writable temp dir.
+// Note: serverless temp storage is ephemeral — configure Gmail SMTP there so
+// inquiries are actually delivered, not just briefly recorded.
+const LOG_DIR = process.env.VERCEL
+  ? path.join(os.tmpdir(), 'veylrio')
+  : path.join(process.cwd(), 'logs');
 const LOG_FILE = path.join(LOG_DIR, 'submissions.log');
 
 const mailEnabled = Boolean(config.mail.user && config.mail.pass);
@@ -76,6 +82,7 @@ function buildEmail(s: Submission): string {
     `Phone / WhatsApp:${s.phone}`,
     `Website:         ${s.website || '—'}`,
     `Industry:        ${s.industry}`,
+    `Outbound today:  ${s.outboundStatus || '—'}`,
     `Team size:       ${s.teamSize}`,
     `Dialer / CRM:    ${s.stack || '—'}`,
     `Preferred:       ${s.contactMethod}`,
