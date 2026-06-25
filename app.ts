@@ -36,21 +36,26 @@ if (process.env.VERCEL) {
   app.set('trust proxy', 1);
 }
 
-// ── View engine ────────────────────────────────────────────────────────────
-// Resolve the views directory robustly. cwd works for local/dist runs; the
-// __dirname-relative candidates cover serverless bundling (e.g. Vercel) where
-// the working directory may differ from where the code is executed.
-function resolveViews(): string {
+// Resolve a runtime directory (views / public) robustly. cwd works for
+// local/dist runs; the __dirname-relative candidates cover serverless bundling
+// (e.g. Vercel) where the working directory may differ from the code location.
+function resolveDir(name: string): string {
   const candidates = [
-    path.join(ROOT, 'views'),
-    path.join(__dirname, 'views'),
-    path.join(__dirname, '..', 'views'),
+    path.join(ROOT, name),
+    path.join(__dirname, name),
+    path.join(__dirname, '..', name),
   ];
   return candidates.find((dir) => fs.existsSync(dir)) ?? candidates[0];
 }
 
+// ── View engine ────────────────────────────────────────────────────────────
+// Express loads the EJS engine via a dynamic require() at render time. Touching
+// it here (static literal) ensures bundlers like Vercel's @vercel/node trace
+// and include it in the serverless function.
+require('ejs');
+
 app.set('view engine', 'ejs');
-app.set('views', resolveViews());
+app.set('views', resolveDir('views'));
 app.use(expressLayouts);
 app.set('layout', 'layout');
 
@@ -70,7 +75,7 @@ if (config.isDev) {
 
 // ── Static assets ──────────────────────────────────────────────────────────
 app.use(
-  express.static(path.join(ROOT, 'public'), {
+  express.static(resolveDir('public'), {
     etag: true,
     redirect: false,
     dotfiles: 'ignore',

@@ -6,8 +6,10 @@ node_modules/
 .env.local
 .env.*.local
 
-# Build output (generated from src/styles/tailwind.css)
-public/css/styles.css
+# Built Tailwind CSS (public/css/styles.css) is COMMITTED so Vercel can serve
+# it without a build step. Run `npm run build:css` after editing styles and
+# commit the result. (Re-add the ignore below if you switch to building on CI.)
+# public/css/styles.css
 
 # Compiled TypeScript output
 dist/
