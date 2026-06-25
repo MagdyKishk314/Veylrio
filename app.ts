@@ -1,32 +1,36 @@
-'use strict';
+import 'dotenv/config';
 
-require('dotenv').config();
+import path from 'path';
+import express from 'express';
+import expressLayouts from 'express-ejs-layouts';
+import compression from 'compression';
+import cookieParser from 'cookie-parser';
+import morgan from 'morgan';
 
-const path = require('path');
-const express = require('express');
-const expressLayouts = require('express-ejs-layouts');
-const compression = require('compression');
-const cookieParser = require('cookie-parser');
-const morgan = require('morgan');
-
-const config = require('./config');
-const logger = require('./utils/logger');
-const securityMiddleware = require('./middleware/security');
-const csrf = require('./middleware/csrf');
-const locals = require('./middleware/locals');
-const { globalLimiter } = require('./middleware/rateLimiter');
-const routes = require('./routes');
-const notFound = require('./middleware/notFound');
-const errorHandler = require('./middleware/errorHandler');
+import config from './config';
+import logger from './utils/logger';
+import securityMiddleware from './middleware/security';
+import * as csrf from './middleware/csrf';
+import locals from './middleware/locals';
+import { globalLimiter } from './middleware/rateLimiter';
+import routes from './routes';
+import seoRoutes from './routes/seo';
+import notFound from './middleware/notFound';
+import errorHandler from './middleware/errorHandler';
 
 const app = express();
+
+// Project root — used to resolve views/static regardless of where the compiled
+// code lives (dist/ in production, source in tsx dev). The app is started from
+// the project root in both cases.
+const ROOT = process.cwd();
 
 // Never advertise the framework.
 app.disable('x-powered-by');
 
 // ── View engine ────────────────────────────────────────────────────────────
 app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(ROOT, 'views'));
 app.use(expressLayouts);
 app.set('layout', 'layout');
 
@@ -46,7 +50,7 @@ if (config.isDev) {
 
 // ── Static assets ──────────────────────────────────────────────────────────
 app.use(
-  express.static(path.join(__dirname, 'public'), {
+  express.static(path.join(ROOT, 'public'), {
     etag: true,
     redirect: false,
     dotfiles: 'ignore',
@@ -69,7 +73,7 @@ app.use(
 
 // SEO files (robots.txt, sitemap.xml, favicon.ico) — mounted before CSRF/locals
 // so they never receive a Set-Cookie and stay cache-friendly for crawlers.
-app.use('/', require('./routes/seo'));
+app.use('/', seoRoutes);
 
 // Defence-in-depth site-wide limiter (after static so assets aren't counted).
 app.use(globalLimiter);
@@ -95,7 +99,7 @@ if (require.main === module) {
   });
 
   // Graceful shutdown.
-  const shutdown = (signal) => {
+  const shutdown = (signal: string) => {
     logger.info(`Received ${signal}, shutting down.`);
     server.close(() => process.exit(0));
     // Force-exit if connections linger.
@@ -105,4 +109,4 @@ if (require.main === module) {
   process.on('SIGINT', () => shutdown('SIGINT'));
 }
 
-module.exports = app;
+export default app;

@@ -1,13 +1,12 @@
-'use strict';
-
-const site = require('../config/site');
+import { RequestHandler } from 'express';
+import site from '../config/site';
 
 /**
  * Static content pages. Each handler supplies a page-specific `seo` object
  * (title, description, canonical path, optional og image) plus any view data.
  */
 
-exports.home = (req, res) => {
+export const home: RequestHandler = (req, res) => {
   res.render('pages/home', {
     seo: {
       title: 'Veylrio — Outbound Infrastructure & Operations Systems',
@@ -18,7 +17,7 @@ exports.home = (req, res) => {
   });
 };
 
-exports.solutions = (req, res) => {
+export const solutions: RequestHandler = (req, res) => {
   res.render('pages/solutions', {
     seo: {
       title: 'Solutions — Outbound Infrastructure, QA & Reporting Systems | Veylrio',
@@ -29,7 +28,7 @@ exports.solutions = (req, res) => {
   });
 };
 
-exports.why = (req, res) => {
+export const why: RequestHandler = (req, res) => {
   res.render('pages/why', {
     seo: {
       title: 'Why Veylrio — Operator-Built Outbound Systems You Own',
@@ -40,7 +39,7 @@ exports.why = (req, res) => {
   });
 };
 
-exports.privacy = (req, res) => {
+export const privacy: RequestHandler = (req, res) => {
   res.render('pages/privacy', {
     seo: {
       title: 'Privacy Policy — Veylrio',
@@ -51,7 +50,7 @@ exports.privacy = (req, res) => {
   });
 };
 
-exports.terms = (req, res) => {
+export const terms: RequestHandler = (req, res) => {
   res.render('pages/terms', {
     seo: {
       title: 'Terms of Use — Veylrio',
@@ -62,7 +61,7 @@ exports.terms = (req, res) => {
   });
 };
 
-exports.thankYou = (req, res) => {
+export const thankYou: RequestHandler = (req, res) => {
   res.render('pages/thank-you', {
     seo: {
       title: 'Thank you — Veylrio',

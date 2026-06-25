@@ -1,0 +1,29 @@
+{
+  "compilerOptions": {
+    "target": "ES2021",
+    "module": "node16",
+    "moduleResolution": "node16",
+    "lib": ["ES2021"],
+    "outDir": "dist",
+    "rootDir": ".",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "noImplicitOverride": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "sourceMap": true,
+    "declaration": false
+  },
+  "include": [
+    "app.ts",
+    "config/**/*.ts",
+    "controllers/**/*.ts",
+    "middleware/**/*.ts",
+    "routes/**/*.ts",
+    "utils/**/*.ts",
+    "validators/**/*.ts",
+    "types/**/*.d.ts"
+  ],
+  "exclude": ["node_modules", "dist", "public"]
+}

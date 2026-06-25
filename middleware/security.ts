@@ -1,8 +1,7 @@
-'use strict';
-
-const crypto = require('crypto');
-const helmet = require('helmet');
-const config = require('../config');
+import crypto from 'crypto';
+import helmet from 'helmet';
+import { RequestHandler, Response } from 'express';
+import config from '../config';
 
 /**
  * Security headers.
@@ -16,10 +15,10 @@ const config = require('../config');
  * stylesheet (plus Google Fonts), scripts are first-party + nonce only.
  */
 
-function cspNonce(req, res, next) {
+const cspNonce: RequestHandler = (req, res, next) => {
   res.locals.cspNonce = crypto.randomBytes(16).toString('base64');
   next();
-}
+};
 
 const helmetMiddleware = helmet({
   contentSecurityPolicy: {
@@ -27,7 +26,7 @@ const helmetMiddleware = helmet({
     directives: {
       defaultSrc: ["'self'"],
       baseUri: ["'self'"],
-      scriptSrc: ["'self'", (req, res) => `'nonce-${res.locals.cspNonce}'`],
+      scriptSrc: ["'self'", (_req, res) => `'nonce-${(res as unknown as Response).locals.cspNonce}'`],
       styleSrc: ["'self'", 'https://fonts.googleapis.com'],
       fontSrc: ["'self'", 'https://fonts.gstatic.com', 'data:'],
       imgSrc: ["'self'", 'data:'],
@@ -50,4 +49,6 @@ const helmetMiddleware = helmet({
     : false,
 });
 
-module.exports = [cspNonce, helmetMiddleware];
+const security: RequestHandler[] = [cspNonce, helmetMiddleware];
+
+export default security;

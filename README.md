@@ -3,7 +3,7 @@
 Production website for **Veylrio** — _Less Weight, More Momentum_.
 A premium operations company that builds outbound infrastructure, systems, tracking, QA and dashboards for outbound-heavy teams.
 
-Built as a server-rendered **Node.js + Express (MVC)** application with **Tailwind CSS** and **EJS**. No heavy frontend framework. Secure by default, fast, accessible, and SEO-ready.
+Built as a server-rendered **Node.js + Express (MVC)** application in **TypeScript**, with **Tailwind CSS** and **EJS**. No heavy frontend framework. Secure by default, fast, accessible, and SEO-ready.
 
 ---
 
@@ -25,18 +25,22 @@ npm run dev
 Open **http://localhost:3000**.
 
 > `npm run dev` runs two processes together: the Tailwind CSS watcher and the
-> Express server (via `nodemon`). Edit a `.ejs` view or `src/styles/tailwind.css`
-> and the page/CSS rebuilds automatically.
+> Express server (via `tsx watch`, which runs the TypeScript directly and reloads
+> on change). Edit a `.ts` file, a `.ejs` view or `src/styles/tailwind.css` and the
+> server/page/CSS rebuilds automatically — no separate compile step in dev.
 
 ### Other scripts
 
-| Script              | What it does                                                        |
-| ------------------- | ------------------------------------------------------------------- |
-| `npm run dev`       | CSS watch + dev server (development)                                |
-| `npm run dev:server`| Dev server only                                                     |
-| `npm run watch:css` | Rebuild `public/css/styles.css` on change                          |
-| `npm run build:css` | One-off **minified** CSS build                                      |
-| `npm start`         | Production: builds CSS (`prestart`) then runs with `NODE_ENV=production` |
+| Script               | What it does                                                            |
+| -------------------- | ---------------------------------------------------------------------- |
+| `npm run dev`        | CSS watch + dev server (development, via `tsx`)                         |
+| `npm run dev:server` | Dev server only (`tsx watch app.ts`)                                    |
+| `npm run watch:css`  | Rebuild `public/css/styles.css` on change                              |
+| `npm run build:css`  | One-off **minified** CSS build                                          |
+| `npm run build:server` | Compile TypeScript to `dist/` (`tsc`)                                |
+| `npm run build`      | Build CSS **and** compile the server to `dist/`                        |
+| `npm run typecheck`  | Type-check without emitting (`tsc --noEmit`)                            |
+| `npm start`          | Production: builds CSS + TS (`prestart`) then runs `dist/app.js` with `NODE_ENV=production` |
 
 ### Production run
 
@@ -77,52 +81,56 @@ To switch to the **alternate** Espresso & Sage palette in a section, the tokens 
 
 ```
 veylrio/
-├─ app.js                     # Express app: middleware order, server, graceful shutdown
+├─ app.ts                     # Express app: middleware order, server, graceful shutdown
+├─ tsconfig.json              # TypeScript compiler config (emits to dist/)
 ├─ tailwind.config.js         # Brand tokens (colors, fonts, shadows, container)
 ├─ postcss.config.js
 ├─ .env.example               # Copy to .env (never commit .env)
 ├─ config/
-│  ├─ index.js                # Reads env once; the rest of the app never touches process.env
-│  └─ site.js                 # ALL site content/data: nav, footer, solutions, copy, form options
+│  ├─ index.ts                # Reads env once; the rest of the app never touches process.env
+│  └─ site.ts                 # ALL site content/data: nav, footer, solutions, copy, form options
 ├─ controllers/
-│  ├─ pageController.js       # Home, Solutions, Why, Privacy, Terms, Thank-you (+ per-page SEO)
-│  ├─ projectController.js    # Start-a-Project form: render, validate, notify, redirect
-│  └─ seoController.js        # Dynamic robots.txt + sitemap.xml
+│  ├─ pageController.ts       # Home, Solutions, Why, Privacy, Terms, Thank-you (+ per-page SEO)
+│  ├─ projectController.ts    # Start-a-Project form: render, validate, notify, redirect
+│  └─ seoController.ts        # Dynamic robots.txt + sitemap.xml
 ├─ routes/
-│  ├─ index.js                # Aggregates the route modules
-│  ├─ pages.js · project.js · seo.js
+│  ├─ index.ts                # Aggregates the route modules
+│  ├─ pages.ts · project.ts · seo.ts
 ├─ middleware/
-│  ├─ security.js             # Helmet CSP + per-request nonce
-│  ├─ csrf.js                 # Double-submit-cookie CSRF (provide + verify)
-│  ├─ rateLimiter.js          # Form + global limiters
-│  ├─ locals.js               # Shared view locals (site, icon, currentPath)
-│  ├─ notFound.js · errorHandler.js
+│  ├─ security.ts             # Helmet CSP + per-request nonce
+│  ├─ csrf.ts                 # Double-submit-cookie CSRF (provide + verify)
+│  ├─ rateLimiter.ts          # Form + global limiters
+│  ├─ locals.ts               # Shared view locals (site, icon, currentPath)
+│  ├─ notFound.ts · errorHandler.ts
 ├─ validators/
-│  └─ projectValidator.js     # express-validator rules + error collector
+│  └─ projectValidator.ts     # express-validator rules + error collector
 ├─ utils/
-│  ├─ icons.js                # Inline SVG line-icon set (CSP-clean, lightweight)
-│  ├─ notifier.js             # Inquiry delivery (Gmail SMTP; records locally if unset)
-│  ├─ logger.js · asyncHandler.js
+│  ├─ icons.ts                # Inline SVG line-icon set (CSP-clean, lightweight)
+│  ├─ notifier.ts             # Inquiry delivery (Gmail SMTP; records locally if unset)
+│  ├─ logger.ts · asyncHandler.ts
+├─ types/
+│  └─ express-ejs-layouts.d.ts # Ambient types for the untyped layouts package
 ├─ views/
 │  ├─ layout.ejs              # HTML shell (express-ejs-layouts)
 │  ├─ partials/               # head, header, footer, cta, structured-data
 │  └─ pages/                  # home, solutions, why, start, thank-you, privacy, terms, 404, 500
 ├─ src/styles/tailwind.css    # Tailwind source + design-system component layer
-└─ public/                    # Static: css (built), js, images, logos, favicons, manifest
+├─ public/                    # Static: css (built), js (browser), images, logos, favicons, manifest
+└─ dist/                      # Compiled JS output from tsc (git-ignored; created by build)
 ```
 
 ### Editing copy
 
-- **Structured content** (nav, footer, the 5 solution systems, process steps, audiences, FAQs, form options) lives in **`config/site.js`** — edit there and every page updates.
+- **Structured content** (nav, footer, the 5 solution systems, process steps, audiences, FAQs, form options) lives in **`config/site.ts`** — edit there and every page updates.
 - **Prose** lives in the relevant `views/pages/*.ejs`.
 - **Per-page SEO** (title, description, canonical path) lives in the controller for that page.
 
 ### Adding a future page (Case Studies, Blog, Packages, …)
 
-1. Add content/data to `config/site.js` if reusable.
+1. Add content/data to `config/site.ts` if reusable.
 2. Add a view in `views/pages/`.
 3. Add a controller handler + a route.
-4. Add the path to `controllers/seoController.js` (`INDEXABLE`) and to the footer/nav in `config/site.js` if it should be linked.
+4. Add the path to `controllers/seoController.ts` (`INDEXABLE`) and to the footer/nav in `config/site.ts` if it should be linked.
 
 ---
 
@@ -131,7 +139,7 @@ veylrio/
 The **Start a Project** form posts to `/start-a-project`. The flow is:
 `rate-limit → CSRF verify → validate/sanitise → notifier → 303 redirect to /thank-you`.
 
-Delivery uses **Gmail SMTP** via `nodemailer` (`utils/notifier.js`):
+Delivery uses **Gmail SMTP** via `nodemailer` (`utils/notifier.ts`):
 
 - **Email is sent** when `GMAIL_USER` and `GMAIL_APP_PASSWORD` are set. Gmail requires an **App Password** (Google Account → 2-Step Verification → App passwords) — not your normal password. Replies go to the submitter (`replyTo`).
 - **If those are blank** (e.g. local dev), each inquiry is recorded to `logs/submissions.log` (git-ignored) and the console — **no email is sent**, nothing is lost.
@@ -143,21 +151,21 @@ Delivery uses **Gmail SMTP** via `nodemailer` (`utils/notifier.js`):
 
 | ✓ | Control | Where |
 | - | ------- | ----- |
-| ✅ | Secure HTTP headers (Helmet) | `middleware/security.js` |
-| ✅ | Strict CSP, **no `unsafe-inline`**, per-request nonce for inline JSON-LD | `middleware/security.js`, `views/partials/structured-data.ejs` |
-| ✅ | HSTS (production), `X-Content-Type-Options`, referrer policy, `frame-ancestors 'none'` | `middleware/security.js` |
-| ✅ | `X-Powered-By` disabled | `app.js` |
-| ✅ | CSRF protection (double-submit cookie: HttpOnly + SameSite + Secure, constant-time compare) | `middleware/csrf.js` |
-| ✅ | Rate limiting on the form + global limiter | `middleware/rateLimiter.js` |
-| ✅ | Server-side validation **and** sanitisation of every field | `validators/projectValidator.js` |
+| ✅ | Secure HTTP headers (Helmet) | `middleware/security.ts` |
+| ✅ | Strict CSP, **no `unsafe-inline`**, per-request nonce for inline JSON-LD | `middleware/security.ts`, `views/partials/structured-data.ejs` |
+| ✅ | HSTS (production), `X-Content-Type-Options`, referrer policy, `frame-ancestors 'none'` | `middleware/security.ts` |
+| ✅ | `X-Powered-By` disabled | `app.ts` |
+| ✅ | CSRF protection (double-submit cookie: HttpOnly + SameSite + Secure, constant-time compare) | `middleware/csrf.ts` |
+| ✅ | Rate limiting on the form + global limiter | `middleware/rateLimiter.ts` |
+| ✅ | Server-side validation **and** sanitisation of every field | `validators/projectValidator.ts` |
 | ✅ | XSS defense: EJS auto-escaping (`<%= %>`) + `.escape()` on free-text | views + validator |
 | ✅ | Honeypot anti-spam field | `views/pages/start.ejs`, validator, controller |
-| ✅ | Body-size limits (`32kb`/`16kb`) + parameter limit | `app.js` |
-| ✅ | Secure cookie flags: `HttpOnly`, `SameSite=Lax`, `Secure` (prod) | `middleware/csrf.js` |
-| ✅ | Safe, internal-only redirects | `controllers/projectController.js` |
-| ✅ | No stack traces leaked in production | `middleware/errorHandler.js` |
-| ✅ | No hardcoded secrets; credentials via `dotenv` / env vars only | `config/index.js`, `.env.example` |
-| ✅ | Graceful shutdown; async errors funneled to handler | `app.js`, `utils/asyncHandler.js` |
+| ✅ | Body-size limits (`32kb`/`16kb`) + parameter limit | `app.ts` |
+| ✅ | Secure cookie flags: `HttpOnly`, `SameSite=Lax`, `Secure` (prod) | `middleware/csrf.ts` |
+| ✅ | Safe, internal-only redirects | `controllers/projectController.ts` |
+| ✅ | No stack traces leaked in production | `middleware/errorHandler.ts` |
+| ✅ | No hardcoded secrets; credentials via `dotenv` / env vars only | `config/index.ts`, `.env.example` |
+| ✅ | Graceful shutdown; async errors funneled to handler | `app.ts`, `utils/asyncHandler.ts` |
 | ⏳ | **Serve over HTTPS** (terminate TLS at your proxy/host) | deployment |
 | ⏳ | Run `npm audit` regularly; keep dependencies patched | ops |
 
@@ -172,8 +180,8 @@ Delivery uses **Gmail SMTP** via `nodemailer` (`utils/notifier.js`):
 | ✅ | Open Graph + Twitter card tags | `partials/head.ejs` |
 | ✅ | `Organization` + `WebSite` + `ProfessionalService` JSON-LD | `partials/structured-data.ejs` |
 | ✅ | `FAQPage` JSON-LD on Why Veylrio | `views/pages/why.ejs` |
-| ✅ | Dynamic `robots.txt` (references sitemap, disallows `/thank-you`) | `controllers/seoController.js` |
-| ✅ | Dynamic `sitemap.xml` (indexable pages only) | `controllers/seoController.js` |
+| ✅ | Dynamic `robots.txt` (references sitemap, disallows `/thank-you`) | `controllers/seoController.ts` |
+| ✅ | Dynamic `sitemap.xml` (indexable pages only) | `controllers/seoController.ts` |
 | ✅ | `noindex` on `/thank-you`, 404 and 500 | controllers + middleware |
 | ✅ | One `<h1>` per page, logical heading order | views |
 | ✅ | Descriptive, human-readable URLs | routes |
@@ -209,6 +217,7 @@ Delivery uses **Gmail SMTP** via `nodemailer` (`utils/notifier.js`):
 
 ## 9. Tech decisions (the short version)
 
+- **TypeScript** across the server for type-safe routes, middleware and config. `tsx` runs the source directly in dev; `tsc` compiles to `dist/` for production. The browser script (`public/js/main.js`) and build configs stay plain JS.
 - **EJS + express-ejs-layouts** for clean server-rendered templating with a single shared layout.
 - **Tailwind built via CLI** (not CDN) so production CSS is purged and minified, and the CSP can stay strict.
 - **Custom double-submit-cookie CSRF** instead of a deprecated/heavy package — minimal dependencies, standard and auditable.

@@ -1,8 +1,7 @@
-'use strict';
+import express from 'express';
+import * as pageController from '../controllers/pageController';
 
-const express = require('express');
 const router = express.Router();
-const pageController = require('../controllers/pageController');
 
 router.get('/', pageController.home);
 router.get('/solutions', pageController.solutions);
@@ -11,4 +10,4 @@ router.get('/privacy-policy', pageController.privacy);
 router.get('/terms', pageController.terms);
 router.get('/thank-you', pageController.thankYou);
 
-module.exports = router;
+export default router;

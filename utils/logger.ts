@@ -1,6 +1,4 @@
-'use strict';
-
-const config = require('../config');
+import config from '../config';
 
 /**
  * Tiny structured logger. Avoids a heavy logging dependency while keeping
@@ -8,10 +6,13 @@ const config = require('../config');
  * a log aggregator); in development it prints readable lines.
  */
 
-function write(level, message, meta) {
+type LogLevel = 'info' | 'warn' | 'error';
+type Meta = Record<string, unknown>;
+
+function write(level: LogLevel, message: string, meta?: Meta): void {
   const time = new Date().toISOString();
   if (config.isProd) {
-    const record = { time, level, message };
+    const record: Record<string, unknown> = { time, level, message };
     if (meta && Object.keys(meta).length) record.meta = meta;
     // eslint-disable-next-line no-console
     console[level === 'error' ? 'error' : 'log'](JSON.stringify(record));
@@ -24,8 +25,10 @@ function write(level, message, meta) {
   }
 }
 
-module.exports = {
-  info: (msg, meta) => write('info', msg, meta),
-  warn: (msg, meta) => write('warn', msg, meta),
-  error: (msg, meta) => write('error', msg, meta),
+const logger = {
+  info: (msg: string, meta?: Meta) => write('info', msg, meta),
+  warn: (msg: string, meta?: Meta) => write('warn', msg, meta),
+  error: (msg: string, meta?: Meta) => write('error', msg, meta),
 };
+
+export default logger;

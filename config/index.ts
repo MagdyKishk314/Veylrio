@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * Central runtime configuration.
  * All environment access happens here so the rest of the app never reads
@@ -15,11 +13,28 @@ const SITE_URL = (process.env.SITE_URL || 'http://localhost:3000').replace(/\/+$
 
 const contactEmail = process.env.CONTACT_EMAIL || 'contact@veylrio.com';
 
-module.exports = {
+export interface MailConfig {
+  user: string;
+  pass: string;
+  fromName: string;
+  notifyTo: string;
+}
+
+export interface AppConfig {
+  env: string;
+  isProd: boolean;
+  isDev: boolean;
+  port: number;
+  siteUrl: string;
+  contactEmail: string;
+  mail: MailConfig;
+}
+
+const config: AppConfig = {
   env: NODE_ENV,
   isProd,
   isDev,
-  port: parseInt(process.env.PORT, 10) || 3000,
+  port: parseInt(process.env.PORT || '', 10) || 3000,
   siteUrl: SITE_URL,
   contactEmail,
   // Inquiry notifications via Gmail SMTP. Leave the Gmail vars blank in
@@ -31,3 +46,5 @@ module.exports = {
     notifyTo: process.env.INQUIRY_NOTIFY_TO || contactEmail,
   },
 };
+
+export default config;
