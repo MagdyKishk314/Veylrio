@@ -9,6 +9,9 @@ node_modules/
 # Build output (generated from src/styles/tailwind.css)
 public/css/styles.css
 
+# Compiled TypeScript output
+dist/
+
 # Logs
 logs/
 *.log

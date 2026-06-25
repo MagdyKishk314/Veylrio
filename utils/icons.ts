@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * Minimal, consistent line icons rendered inline as SVG.
  * Keeping icons in code (not icon fonts or sprite libraries) keeps the
@@ -10,7 +8,7 @@
  *   <%- icon('chart', 'h-6 w-6 text-clay') %>
  */
 
-const PATHS = {
+const PATHS: Record<string, string> = {
   'arrow-right': '<path d="M5 12h14M13 6l6 6-6 6"/>',
   'arrow-up-right': '<path d="M7 17 17 7M8 7h9v9"/>',
   check: '<path d="m5 12.5 4.5 4.5L19 7"/>',
@@ -40,7 +38,7 @@ const PATHS = {
     '<path d="M5 8h9M18 8h1M5 16h1M10 16h9"/><circle cx="16" cy="8" r="2"/><circle cx="8" cy="16" r="2"/>',
 };
 
-function icon(name, classes = 'h-6 w-6') {
+function icon(name: string, classes = 'h-6 w-6'): string {
   const body = PATHS[name];
   if (!body) return '';
   return (
@@ -50,4 +48,4 @@ function icon(name, classes = 'h-6 w-6') {
   );
 }
 
-module.exports = { icon, PATHS };
+export { icon, PATHS };

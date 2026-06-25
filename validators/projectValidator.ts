@@ -1,7 +1,6 @@
-'use strict';
-
-const { body, validationResult } = require('express-validator');
-const site = require('../config/site');
+import { body, validationResult } from 'express-validator';
+import { Request } from 'express';
+import site from '../config/site';
 
 /**
  * Validation + sanitisation rules for the "Start a Project" inquiry form.
@@ -14,7 +13,7 @@ const site = require('../config/site');
  *  - keep optional fields genuinely optional.
  */
 
-const inSet = (value, set) => value === '' || set.includes(value);
+const inSet = (value: string, set: string[]): boolean => value === '' || set.includes(value);
 
 const rules = [
   body('name')
@@ -98,14 +97,14 @@ const rules = [
     .isLength({ max: 0 }).withMessage('Spam detected.'),
 ];
 
-function collectErrors(req) {
+function collectErrors(req: Request): Record<string, string> | null {
   const result = validationResult(req);
   if (result.isEmpty()) return null;
-  const errors = {};
+  const errors: Record<string, string> = {};
   for (const e of result.array({ onlyFirstError: true })) {
-    errors[e.path] = e.msg;
+    if (e.type === 'field') errors[e.path] = String(e.msg);
   }
   return errors;
 }
 
-module.exports = { rules, collectErrors };
+export { rules, collectErrors };

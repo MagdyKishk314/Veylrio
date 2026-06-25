@@ -1,14 +1,19 @@
-'use strict';
-
-const config = require('../config');
+import { RequestHandler } from 'express';
+import config from '../config';
 
 /**
  * Dynamic robots.txt and sitemap.xml so the canonical origin always matches
  * SITE_URL and the sitemap stays in sync with the live, indexable routes.
  */
 
+interface IndexableRoute {
+  path: string;
+  changefreq: string;
+  priority: string;
+}
+
 // Public, indexable routes (no-index pages like /thank-you are excluded).
-const INDEXABLE = [
+const INDEXABLE: IndexableRoute[] = [
   { path: '/', changefreq: 'monthly', priority: '1.0' },
   { path: '/solutions', changefreq: 'monthly', priority: '0.9' },
   { path: '/why-veylrio', changefreq: 'monthly', priority: '0.8' },
@@ -17,7 +22,7 @@ const INDEXABLE = [
   { path: '/terms', changefreq: 'yearly', priority: '0.3' },
 ];
 
-exports.robots = (req, res) => {
+export const robots: RequestHandler = (req, res) => {
   // Note: /thank-you is intentionally NOT disallowed here — it carries a
   // `noindex` meta tag, and a Disallow would stop crawlers from ever reading it.
   const body = [
@@ -30,7 +35,7 @@ exports.robots = (req, res) => {
   res.type('text/plain').send(body);
 };
 
-exports.sitemap = (req, res) => {
+export const sitemap: RequestHandler = (req, res) => {
   const lastmod = new Date().toISOString().slice(0, 10);
   const urls = INDEXABLE.map(
     (u) =>

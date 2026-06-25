@@ -1,10 +1,9 @@
-'use strict';
-
-const site = require('../config/site');
-const { collectErrors } = require('../validators/projectValidator');
-const { sendInquiry } = require('../utils/notifier');
-const asyncHandler = require('../utils/asyncHandler');
-const logger = require('../utils/logger');
+import { RequestHandler } from 'express';
+import site from '../config/site';
+import { collectErrors } from '../validators/projectValidator';
+import { sendInquiry, Submission } from '../utils/notifier';
+import asyncHandler from '../utils/asyncHandler';
+import logger from '../utils/logger';
 
 const SEO = {
   title: 'Start a Project — Veylrio',
@@ -17,17 +16,17 @@ const SEO = {
 const ECHO_FIELDS = [
   'name', 'company', 'email', 'phone', 'website', 'industry',
   'teamSize', 'stack', 'needs', 'broken', 'contactMethod', 'timeline', 'budget',
-];
+] as const;
 
-function pickValues(body = {}) {
-  const values = {};
+function pickValues(body: Record<string, unknown> = {}): Record<string, string> {
+  const values: Record<string, string> = {};
   for (const field of ECHO_FIELDS) {
-    values[field] = typeof body[field] === 'string' ? body[field] : '';
+    values[field] = typeof body[field] === 'string' ? (body[field] as string) : '';
   }
   return values;
 }
 
-exports.showForm = (req, res) => {
+export const showForm: RequestHandler = (req, res) => {
   res.render('pages/start', {
     seo: SEO,
     values: pickValues(),
@@ -36,7 +35,7 @@ exports.showForm = (req, res) => {
   });
 };
 
-exports.submitForm = asyncHandler(async (req, res) => {
+export const submitForm = asyncHandler(async (req, res) => {
   // Honeypot: if filled, treat as spam — pretend success without processing.
   if (req.body && req.body._hp_company_url) {
     logger.warn('Inquiry honeypot triggered; dropping submission.');
@@ -55,7 +54,7 @@ exports.submitForm = asyncHandler(async (req, res) => {
 
   // Build a clean submission object from validated/sanitised input.
   const b = req.body;
-  const submission = {
+  const submission: Submission = {
     receivedAt: new Date().toISOString(),
     name: b.name,
     company: b.company,

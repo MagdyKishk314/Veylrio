@@ -1,6 +1,4 @@
-'use strict';
-
-const config = require('./index');
+import config from './index';
 
 /**
  * Site-wide content & structure.
@@ -258,38 +256,6 @@ const faqs = [
   },
 ];
 
-/**
- * Testimonials shown in the homepage slider (right after the hero).
- *
- * ⚠️  IMPORTANT — these are PLACEHOLDERS, not real quotes.
- *     Veylrio's brand rule is: never publish fabricated testimonials.
- *     Replace each entry with a REAL, permissioned client quote before launch.
- *     Leave this array EMPTY ([]) to hide the testimonials section entirely.
- */
-const testimonials = [
-  {
-    quote:
-      'Placeholder — replace with a real client quote about what was messy before, what Veylrio built, and what changed.',
-    name: 'Client name',
-    role: 'Owner',
-    company: 'Company',
-  },
-  {
-    quote:
-      'Placeholder — a second real testimonial goes here. Keep quotes specific and honest: the problem, the system we built, the outcome.',
-    name: 'Client name',
-    role: 'Operations lead',
-    company: 'Company',
-  },
-  {
-    quote:
-      'Placeholder — a third real testimonial. Two to five short, genuine quotes work best in this slider.',
-    name: 'Client name',
-    role: 'Founder',
-    company: 'Company',
-  },
-];
-
 /** Options for the Start a Project form (kept here so they are easy to edit). */
 const form = {
   industries: [
@@ -315,7 +281,7 @@ const form = {
   ],
 };
 
-module.exports = {
+const site = {
   brand,
   nav,
   footerNav,
@@ -328,9 +294,10 @@ module.exports = {
   problems,
   trustPoints,
   faqs,
-  testimonials,
   form,
   siteUrl: config.siteUrl,
   contactEmail: config.contactEmail,
   year: new Date().getFullYear(),
 };
+
+export default site;

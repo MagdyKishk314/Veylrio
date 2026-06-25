@@ -1,14 +1,20 @@
-'use strict';
+import { ErrorRequestHandler } from 'express';
+import config from '../config';
+import logger from '../utils/logger';
+import site from '../config/site';
+import { icon } from '../utils/icons';
 
-const config = require('../config');
-const logger = require('../utils/logger');
+interface HttpError extends Error {
+  status?: number;
+  statusCode?: number;
+  code?: string;
+}
 
 /**
  * Central error handler. Logs full detail server-side, but never leaks stack
  * traces or internal messages to the client in production.
  */
-// eslint-disable-next-line no-unused-vars
-module.exports = function errorHandler(err, req, res, next) {
+const errorHandler: ErrorRequestHandler = (err: HttpError, req, res, next) => {
   const status = err.status || err.statusCode || 500;
 
   // Log server-side (full detail).
@@ -34,8 +40,8 @@ module.exports = function errorHandler(err, req, res, next) {
 
   // Ensure the layout/partials have what they need, even when an early
   // middleware (e.g. body-parser) threw before view locals were attached.
-  res.locals.site = res.locals.site || require('../config/site');
-  res.locals.icon = res.locals.icon || require('../utils/icons').icon;
+  res.locals.site = res.locals.site || site;
+  res.locals.icon = res.locals.icon || icon;
   res.locals.currentPath = res.locals.currentPath || req.path;
   res.locals.currentYear = res.locals.currentYear || res.locals.site.year;
   res.locals.cspNonce = res.locals.cspNonce || '';
@@ -59,3 +65,5 @@ module.exports = function errorHandler(err, req, res, next) {
     bodyClass: 'bg-ink-700',
   });
 };
+
+export default errorHandler;

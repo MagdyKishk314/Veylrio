@@ -8,7 +8,7 @@ module.exports = {
   content: [
     './views/**/*.ejs',
     './public/js/**/*.js',
-    './utils/icons.js',
+    './utils/icons.ts',
   ],
   theme: {
     // Calm, editorial container — generous gutters, capped reading width.

@@ -1,8 +1,7 @@
-'use strict';
-
-const rateLimit = require('express-rate-limit');
-const site = require('../config/site');
-const { icon } = require('../utils/icons');
+import rateLimit from 'express-rate-limit';
+import { Request, Response } from 'express';
+import site from '../config/site';
+import { icon } from '../utils/icons';
 
 /**
  * Rate limiters. The form limiter is deliberately strict to deter abuse of the
@@ -11,10 +10,10 @@ const { icon } = require('../utils/icons');
  * When a limit is hit we render the branded error page (HTTP 429) rather than
  * express-rate-limit's default plain-text response. Because the global limiter
  * runs before the locals middleware, the handler sets the view locals it needs
- * defensively (mirroring errorHandler.js).
+ * defensively (mirroring errorHandler.ts).
  */
 
-function tooMany(req, res) {
+function tooMany(req: Request, res: Response): void {
   res.status(429);
   res.locals.site = res.locals.site || site;
   res.locals.icon = res.locals.icon || icon;
@@ -54,4 +53,4 @@ const globalLimiter = rateLimit({
   handler: tooMany,
 });
 
-module.exports = { formLimiter, globalLimiter };
+export { formLimiter, globalLimiter };

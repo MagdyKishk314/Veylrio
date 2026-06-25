@@ -1,7 +1,6 @@
-'use strict';
-
-const crypto = require('crypto');
-const config = require('../config');
+import crypto from 'crypto';
+import { RequestHandler } from 'express';
+import config from '../config';
 
 /**
  * Stateless CSRF protection using the signed double-submit cookie pattern.
@@ -20,17 +19,17 @@ const COOKIE_NAME = 'veylrio.csrf';
 
 const cookieOptions = {
   httpOnly: true,
-  sameSite: 'lax',
+  sameSite: 'lax' as const,
   secure: config.isProd,
   path: '/',
   maxAge: 1000 * 60 * 60 * 4, // 4 hours
 };
 
-function generateToken() {
+function generateToken(): string {
   return crypto.randomBytes(32).toString('hex');
 }
 
-function safeEqual(a, b) {
+function safeEqual(a: unknown, b: unknown): boolean {
   if (typeof a !== 'string' || typeof b !== 'string') return false;
   const ab = Buffer.from(a);
   const bb = Buffer.from(b);
@@ -38,17 +37,17 @@ function safeEqual(a, b) {
   return crypto.timingSafeEqual(ab, bb);
 }
 
-function provideToken(req, res, next) {
-  let token = req.cookies && req.cookies[COOKIE_NAME];
-  if (!token || typeof token !== 'string' || token.length !== 64) {
+const provideToken: RequestHandler = (req, res, next) => {
+  let token: unknown = req.cookies && req.cookies[COOKIE_NAME];
+  if (typeof token !== 'string' || token.length !== 64) {
     token = generateToken();
     res.cookie(COOKIE_NAME, token, cookieOptions);
   }
   res.locals.csrfToken = token;
   next();
-}
+};
 
-function verifyToken(req, res, next) {
+const verifyToken: RequestHandler = (req, res, next) => {
   const cookieToken = req.cookies && req.cookies[COOKIE_NAME];
   const submitted =
     (req.body && req.body._csrf) ||
@@ -59,10 +58,13 @@ function verifyToken(req, res, next) {
     return next();
   }
 
-  const err = new Error('Invalid or missing CSRF token.');
+  const err = new Error('Invalid or missing CSRF token.') as Error & {
+    status?: number;
+    code?: string;
+  };
   err.status = 403;
   err.code = 'EBADCSRFTOKEN';
   return next(err);
-}
+};
 
-module.exports = { provideToken, verifyToken, COOKIE_NAME };
+export { provideToken, verifyToken, COOKIE_NAME };
