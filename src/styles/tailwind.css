@@ -3,14 +3,14 @@
 @tailwind utilities;
 
 /* ───────────────────────────────────────────────────────────────────────────
-   Veylrio — design system
-   Calm, editorial-meets-operations. Paper surfaces, deep teal hero/CTA bands,
-   clay used sparingly. Component classes keep markup clean and consistent.
+   Veylrio — design system (premium dark base)
+   Deep teal-charcoal surfaces, cream type, clay accent used sparingly.
+   Component class names are stable so views read cleanly.
    ─────────────────────────────────────────────────────────────────────────── */
 
 @layer base {
   :root {
-    color-scheme: light;
+    color-scheme: dark;
   }
 
   html {
@@ -19,43 +19,34 @@
   }
 
   body {
-    @apply bg-paper text-ink-700 font-sans antialiased;
+    background-color: #0a211f; /* ink-900 */
+    color: #f0ebe1; /* paper */
+    @apply font-sans antialiased;
     text-rendering: optimizeLegibility;
   }
 
   h1, h2, h3, h4 {
-    /* Sora 600/700 are the loaded brand weights — default headings to 600 so
-       display type never falls back to a synthesized 400. */
-    @apply font-display font-semibold text-ink-700;
+    @apply font-display font-semibold text-cream;
     text-wrap: balance;
   }
 
-  p {
-    text-wrap: pretty;
-  }
+  p { text-wrap: pretty; }
 
-  /* Accessible, on-brand focus ring everywhere. */
   :focus-visible {
-    @apply outline-none ring-2 ring-clay-600 ring-offset-2 ring-offset-paper rounded-sm;
+    @apply outline-none ring-2 ring-clay-400 ring-offset-2 rounded-sm;
+    --tw-ring-offset-color: #0a211f;
   }
 
   ::selection {
-    background-color: #C56A4A;
-    color: #F2EEE6;
+    background-color: #e0906f;
+    color: #061513;
   }
 
-  /* Anchor offset so in-page jumps clear the sticky header. */
-  [id] {
-    scroll-margin-top: 6rem;
-  }
+  [id] { scroll-margin-top: 6rem; }
 
   @media (prefers-reduced-motion: reduce) {
-    html {
-      scroll-behavior: auto;
-    }
-    *,
-    *::before,
-    *::after {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
       animation-duration: 0.001ms !important;
       animation-iteration-count: 1 !important;
       transition-duration: 0.001ms !important;
@@ -67,221 +58,125 @@
   /* ── Header / navigation ────────────────────────────────────────────────── */
   .site-header {
     @apply sticky top-0 z-40 border-b border-cream/10;
-    background-color: rgba(18, 58, 54, 0.82); /* ink-700 */
-    backdrop-filter: saturate(140%) blur(10px);
+    background-color: rgba(10, 33, 31, 0.72);
+    backdrop-filter: saturate(140%) blur(12px);
   }
   .site-header.is-scrolled {
     @apply border-cream/10 shadow-lg;
-    background-color: rgba(14, 45, 42, 0.94); /* ink-800 */
+    background-color: rgba(8, 26, 24, 0.92);
   }
   .nav-link {
-    @apply relative rounded-lg px-3 py-2 text-sm font-medium text-paper-200/80 transition hover:text-cream
-           focus-visible:ring-offset-ink-700;
+    @apply relative rounded-lg px-3 py-2 text-sm font-medium text-paper-200/75 transition hover:text-cream
+           focus-visible:ring-offset-ink-900;
   }
-  .nav-link[aria-current='page'] {
-    @apply text-cream;
-  }
+  .nav-link[aria-current='page'] { @apply text-cream; }
   .nav-link[aria-current='page']::after {
     content: '';
     @apply absolute inset-x-3 -bottom-0.5 h-0.5 rounded-full bg-clay-400;
   }
 
   /* ── Layout helpers ─────────────────────────────────────────────────────── */
-  .section-y {
-    @apply py-20 md:py-28;
-  }
+  .section-y { @apply py-20 md:py-28; }
+
+  /* Slightly lifted alternating band over the base */
+  .band { background-color: #0c2622; }
 
   .eyebrow {
-    @apply inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-eyebrow text-clay-700;
+    @apply inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-eyebrow text-clay-400;
   }
-  .eyebrow--on-dark {
-    @apply text-clay-400;
-  }
-
-  .lead {
-    @apply text-lg md:text-xl leading-relaxed text-ink-500;
-  }
-  .lead--on-dark {
-    @apply text-paper-200;
-  }
+  .lead { @apply text-lg md:text-xl leading-relaxed text-paper-200/80; }
 
   /* ── Buttons ────────────────────────────────────────────────────────────── */
   .btn {
     @apply inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-semibold
            leading-none transition duration-200 ease-calm
            focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2;
+    --tw-ring-offset-color: #0a211f;
   }
-  .btn svg {
-    @apply transition-transform duration-200 ease-calm;
-  }
-  .btn:hover svg.arrow {
-    @apply translate-x-0.5;
-  }
+  .btn svg { @apply transition-transform duration-200 ease-calm; }
+  .btn:hover svg.arrow { @apply translate-x-0.5; }
 
+  /* Primary: bright clay fill, dark ink text — pops on the dark base, AA-safe. */
   .btn-primary {
-    /* clay-700 on cream = 4.54:1 — meets WCAG AA for the resting state. */
-    @apply btn bg-clay-700 text-cream shadow-sm
-           hover:bg-clay-800 active:bg-clay-800
-           focus-visible:ring-clay-700 focus-visible:ring-offset-paper;
+    @apply btn bg-clay-400 text-ink-950 shadow-sm
+           hover:bg-clay-300 active:bg-clay-400
+           focus-visible:ring-clay-400;
   }
   .btn-secondary {
-    @apply btn border border-ink-700/25 bg-transparent text-ink-700
-           hover:border-ink-700/50 hover:bg-ink-700/[0.04]
-           focus-visible:ring-ink-700 focus-visible:ring-offset-paper;
+    @apply btn border border-cream/25 bg-transparent text-cream
+           hover:border-cream/50 hover:bg-cream/[0.06]
+           focus-visible:ring-cream;
   }
-  /* On deep teal backgrounds */
-  .btn-on-dark {
-    @apply btn bg-cream text-ink-700 shadow-sm
-           hover:bg-paper-100 focus-visible:ring-cream focus-visible:ring-offset-ink-700;
-  }
-  .btn-outline-on-dark {
-    @apply btn border border-cream/30 bg-transparent text-cream
-           hover:border-cream/70 hover:bg-cream/[0.06]
-           focus-visible:ring-cream focus-visible:ring-offset-ink-700;
-  }
+  /* Aliases kept for views that target on-dark variants. */
+  .btn-on-dark { @apply btn-primary; }
+  .btn-outline-on-dark { @apply btn-secondary; }
 
   /* ── Cards & surfaces ───────────────────────────────────────────────────── */
   .card {
-    @apply rounded-2xl border border-ink-700/10 bg-white shadow-card;
+    @apply rounded-2xl border border-cream/10 shadow-card;
+    background-color: #0e2a26;
   }
-  .card-pad {
-    @apply card p-6 md:p-8;
-  }
+  .card-pad { @apply card p-6 md:p-8; }
   .card-hover {
-    @apply transition duration-300 ease-calm hover:-translate-y-0.5 hover:shadow-card-hover hover:border-ink-700/20;
+    @apply transition duration-300 ease-calm hover:-translate-y-0.5 hover:border-cream/20;
   }
+  .card-hover:hover { box-shadow: 0 18px 50px -22px rgba(0, 0, 0, 0.65); }
 
   .chip {
-    @apply inline-flex items-center rounded-full border border-ink-700/15 bg-paper-100 px-3.5 py-1.5
-           text-sm font-medium text-ink-600;
+    @apply inline-flex items-center rounded-full border border-cream/10 bg-cream/[0.04] px-3.5 py-1.5
+           text-sm font-medium text-paper-200/80;
   }
 
-  /* Icon medallion */
   .icon-badge {
-    @apply inline-flex h-12 w-12 items-center justify-center rounded-xl bg-ink-700/[0.06] text-ink-700;
+    @apply inline-flex h-12 w-12 items-center justify-center rounded-xl bg-cream/[0.06] text-clay-400;
   }
-  .icon-badge--clay {
-    @apply bg-clay-600/10 text-clay-700;
-  }
-  .icon-badge--on-dark {
-    @apply bg-cream/10 text-clay-400;
-  }
+  .icon-badge--clay { @apply bg-clay-400/20 text-clay-400; }
+  .icon-badge--on-dark { @apply bg-cream/10 text-clay-400; }
 
-  /* Hairline divider in brand ink */
-  .rule {
-    @apply h-px w-full bg-ink-700/10;
-  }
+  .rule { @apply h-px w-full bg-cream/10; }
 
-  /* ── Slider (testimonials) — controls on dark ───────────────────────────── */
+  /* ── Slider (legacy testimonials controls; unused after retheme) ─────────── */
   .slider-btn {
     @apply inline-flex h-11 w-11 items-center justify-center rounded-full border border-cream/25 text-cream
-           transition hover:border-cream/60 hover:bg-cream/[0.06]
-           focus-visible:ring-cream focus-visible:ring-offset-ink-700;
-  }
-  .slider-dot {
-    @apply h-2 w-2 rounded-full bg-cream/30 transition hover:bg-cream/60
-           focus-visible:ring-cream focus-visible:ring-offset-ink-700;
-  }
-  .slider-dot[aria-current='true'] {
-    @apply w-6 bg-clay-400;
+           transition hover:border-cream/60 hover:bg-cream/[0.06] focus-visible:ring-cream;
   }
 
   /* ── Forms ──────────────────────────────────────────────────────────────── */
-  .field-label {
-    @apply mb-1.5 block text-sm font-semibold text-ink-700;
+  .field-label { @apply mb-1.5 block text-sm font-semibold text-paper-200; }
+  .field-hint { @apply mt-1 text-xs text-paper-200/50; }
+  .field-error { @apply mt-1.5 text-xs font-medium text-clay-300; }
+  .input, .textarea, .select {
+    @apply form-input w-full rounded-xl border-cream/20 px-4 py-3 text-cream
+           placeholder:text-paper-200/40 shadow-sm transition
+           focus:border-clay-400 focus:ring-2 focus:ring-clay-400/30;
+    background-color: rgba(6, 21, 19, 0.55);
   }
-  .field-hint {
-    @apply mt-1 text-xs text-ink-400;
-  }
-  .field-error {
-    /* clay-800 on paper = 6.30:1 (clay-700 was a marginal 4.43:1 fail). */
-    @apply mt-1.5 text-xs font-medium text-clay-800;
-  }
-  .input,
-  .textarea,
-  .select {
-    @apply form-input w-full rounded-xl border-ink-700/20 bg-white px-4 py-3 text-ink-700
-           placeholder:text-ink-400 shadow-sm transition
-           focus:border-clay-600 focus:ring-2 focus:ring-clay-600/30;
-  }
-  .select {
-    @apply form-select pr-10;
-  }
-  .textarea {
-    @apply form-textarea min-h-[7rem] leading-relaxed;
-  }
-  .input-invalid {
-    @apply border-clay-600 focus:border-clay-700 focus:ring-clay-600/40;
-  }
-  /* Honeypot: present in the DOM, removed from the visual + a11y tree. */
+  .select { @apply form-select pr-10; }
+  .textarea { @apply form-textarea min-h-[7rem] leading-relaxed; }
+  .input-invalid { @apply border-clay-400 focus:border-clay-300 focus:ring-clay-400/40; }
   .hp-field {
     position: absolute !important;
     left: -9999px !important;
-    top: auto;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
+    top: auto; width: 1px; height: 1px; overflow: hidden;
   }
 
-  /* ── Patterns / decorative ──────────────────────────────────────────────── */
-  .pattern-tile {
-    background-image: url('/images/veylrio-pattern-tile.svg');
-    background-repeat: repeat;
-    background-size: 84px 168px;
-  }
-  /* Light hero: the brand "signal-fan" pattern (paper + scattered teal/clay
-     fans) baked into the SVG, scaled to cover. */
-  .hero-pattern {
-    background-color: #F0EBE1;
-    background-image: url('/images/veylrio-pattern-light-subtle.svg');
-    background-repeat: no-repeat;
-    background-position: center top;
-    background-size: cover;
-  }
+  /* ── Comparison table (own vs rent) ─────────────────────────────────────── */
+  .compare-grid { @apply grid grid-cols-1 sm:grid-cols-12 items-stretch; }
 }
 
 @layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
-  .text-pretty {
-    text-wrap: pretty;
-  }
-  /* Soft top/bottom fade for decorative pattern layers */
+  .text-balance { text-wrap: balance; }
+  .text-pretty { text-wrap: pretty; }
   .mask-fade-y {
     -webkit-mask-image: linear-gradient(to bottom, transparent, #000 18%, #000 82%, transparent);
     mask-image: linear-gradient(to bottom, transparent, #000 18%, #000 82%, transparent);
   }
-  /* Hide scrollbars on the snap-scroll slider track (still keyboard/touch scrollable) */
-  .no-scrollbar {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
-  .no-scrollbar::-webkit-scrollbar {
-    display: none;
-  }
 }
 
-/* ───────────────────────────────────────────────────────────────────────────
-   Full-viewport hero = one screen minus the sticky navbar (h-16 / md:h-20).
-   Plain CSS (outside @layer) so it is never purged. `vh` is the baseline;
-   `svh` refines mobile so the address bar doesn't make the hero overshoot.
-   ─────────────────────────────────────────────────────────────────────────── */
-.hero-screen {
-  min-height: calc(100vh - 4rem);
-}
-@media (min-width: 768px) {
-  .hero-screen {
-    min-height: calc(100vh - 5rem);
-  }
-}
+/* Full-viewport hero = one screen minus the sticky navbar (h-16 / md:h-20). */
+.hero-screen { min-height: calc(100vh - 4rem); }
+@media (min-width: 768px) { .hero-screen { min-height: calc(100vh - 5rem); } }
 @supports (min-height: 100svh) {
-  .hero-screen {
-    min-height: calc(100svh - 4rem);
-  }
-  @media (min-width: 768px) {
-    .hero-screen {
-      min-height: calc(100svh - 5rem);
-    }
-  }
+  .hero-screen { min-height: calc(100svh - 4rem); }
+  @media (min-width: 768px) { .hero-screen { min-height: calc(100svh - 5rem); } }
 }

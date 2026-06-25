@@ -23,13 +23,10 @@ export interface Submission {
   company: string;
   email: string;
   phone: string;
-  website: string;
   industry: string;
   outboundStatus: string;
-  teamSize: string;
   stack: string;
   needs: string;
-  broken: string;
   contactMethod: string;
   timeline: string;
   budget: string;
@@ -78,22 +75,17 @@ function buildEmail(s: Submission): string {
     '',
     `Name:            ${s.name}`,
     `Company:         ${s.company}`,
-    `Work email:      ${s.email}`,
+    `Email:           ${s.email}`,
     `Phone / WhatsApp:${s.phone}`,
-    `Website:         ${s.website || '—'}`,
     `Industry:        ${s.industry}`,
-    `Outbound today:  ${s.outboundStatus || '—'}`,
-    `Team size:       ${s.teamSize}`,
+    `Outbound today:  ${s.outboundStatus}`,
     `Dialer / CRM:    ${s.stack || '—'}`,
     `Preferred:       ${s.contactMethod}`,
     `Timeline:        ${s.timeline}`,
     `Budget:          ${s.budget || '—'}`,
     '',
-    'What they need help with:',
+    'What they want to build or fix:',
     s.needs,
-    '',
-    'What is broken or messy:',
-    s.broken || '—',
     '',
     `Received: ${s.receivedAt}`,
   ];

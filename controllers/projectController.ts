@@ -6,16 +6,16 @@ import asyncHandler from '../utils/asyncHandler';
 import logger from '../utils/logger';
 
 const SEO = {
-  title: 'Start a Project — Build My Outbound System | Veylrio',
+  title: 'Start Your Outbound Setup — Veylrio',
   description:
-    'Tell us how you get customers today and what you have already tried. We will scope the outbound setup you should own and reply through your preferred contact method.',
+    'Tell us where you are with outbound and what you want to build or fix. We will recommend the simplest practical next step.',
   path: '/start-a-project',
 };
 
 /** Fields we echo back into the form when validation fails (never the honeypot). */
 const ECHO_FIELDS = [
-  'name', 'company', 'email', 'phone', 'website', 'industry', 'outboundStatus',
-  'teamSize', 'stack', 'needs', 'broken', 'contactMethod', 'timeline', 'budget',
+  'name', 'company', 'email', 'phone', 'industry', 'outboundStatus',
+  'stack', 'needs', 'contactMethod', 'timeline', 'budget',
 ] as const;
 
 function pickValues(body: Record<string, unknown> = {}): Record<string, string> {
@@ -60,13 +60,10 @@ export const submitForm = asyncHandler(async (req, res) => {
     company: b.company,
     email: b.email,
     phone: b.phone,
-    website: b.website || '',
     industry: b.industry,
-    outboundStatus: b.outboundStatus || '',
-    teamSize: b.teamSize,
+    outboundStatus: b.outboundStatus,
     stack: b.stack || '',
     needs: b.needs,
-    broken: b.broken || '',
     contactMethod: b.contactMethod,
     timeline: b.timeline,
     budget: b.budget || '',

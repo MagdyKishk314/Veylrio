@@ -8,21 +8,21 @@
   </div>
 </section>
 
-<section class="section-y bg-paper">
+<section class="section-y">
   <div class="container">
     <div class="mx-auto max-w-prose">
 <% if (!isProd) { %>
       <%# Owner-facing reminder — only renders in non-production builds. %>
-      <div class="mb-10 rounded-2xl border border-clay-600/30 bg-clay-600/[0.06] p-5">
-        <p class="text-sm text-ink-600">
-          <strong class="font-semibold text-ink-700">Dev note (hidden in production):</strong> This is a
+      <div class="mb-10 rounded-2xl border border-clay-400/30 bg-clay-400/[0.08] p-5">
+        <p class="text-sm text-paper-200/80">
+          <strong class="font-semibold text-cream">Dev note (hidden in production):</strong> This is a
           clean starter policy. Have it reviewed by a qualified legal professional and tailored to your
           jurisdiction and actual data practices before launch.
         </p>
       </div>
 <% } %>
 
-      <div class="prose max-w-none prose-headings:font-display prose-headings:text-ink-700 prose-h2:text-2xl prose-h2:mt-12 prose-h3:text-lg prose-a:text-clay-700 prose-a:no-underline hover:prose-a:underline prose-strong:text-ink-700 text-ink-600">
+      <div class="prose prose-invert max-w-none prose-headings:font-display prose-headings:text-cream prose-h2:text-2xl prose-h2:mt-12 prose-h3:text-lg prose-a:text-clay-400 prose-a:no-underline hover:prose-a:underline prose-strong:text-cream text-paper-200/75">
         <p>
           This Privacy Policy explains how <%= site.brand.legalName %> (“Veylrio”, “we”, “us”) collects,
           uses and protects information when you visit <%= site.brand.domain %> or contact us through
@@ -32,7 +32,7 @@
         <h2>Information we collect</h2>
         <p>We collect only what we need to respond to you and operate this site:</p>
         <ul>
-          <li><strong>Information you provide.</strong> When you submit the “Start a Project” form, we collect the details you enter — such as your name, company, work email, phone or WhatsApp number, website, industry, team size, current tools, your message, preferred contact method, timeline and optional budget range.</li>
+          <li><strong>Information you provide.</strong> When you submit the “Start a Project” form, we collect the details you enter — such as your name, company, email, phone or WhatsApp number, industry, your current outbound situation, current dialer/CRM, what you want to build or fix, preferred contact method, timeline and optional budget range.</li>
           <li><strong>Technical information.</strong> Standard server logs may record information such as your IP address, browser type and the pages you request, used to keep the site secure and reliable.</li>
         </ul>
 

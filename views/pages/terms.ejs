@@ -8,21 +8,21 @@
   </div>
 </section>
 
-<section class="section-y bg-paper">
+<section class="section-y">
   <div class="container">
     <div class="mx-auto max-w-prose">
 <% if (!isProd) { %>
       <%# Owner-facing reminder — only renders in non-production builds. %>
-      <div class="mb-10 rounded-2xl border border-clay-600/30 bg-clay-600/[0.06] p-5">
-        <p class="text-sm text-ink-600">
-          <strong class="font-semibold text-ink-700">Dev note (hidden in production):</strong> These are
+      <div class="mb-10 rounded-2xl border border-clay-400/30 bg-clay-400/[0.08] p-5">
+        <p class="text-sm text-paper-200/80">
+          <strong class="font-semibold text-cream">Dev note (hidden in production):</strong> These are
           clean starter terms. Have them reviewed by a qualified legal professional and tailored to your
           jurisdiction and engagement model before launch.
         </p>
       </div>
 <% } %>
 
-      <div class="prose max-w-none prose-headings:font-display prose-headings:text-ink-700 prose-h2:text-2xl prose-h2:mt-12 prose-h3:text-lg prose-a:text-clay-700 prose-a:no-underline hover:prose-a:underline prose-strong:text-ink-700 text-ink-600">
+      <div class="prose prose-invert max-w-none prose-headings:font-display prose-headings:text-cream prose-h2:text-2xl prose-h2:mt-12 prose-h3:text-lg prose-a:text-clay-400 prose-a:no-underline hover:prose-a:underline prose-strong:text-cream text-paper-200/75">
         <p>
           These Terms of Use (“Terms”) govern your access to and use of the
           <%= site.brand.domain %> website operated by <%= site.brand.legalName %>

@@ -1,5 +1,4 @@
 <%
-  // Small helpers for the form. `values` and `errors` come from the controller.
   function val(name) { return (values && values[name]) ? values[name] : ''; }
   function err(name) { return (errors && errors[name]) ? errors[name] : ''; }
   function inputClass(name) { return err(name) ? 'input input-invalid' : 'input'; }
@@ -9,94 +8,96 @@
 %>
 
 <!-- ══ HEADER ══════════════════════════════════════════════════════════════ -->
-<section class="relative overflow-hidden bg-ink-800 text-cream">
-  <div class="pointer-events-none absolute inset-0 pattern-tile opacity-[0.06]" aria-hidden="true"></div>
+<section class="relative overflow-hidden">
+  <div class="pointer-events-none absolute -right-40 -top-32 -z-10 h-[28rem] w-[28rem] rounded-full bg-clay-500/10 blur-[120px]" aria-hidden="true"></div>
   <div class="container relative">
     <div class="max-w-3xl py-16 md:py-20">
-      <p class="eyebrow eyebrow--on-dark">Start a Project</p>
-      <h1 class="mt-5 text-display text-cream">Let’s scope your outbound system.</h1>
-      <p class="lead lead--on-dark mt-6 max-w-2xl">
-        Tell us how you get customers today and what you have already tried. There is no obligation and
-        no pitch deck — we will review the details and reply through your preferred contact method with
-        a clear, practical next step.
+      <p class="eyebrow">Start a Project</p>
+      <h1 class="mt-5 text-display">Let’s build the outbound setup you can own.</h1>
+      <p class="lead mt-6 max-w-2xl">
+        Tell us where you are now: starting from zero, leaving a vendor, hiring a caller, or cleaning
+        up what you already have. We will review it and recommend the simplest practical next step.
       </p>
     </div>
   </div>
 </section>
 
 <!-- ══ FORM ════════════════════════════════════════════════════════════════ -->
-<section class="section-y bg-paper">
+<section class="section-y">
   <div class="container">
     <div class="grid gap-10 lg:grid-cols-12">
       <!-- Form -->
       <div class="lg:col-span-8">
         <% if (hasErrors) { %>
-          <div class="mb-8 rounded-2xl border border-clay-600/30 bg-clay-600/[0.06] p-5" role="alert">
-            <p class="font-semibold text-clay-800">Please check the highlighted fields.</p>
-            <p class="mt-1 text-sm text-ink-500">A few details need fixing before we can send this through.</p>
+          <div class="mb-8 rounded-2xl border border-clay-400/30 bg-clay-400/[0.08] p-5" role="alert">
+            <p class="font-semibold text-clay-300">Please check the highlighted fields.</p>
+            <p class="mt-1 text-sm text-paper-200/60">A few details need fixing before we can send this through.</p>
           </div>
         <% } %>
 
         <form method="POST" action="/start-a-project" novalidate class="space-y-10">
           <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
-
-          <!-- Honeypot (must stay empty) -->
           <div class="hp-field" aria-hidden="true">
             <label for="_hp_company_url">Company URL (leave this empty)</label>
             <input type="text" id="_hp_company_url" name="_hp_company_url" tabindex="-1" autocomplete="off" />
           </div>
 
-          <!-- ── About you ────────────────────────────────────────────────── -->
+          <!-- About you -->
           <fieldset class="space-y-6">
-            <legend class="text-xs font-semibold uppercase tracking-eyebrow text-clay-700">About you</legend>
-
+            <legend class="text-xs font-semibold uppercase tracking-eyebrow text-clay-400">About you</legend>
             <div class="grid gap-6 sm:grid-cols-2">
               <div>
-                <label for="name" class="field-label">Name <span class="text-clay-700">*</span></label>
+                <label for="name" class="field-label">Name <span class="text-clay-400">*</span></label>
                 <input type="text" id="name" name="name" value="<%= val('name') %>" autocomplete="name" required maxlength="100"
                   class="<%= inputClass('name') %>" <%= err('name') ? 'aria-invalid="true" aria-describedby="name-error"' : '' %> />
                 <% if (err('name')) { %><p id="name-error" class="field-error"><%= err('name') %></p><% } %>
               </div>
-
               <div>
-                <label for="company" class="field-label">Company <span class="text-clay-700">*</span></label>
+                <label for="company" class="field-label">Company <span class="text-clay-400">*</span></label>
                 <input type="text" id="company" name="company" value="<%= val('company') %>" autocomplete="organization" required maxlength="120"
                   class="<%= inputClass('company') %>" <%= err('company') ? 'aria-invalid="true" aria-describedby="company-error"' : '' %> />
                 <% if (err('company')) { %><p id="company-error" class="field-error"><%= err('company') %></p><% } %>
               </div>
-
               <div>
-                <label for="email" class="field-label">Work email <span class="text-clay-700">*</span></label>
+                <label for="email" class="field-label">Email <span class="text-clay-400">*</span></label>
                 <input type="email" id="email" name="email" value="<%= val('email') %>" autocomplete="email" required maxlength="160"
                   class="<%= inputClass('email') %>" <%= err('email') ? 'aria-invalid="true" aria-describedby="email-error"' : '' %> />
                 <% if (err('email')) { %><p id="email-error" class="field-error"><%= err('email') %></p><% } %>
               </div>
-
               <div>
-                <label for="phone" class="field-label">Phone / WhatsApp <span class="text-clay-700">*</span></label>
+                <label for="phone" class="field-label">Phone / WhatsApp <span class="text-clay-400">*</span></label>
                 <input type="tel" id="phone" name="phone" value="<%= val('phone') %>" autocomplete="tel" required maxlength="40"
                   class="<%= inputClass('phone') %>" <%= err('phone') ? 'aria-invalid="true" aria-describedby="phone-error"' : '' %> />
                 <% if (err('phone')) { %><p id="phone-error" class="field-error"><%= err('phone') %></p><% } %>
-              </div>
-
-              <div class="sm:col-span-2">
-                <label for="website" class="field-label">Website <span class="text-ink-400 font-normal">(optional)</span></label>
-                <input type="text" id="website" name="website" value="<%= val('website') %>" autocomplete="url" inputmode="url" maxlength="160" placeholder="yourcompany.com"
-                  class="<%= inputClass('website') %>" <%= err('website') ? 'aria-invalid="true" aria-describedby="website-error"' : '' %> />
-                <% if (err('website')) { %><p id="website-error" class="field-error"><%= err('website') %></p><% } %>
               </div>
             </div>
           </fieldset>
 
           <div class="rule"></div>
 
-          <!-- ── Your operation ───────────────────────────────────────────── -->
+          <!-- Your situation -->
           <fieldset class="space-y-6">
-            <legend class="text-xs font-semibold uppercase tracking-eyebrow text-clay-700">Your operation</legend>
+            <legend class="text-xs font-semibold uppercase tracking-eyebrow text-clay-400">Your situation</legend>
+
+            <div>
+              <span class="field-label">Where are you with outbound? <span class="text-clay-400">*</span></span>
+              <div class="grid gap-3 sm:grid-cols-2">
+                <% options.outboundStatus.forEach(function (opt) { %>
+                  <label class="flex cursor-pointer items-center gap-3 rounded-xl border border-cream/15 bg-ink-950/40 px-4 py-3 transition hover:border-cream/30 has-[:checked]:border-clay-400 has-[:checked]:bg-clay-400/10">
+                    <input type="radio" name="outboundStatus" value="<%= opt %>" <%= val('outboundStatus') === opt ? 'checked' : '' %> class="peer sr-only" />
+                    <span class="flex h-4 w-4 shrink-0 items-center justify-center rounded-full border border-cream/30 peer-checked:border-clay-400">
+                      <span class="h-2 w-2 rounded-full bg-clay-400 opacity-0 peer-checked:opacity-100"></span>
+                    </span>
+                    <span class="text-sm text-paper-200/80 peer-checked:text-cream"><%= opt %></span>
+                  </label>
+                <% }); %>
+              </div>
+              <% if (err('outboundStatus')) { %><p class="field-error"><%= err('outboundStatus') %></p><% } %>
+            </div>
 
             <div class="grid gap-6 sm:grid-cols-2">
               <div>
-                <label for="industry" class="field-label">Industry <span class="text-clay-700">*</span></label>
+                <label for="industry" class="field-label">Industry <span class="text-clay-400">*</span></label>
                 <select id="industry" name="industry" required class="<%= selectClass('industry') %>"
                   <%= err('industry') ? 'aria-invalid="true" aria-describedby="industry-error"' : '' %>>
                   <option value="" <%= val('industry') ? '' : 'selected' %> disabled>Select an industry…</option>
@@ -106,90 +107,34 @@
                 </select>
                 <% if (err('industry')) { %><p id="industry-error" class="field-error"><%= err('industry') %></p><% } %>
               </div>
-
               <div>
-                <label for="teamSize" class="field-label">Team size <span class="text-clay-700">*</span></label>
-                <select id="teamSize" name="teamSize" required class="<%= selectClass('teamSize') %>"
-                  <%= err('teamSize') ? 'aria-invalid="true" aria-describedby="teamSize-error"' : '' %>>
-                  <option value="" <%= val('teamSize') ? '' : 'selected' %> disabled>Select team size…</option>
-                  <% options.teamSizes.forEach(function (opt) { %>
-                    <option value="<%= opt %>" <%= val('teamSize') === opt ? 'selected' : '' %>><%= opt %></option>
-                  <% }); %>
-                </select>
-                <% if (err('teamSize')) { %><p id="teamSize-error" class="field-error"><%= err('teamSize') %></p><% } %>
-              </div>
-
-              <div class="sm:col-span-2">
-                <label for="outboundStatus" class="field-label">Where are you with outbound today? <span class="text-ink-400 font-normal">(optional)</span></label>
-                <select id="outboundStatus" name="outboundStatus" class="<%= selectClass('outboundStatus') %>"
-                  <%= err('outboundStatus') ? 'aria-invalid="true" aria-describedby="outboundStatus-error"' : '' %>>
-                  <option value="" <%= val('outboundStatus') ? '' : 'selected' %>>Select one…</option>
-                  <% options.outboundStatus.forEach(function (opt) { %>
-                    <option value="<%= opt %>" <%= val('outboundStatus') === opt ? 'selected' : '' %>><%= opt %></option>
-                  <% }); %>
-                </select>
-                <% if (err('outboundStatus')) { %><p id="outboundStatus-error" class="field-error"><%= err('outboundStatus') %></p><% } %>
-              </div>
-
-              <div class="sm:col-span-2">
-                <label for="stack" class="field-label">Current dialer or CRM <span class="text-ink-400 font-normal">(optional)</span></label>
+                <label for="stack" class="field-label">Current dialer or CRM <span class="text-paper-200/45 font-normal">(optional)</span></label>
                 <input type="text" id="stack" name="stack" value="<%= val('stack') %>" maxlength="160" placeholder="e.g. a power dialer + a CRM, or “not sure”"
                   class="<%= inputClass('stack') %>" <%= err('stack') ? 'aria-invalid="true" aria-describedby="stack-error"' : '' %> />
                 <% if (err('stack')) { %><p id="stack-error" class="field-error"><%= err('stack') %></p><% } %>
               </div>
             </div>
-          </fieldset>
-
-          <div class="rule"></div>
-
-          <!-- ── What you need ────────────────────────────────────────────── -->
-          <fieldset class="space-y-6">
-            <legend class="text-xs font-semibold uppercase tracking-eyebrow text-clay-700">What you need</legend>
 
             <div>
-              <label for="needs" class="field-label">What do you need help with? <span class="text-clay-700">*</span></label>
+              <label for="needs" class="field-label">What do you want to build or fix? <span class="text-clay-400">*</span></label>
               <textarea id="needs" name="needs" required maxlength="2000" data-counter="needs-count" rows="4"
-                placeholder="Building from scratch, leaving a vendor, hiring a caller, cleaner reporting — whatever is on your mind."
+                placeholder="Building from zero, leaving a vendor, hiring a caller, cleaner reporting — whatever is on your mind."
                 class="<%= textareaClass('needs') %>" <%= err('needs') ? 'aria-invalid="true" aria-describedby="needs-error needs-count"' : 'aria-describedby="needs-count"' %>><%= val('needs') %></textarea>
               <div class="flex items-center justify-between">
                 <% if (err('needs')) { %><p id="needs-error" class="field-error"><%= err('needs') %></p><% } else { %><span></span><% } %>
                 <span id="needs-count" class="field-hint"></span>
               </div>
             </div>
-
-            <div>
-              <label for="broken" class="field-label">What have you tried, and what frustrated you? <span class="text-ink-400 font-normal">(optional)</span></label>
-              <textarea id="broken" name="broken" maxlength="2000" data-counter="broken-count" rows="4"
-                placeholder="Vendors, networks, callers, data… what did and didn’t work, and where money or time is leaking."
-                class="<%= textareaClass('broken') %>" <%= err('broken') ? 'aria-invalid="true" aria-describedby="broken-error broken-count"' : 'aria-describedby="broken-count"' %>><%= val('broken') %></textarea>
-              <div class="flex items-center justify-between">
-                <% if (err('broken')) { %><p id="broken-error" class="field-error"><%= err('broken') %></p><% } else { %><span></span><% } %>
-                <span id="broken-count" class="field-hint"></span>
-              </div>
-            </div>
           </fieldset>
 
           <div class="rule"></div>
 
-          <!-- ── Logistics ────────────────────────────────────────────────── -->
+          <!-- Logistics -->
           <fieldset class="space-y-6">
-            <legend class="text-xs font-semibold uppercase tracking-eyebrow text-clay-700">Logistics</legend>
-
+            <legend class="text-xs font-semibold uppercase tracking-eyebrow text-clay-400">Logistics</legend>
             <div class="grid gap-6 sm:grid-cols-3">
               <div>
-                <label for="contactMethod" class="field-label">Preferred contact <span class="text-clay-700">*</span></label>
-                <select id="contactMethod" name="contactMethod" required class="<%= selectClass('contactMethod') %>"
-                  <%= err('contactMethod') ? 'aria-invalid="true" aria-describedby="contactMethod-error"' : '' %>>
-                  <option value="" <%= val('contactMethod') ? '' : 'selected' %> disabled>Choose…</option>
-                  <% options.contactMethods.forEach(function (opt) { %>
-                    <option value="<%= opt %>" <%= val('contactMethod') === opt ? 'selected' : '' %>><%= opt %></option>
-                  <% }); %>
-                </select>
-                <% if (err('contactMethod')) { %><p id="contactMethod-error" class="field-error"><%= err('contactMethod') %></p><% } %>
-              </div>
-
-              <div>
-                <label for="timeline" class="field-label">Timeline <span class="text-clay-700">*</span></label>
+                <label for="timeline" class="field-label">Timeline <span class="text-clay-400">*</span></label>
                 <select id="timeline" name="timeline" required class="<%= selectClass('timeline') %>"
                   <%= err('timeline') ? 'aria-invalid="true" aria-describedby="timeline-error"' : '' %>>
                   <option value="" <%= val('timeline') ? '' : 'selected' %> disabled>Choose…</option>
@@ -199,9 +144,19 @@
                 </select>
                 <% if (err('timeline')) { %><p id="timeline-error" class="field-error"><%= err('timeline') %></p><% } %>
               </div>
-
               <div>
-                <label for="budget" class="field-label">Budget <span class="text-ink-400 font-normal">(optional)</span></label>
+                <label for="contactMethod" class="field-label">Preferred contact <span class="text-clay-400">*</span></label>
+                <select id="contactMethod" name="contactMethod" required class="<%= selectClass('contactMethod') %>"
+                  <%= err('contactMethod') ? 'aria-invalid="true" aria-describedby="contactMethod-error"' : '' %>>
+                  <option value="" <%= val('contactMethod') ? '' : 'selected' %> disabled>Choose…</option>
+                  <% options.contactMethods.forEach(function (opt) { %>
+                    <option value="<%= opt %>" <%= val('contactMethod') === opt ? 'selected' : '' %>><%= opt %></option>
+                  <% }); %>
+                </select>
+                <% if (err('contactMethod')) { %><p id="contactMethod-error" class="field-error"><%= err('contactMethod') %></p><% } %>
+              </div>
+              <div>
+                <label for="budget" class="field-label">Budget <span class="text-paper-200/45 font-normal">(optional)</span></label>
                 <select id="budget" name="budget" class="<%= selectClass('budget') %>"
                   <%= err('budget') ? 'aria-invalid="true" aria-describedby="budget-error"' : '' %>>
                   <option value="" <%= val('budget') ? '' : 'selected' %>>Prefer not to say</option>
@@ -216,43 +171,42 @@
 
           <div class="flex flex-col gap-4 pt-2 sm:flex-row sm:items-center sm:justify-between">
             <button type="submit" class="btn-primary w-full sm:w-auto">
-              Send project details
+              <%= site.cta.primary.label %>
               <%- icon('arrow-right', 'arrow h-4 w-4') %>
             </button>
-            <p class="text-xs text-ink-400">
-              By submitting, you agree to our <a href="/privacy-policy" class="underline hover:text-ink-600">Privacy Policy</a>.
+            <p class="text-xs text-paper-200/45">
+              By submitting, you agree to our <a href="/privacy-policy" class="underline hover:text-paper-200">Privacy Policy</a>.
             </p>
           </div>
         </form>
       </div>
 
-      <!-- Reassurance sidebar -->
+      <!-- Sidebar -->
       <aside class="lg:col-span-4">
         <div class="lg:sticky lg:top-28 space-y-5">
-          <div class="card-pad bg-white">
-            <h2 class="text-base font-semibold text-ink-700">What happens next</h2>
+          <div class="card-pad">
+            <h2 class="text-base font-semibold text-cream">What happens next</h2>
             <ol class="mt-4 space-y-4">
               <% [
-                   {n: '1', t: 'We read it properly', d: 'A person reviews your details — not a bot, not a generic auto-reply.'},
-                   {n: '2', t: 'We reply your way', d: 'We respond through your preferred contact method with a clear next step.'},
-                   {n: '3', t: 'We scope the setup', d: 'If it is a fit, we map what to build, what you already have, and what you should own by the end.'}
+                   {n: '1', t: 'We review your situation', d: 'A person reads your details — not a bot, not a generic auto-reply.'},
+                   {n: '2', t: 'We reply with the next step', d: 'Through your preferred contact method, with a clear, practical recommendation.'},
+                   {n: '3', t: 'We scope what you should own', d: 'If it is a fit, we map what to build and what you keep by the end.'}
                  ].forEach(function (s) { %>
                 <li class="flex items-start gap-3">
-                  <span class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-clay-600/10 font-display font-semibold text-sm text-clay-800"><%= s.n %></span>
+                  <span class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-clay-400/12 font-display text-sm font-semibold text-clay-400"><%= s.n %></span>
                   <div>
-                    <p class="text-sm font-semibold text-ink-700"><%= s.t %></p>
-                    <p class="mt-1 text-sm text-ink-500"><%= s.d %></p>
+                    <p class="text-sm font-semibold text-cream"><%= s.t %></p>
+                    <p class="mt-1 text-sm text-paper-200/60"><%= s.d %></p>
                   </div>
                 </li>
               <% }); %>
             </ol>
           </div>
-
-          <div class="card-pad bg-paper-100">
-            <p class="text-sm text-ink-600">
-              Prefer email? Reach us directly at
-              <a href="mailto:<%= site.contactEmail %>" class="font-semibold text-clay-700 hover:text-clay-800"><%= site.contactEmail %></a>.
-              Feel free to attach screenshots, sheets or workflow notes.
+          <div class="card-pad">
+            <p class="text-sm text-paper-200/70">
+              Prefer email? Reach us at
+              <a href="mailto:<%= site.contactEmail %>" class="font-semibold text-clay-400 hover:text-clay-300"><%= site.contactEmail %></a>.
+              Feel free to attach screenshots, sheets, or notes.
             </p>
           </div>
         </div>

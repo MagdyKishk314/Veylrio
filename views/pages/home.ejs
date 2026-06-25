@@ -1,111 +1,166 @@
 <!-- ══ HERO ════════════════════════════════════════════════════════════════ -->
 <section class="hero-screen relative isolate flex items-center overflow-hidden">
-  <!-- Brand "signal-fan" pattern on paper (dialed back so the headline pops) -->
-  <div class="absolute inset-0 -z-10 bg-paper" aria-hidden="true"></div>
-  <div class="hero-pattern absolute inset-0 -z-10 opacity-50" aria-hidden="true"></div>
-  <div class="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-32 bg-gradient-to-b from-transparent to-paper" aria-hidden="true"></div>
+  <div class="pointer-events-none absolute -left-40 -top-24 -z-10 h-[34rem] w-[34rem] rounded-full bg-clay-500/10 blur-[120px]" aria-hidden="true"></div>
+  <div class="pointer-events-none absolute -right-40 bottom-0 -z-10 h-[30rem] w-[30rem] rounded-full bg-ink-500/25 blur-[120px]" aria-hidden="true"></div>
 
   <div class="container relative w-full">
-    <div class="grid items-center gap-10 py-14 lg:grid-cols-12 lg:gap-8">
+    <div class="grid items-center gap-12 py-16 lg:grid-cols-12 lg:gap-10">
       <!-- Copy -->
-      <div class="lg:col-span-7">
-        <img src="/logos/veylrio-mark-fullcolor.svg" alt="Veylrio" width="128" height="128" class="mb-7 h-14 w-14 lg:hidden" />
-
-        <p class="eyebrow">Build &amp; own your outbound</p>
-
-        <h1 class="mt-6">
-          <span class="block font-display font-bold tracking-tight text-ink-700 leading-[1.04] text-[clamp(2.2rem,1rem+4.4vw,4.25rem)]">Build your own outbound operation.</span>
-          <span class="mt-1 block font-serif italic font-medium text-clay-600 leading-[1.08] text-[clamp(2.2rem,1rem+4.4vw,4.25rem)]">Stop renting one.</span>
+      <div class="lg:col-span-6">
+        <p class="eyebrow">Outbound you own</p>
+        <h1 class="mt-6 text-balance">
+          <span class="block font-display font-bold tracking-tight text-cream leading-[1.05] text-[clamp(2.3rem,1.1rem+4.6vw,4.25rem)]">Build your own outbound operation.</span>
+          <span class="mt-1 block font-serif italic font-medium text-clay-400 leading-[1.1] text-[clamp(2.3rem,1.1rem+4.6vw,4.25rem)]">Stop renting one.</span>
         </h1>
-
-        <p class="lead mt-7 max-w-xl text-ink-600">
+        <p class="lead mt-7 max-w-xl">
           Veylrio sets up the dialer, CRM, caller workflow, data process, reporting, and operating
-          structure — so your business runs outbound with visibility and control.
+          structure so your business can run outbound with visibility, control, and less long-term
+          dependency on vendors.
         </p>
-
-        <p class="mt-4 max-w-xl text-ink-500">
-          Leaving a vendor, replacing a network, hiring your first caller, or starting cold calling
-          for the first time — we build the system so you can run it.
-        </p>
-
         <div class="mt-9 flex flex-col gap-3 sm:flex-row">
           <a href="<%= site.cta.primary.href %>" class="btn-primary">
             <%= site.cta.primary.label %>
             <%- icon('arrow-right', 'arrow h-4 w-4') %>
           </a>
-          <a href="<%= site.cta.secondary.href %>" class="btn-secondary">
-            <%= site.cta.secondary.label %>
-          </a>
+          <a href="#how-it-works" class="btn-secondary">See How It Works</a>
         </div>
-
-        <p class="mt-10 text-sm font-medium text-ink-500">
-          For real estate investors, home services, realtors, agencies, and owners leaving vendors.
+        <p class="mt-9 max-w-xl text-sm text-paper-200/55">
+          For real estate investors, realtors, roofing companies, solar teams, home-service
+          businesses, agencies, and owners who want outbound without the black box.
         </p>
       </div>
 
-      <!-- Brand mark medallion (desktop) -->
-      <div class="hidden lg:col-span-5 lg:flex lg:items-center lg:justify-center">
-        <div class="relative flex aspect-square w-full max-w-sm items-center justify-center">
-          <span class="absolute h-[28rem] w-[28rem] rounded-full border border-ink-700/5" aria-hidden="true"></span>
-          <span class="absolute h-[21rem] w-[21rem] rounded-full border border-ink-700/10" aria-hidden="true"></span>
-          <span class="absolute h-60 w-60 rounded-full bg-paper-100/70 blur-2xl" aria-hidden="true"></span>
-          <img src="/logos/veylrio-mark-fullcolor.svg" alt="" aria-hidden="true" width="128" height="128" class="relative h-44 w-44 xl:h-52 xl:w-52" />
+      <!-- Visual: rented black box → owned system -->
+      <div class="lg:col-span-6">
+        <div class="relative mx-auto grid max-w-md gap-4 sm:max-w-xl sm:grid-cols-[1fr_auto_1.2fr] sm:items-center">
+          <!-- Rented -->
+          <figure class="card-pad bg-ink-950/40 text-center">
+            <span class="chip mb-4 border-cream/10 text-paper-200/60">Rented</span>
+            <span class="mx-auto flex h-12 w-12 items-center justify-center rounded-xl bg-cream/[0.05] text-paper-200/45">
+              <%- icon('lock', 'h-6 w-6') %>
+            </span>
+            <p class="mt-4 text-sm font-semibold text-paper-200/80">Vendor black box</p>
+            <p class="mt-2 text-xs leading-relaxed text-paper-200/40">margin · overhead · limited visibility</p>
+          </figure>
+
+          <!-- Arrow -->
+          <div class="flex items-center justify-center text-clay-400" aria-hidden="true">
+            <span class="hidden sm:block"><%- icon('arrow-right', 'h-7 w-7') %></span>
+            <svg class="h-7 w-7 sm:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg>
+          </div>
+
+          <!-- Owned -->
+          <figure class="relative card-pad border-clay-400/30 bg-ink-800">
+            <div class="pointer-events-none absolute -inset-px -z-10 rounded-2xl bg-clay-400/[0.06] blur-md" aria-hidden="true"></div>
+            <div class="flex items-center justify-between">
+              <span class="chip border-clay-400/30 bg-clay-400/10 text-clay-400">Owned</span>
+              <img src="/logos/veylrio-mark-reversed.svg" alt="" aria-hidden="true" width="28" height="28" class="h-6 w-6 opacity-80" />
+            </div>
+            <ul class="mt-5 space-y-2.5">
+              <% site.ownershipStack.forEach(function (layer) { %>
+                <li class="flex items-center gap-3 rounded-lg border border-cream/10 bg-cream/[0.03] px-3.5 py-2.5">
+                  <span class="h-1.5 w-1.5 rounded-full bg-clay-400"></span>
+                  <span class="text-sm font-medium text-cream"><%= layer %></span>
+                </li>
+              <% }); %>
+            </ul>
+          </figure>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ══ TESTIMONIALS (auto-hides when site.testimonials is empty) ═══════════ -->
-<%- include('../partials/testimonials') %>
-
 <!-- ══ PROBLEM ═════════════════════════════════════════════════════════════ -->
-<section class="section-y bg-paper">
+<section class="section-y band">
   <div class="container">
     <div class="mx-auto max-w-3xl text-center">
-      <p class="eyebrow">The black-box problem</p>
-      <h2 class="mt-4 text-display-sm">You should not need to rent a black box to run outbound.</h2>
+      <p class="eyebrow">The problem</p>
+      <h2 class="mt-4 text-display-sm">Paying for outbound is not the same as owning it.</h2>
       <p class="lead mt-5">
-        Many businesses pay a vendor, network, or agency every month and still do not control the
-        caller, the data, the CRM, the recordings, or the reporting. That is dependency — and it
-        makes it hard to tell why anything is or is not working.
+        Many businesses pay vendors, networks, or agencies every month but still do not control the
+        caller, CRM, data flow, recordings, reporting, or daily campaign changes. That means renting
+        access instead of building an asset.
       </p>
     </div>
 
     <ul class="mx-auto mt-12 grid max-w-5xl gap-4 sm:grid-cols-2">
       <% site.problems.forEach(function (problem) { %>
         <li class="card-pad flex items-start gap-4">
-          <span class="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-clay-600/10 text-clay-700">
+          <span class="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-clay-400/12 text-clay-400">
             <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
           </span>
-          <span class="text-ink-600"><%= problem %></span>
+          <span class="text-paper-200/85"><%= problem %></span>
         </li>
       <% }); %>
     </ul>
   </div>
 </section>
 
+<!-- ══ COST ════════════════════════════════════════════════════════════════ -->
+<section class="section-y">
+  <div class="container">
+    <div class="mx-auto max-w-3xl text-center">
+      <p class="eyebrow">The cost angle</p>
+      <h2 class="mt-4 text-display-sm">Cheaper because the waste is removed — not the quality.</h2>
+      <p class="lead mt-5">
+        Running your own outbound operation can often cost less than paying a vendor every month,
+        because you remove recurring middle margin and bundled overhead. The goal is not to cut
+        corners — it is to redirect more of your budget into what actually improves the operation.
+      </p>
+    </div>
+
+    <div class="mx-auto mt-12 grid max-w-4xl gap-5 md:grid-cols-2">
+      <!-- Vendor spend -->
+      <div class="card-pad">
+        <p class="text-xs font-semibold uppercase tracking-eyebrow text-paper-200/50">Vendor spend often goes to</p>
+        <ul class="mt-5 space-y-3">
+          <% site.costAllocation.vendor.forEach(function (item) { %>
+            <li class="flex items-center gap-3 text-paper-200/55">
+              <span class="h-1.5 w-1.5 shrink-0 rounded-full bg-paper-200/30"></span>
+              <span class="text-sm line-through decoration-paper-200/20"><%= item %></span>
+            </li>
+          <% }); %>
+        </ul>
+      </div>
+      <!-- Owned spend -->
+      <div class="card-pad relative border-clay-400/25">
+        <div class="pointer-events-none absolute -inset-px -z-10 rounded-2xl bg-clay-400/[0.05] blur-md" aria-hidden="true"></div>
+        <p class="text-xs font-semibold uppercase tracking-eyebrow text-clay-400">Owned spend goes to</p>
+        <ul class="mt-5 space-y-3">
+          <% site.costAllocation.owned.forEach(function (item) { %>
+            <li class="flex items-center gap-3 text-cream">
+              <span class="text-clay-400"><%- icon('check', 'h-4 w-4') %></span>
+              <span class="text-sm font-medium"><%= item %></span>
+            </li>
+          <% }); %>
+        </ul>
+      </div>
+    </div>
+    <p class="mx-auto mt-6 max-w-2xl text-center text-sm text-paper-200/45">
+      We do not claim guaranteed savings or invent numbers — the point is where the money goes.
+    </p>
+  </div>
+</section>
+
 <!-- ══ WHAT YOU OWN ════════════════════════════════════════════════════════ -->
-<section class="relative overflow-hidden bg-ink-700 text-cream">
-  <div class="pointer-events-none absolute inset-0 pattern-tile opacity-[0.05] mask-fade-y" aria-hidden="true"></div>
-  <div class="container relative section-y">
+<section class="section-y band">
+  <div class="container">
     <div class="grid gap-12 lg:grid-cols-12">
       <div class="lg:col-span-5">
-        <p class="eyebrow eyebrow--on-dark">What you own</p>
-        <h2 class="mt-4 text-display-sm text-cream">By the end, the operation belongs to you.</h2>
-        <p class="lead lead--on-dark mt-5">
-          Owning your outbound does not mean doing everything yourself. It means the core operating
-          asset lives in tools and accounts you control — and stays with you even if you ever stop
-          working with us.
+        <p class="eyebrow">What you own</p>
+        <h2 class="mt-4 text-display-sm">By the end, the setup belongs to you.</h2>
+        <p class="lead mt-5">
+          Owning the operation does not mean doing everything yourself. It means the core system lives
+          in tools and accounts you control.
         </p>
         <p class="mt-6 font-serif text-xl italic text-clay-400">Less Weight, More Momentum</p>
       </div>
-
       <div class="lg:col-span-7">
-        <ul class="grid gap-px overflow-hidden rounded-2xl border border-cream/10 bg-cream/10 sm:grid-cols-2 lg:grid-cols-3">
+        <ul class="grid gap-px overflow-hidden rounded-2xl border border-cream/10 bg-cream/10 sm:grid-cols-2">
           <% site.ownItems.forEach(function (item) { %>
-            <li class="flex items-center gap-3 bg-ink-700 p-5">
-              <span class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-cream/10 text-clay-400">
+            <li class="flex items-center gap-3 bg-ink-800 px-5 py-4">
+              <span class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-clay-400/12 text-clay-400">
                 <%- icon('check', 'h-4 w-4') %>
               </span>
               <span class="text-sm font-medium text-cream"><%= item %></span>
@@ -117,49 +172,19 @@
   </div>
 </section>
 
-<!-- ══ COST ADVANTAGE ══════════════════════════════════════════════════════ -->
-<section class="section-y bg-paper">
-  <div class="container">
-    <div class="grid gap-10 lg:grid-cols-12 lg:items-center">
-      <div class="lg:col-span-6">
-        <p class="eyebrow">The cost angle</p>
-        <h2 class="mt-4 text-display-sm">Cheaper because the waste is removed — not the quality.</h2>
-        <p class="mt-6 text-ink-500"><%= site.costAdvantage.body %></p>
-      </div>
-      <div class="lg:col-span-6">
-        <div class="rounded-2xl border border-clay-600/25 bg-clay-600/[0.06] p-7 md:p-9">
-          <span class="icon-badge icon-badge--clay"><%- icon('gauge', 'h-6 w-6') %></span>
-          <p class="mt-5 font-display text-xl font-semibold leading-snug text-ink-700">
-            <%= site.costAdvantage.callout %>
-          </p>
-          <p class="mt-4 text-sm text-ink-500">
-            More of your budget reaches the caller, the data, and the system — not vendor margin and
-            overhead.
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- ══ WHAT WE BUILD ═══════════════════════════════════════════════════════ -->
-<section class="section-y bg-paper-100">
+<section class="section-y">
   <div class="container">
     <div class="mx-auto max-w-3xl text-center">
       <p class="eyebrow">What we build</p>
-      <h2 class="mt-4 text-display-sm">The working parts of an outbound operation you own.</h2>
-      <p class="lead mt-5">
-        We build the whole launch system — not isolated pieces — and design the process first, then
-        the tools around it.
-      </p>
+      <h2 class="mt-4 text-display-sm">The working parts of a cold-calling operation.</h2>
     </div>
-
     <div class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
       <% site.builds.forEach(function (b) { %>
         <div class="card-pad card-hover h-full">
           <span class="icon-badge"><%- icon(b.icon, 'h-6 w-6') %></span>
-          <h3 class="mt-5 text-base font-semibold text-ink-700"><%= b.title %></h3>
-          <p class="mt-2 text-sm leading-relaxed text-ink-500"><%= b.text %></p>
+          <h3 class="mt-5 text-base font-semibold text-cream"><%= b.title %></h3>
+          <p class="mt-2 text-sm leading-relaxed text-paper-200/65"><%= b.text %></p>
         </div>
       <% }); %>
     </div>
@@ -167,76 +192,74 @@
 </section>
 
 <!-- ══ WHO IT IS FOR ═══════════════════════════════════════════════════════ -->
-<section class="section-y bg-paper">
+<section class="section-y band">
   <div class="container">
     <div class="mx-auto max-w-3xl text-center">
       <p class="eyebrow">Who it is for</p>
-      <h2 class="mt-4 text-display-sm">Owners who want outbound they control.</h2>
-      <p class="lead mt-5">
-        If you want direct conversations — and you are tired of paying for outbound you cannot see
-        into — you are who we build for.
-      </p>
+      <h2 class="mt-4 text-display-sm">Built for owners who want outbound they control.</h2>
     </div>
-    <div class="mx-auto mt-10 flex max-w-4xl flex-wrap justify-center gap-3">
+    <div class="mx-auto mt-10 grid max-w-4xl gap-4 sm:grid-cols-2 lg:grid-cols-3">
       <% site.audiences.forEach(function (audience) { %>
-        <span class="chip"><%= audience %></span>
+        <div class="card-pad flex items-center gap-3 py-5">
+          <span class="h-2 w-2 shrink-0 rounded-full bg-clay-400"></span>
+          <span class="text-sm font-medium text-cream"><%= audience %></span>
+        </div>
       <% }); %>
     </div>
+    <p class="mx-auto mt-8 max-w-2xl text-center text-paper-200/70">
+      If you want direct conversations with prospects but do not want to keep paying for a black-box
+      vendor, this is for you.
+    </p>
   </div>
 </section>
 
 <!-- ══ HOW IT WORKS ════════════════════════════════════════════════════════ -->
-<section class="relative overflow-hidden bg-ink-700 text-cream">
-  <div class="pointer-events-none absolute inset-0 pattern-tile opacity-[0.05] mask-fade-y" aria-hidden="true"></div>
-  <div class="container relative section-y">
+<section id="how-it-works" class="section-y scroll-mt-24">
+  <div class="container">
     <div class="mx-auto max-w-3xl text-center">
-      <p class="eyebrow eyebrow--on-dark justify-center">How it works</p>
-      <h2 class="mt-4 text-display-sm text-cream">A clear path from rented to owned.</h2>
-      <p class="lead lead--on-dark mx-auto mt-5 max-w-2xl">
-        No black-box setup. Every step is visible, practical, and handed back to you.
-      </p>
+      <p class="eyebrow">How it works</p>
+      <h2 class="mt-4 text-display-sm">Simple to start. Built to be owned.</h2>
     </div>
-
-    <ol class="mt-14 grid gap-px overflow-hidden rounded-2xl border border-cream/10 bg-cream/10 sm:grid-cols-2 lg:grid-cols-3">
+    <ol class="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
       <% site.process.forEach(function (step) { %>
-        <li class="bg-ink-700 p-6 md:p-7">
-          <span class="font-display text-3xl font-semibold text-clay-400/40"><%= step.number %></span>
+        <li class="card-pad h-full">
+          <span class="font-display text-3xl font-semibold text-clay-400/35"><%= step.number %></span>
           <h3 class="mt-3 text-lg font-semibold text-cream"><%= step.title %></h3>
-          <p class="mt-2 text-sm leading-relaxed text-paper-200/80"><%= step.text %></p>
+          <p class="mt-2 text-sm leading-relaxed text-paper-200/65"><%= step.text %></p>
         </li>
       <% }); %>
     </ol>
   </div>
 </section>
 
-<!-- ══ OWN VS VENDOR ═══════════════════════════════════════════════════════ -->
-<section class="section-y bg-paper">
+<!-- ══ OWN VS RENT ═════════════════════════════════════════════════════════ -->
+<section id="own-vs-rent" class="section-y band scroll-mt-24">
   <div class="container">
     <div class="mx-auto max-w-3xl text-center">
       <p class="eyebrow">Own vs rent</p>
-      <h2 class="mt-4 text-display-sm">Same channel. A very different position.</h2>
+      <h2 class="mt-4 text-display-sm">Renting outbound vs owning the operation.</h2>
     </div>
 
-    <div class="mx-auto mt-12 max-w-4xl overflow-hidden rounded-2xl border border-ink-700/10 bg-white shadow-card">
-      <!-- header -->
-      <div class="grid grid-cols-1 sm:grid-cols-2">
-        <div class="border-b border-ink-700/10 px-6 py-4 sm:border-r">
-          <p class="text-xs font-semibold uppercase tracking-eyebrow text-ink-400">Renting · vendor or network</p>
-        </div>
-        <div class="border-b border-ink-700/10 bg-ink-700/[0.03] px-6 py-4">
-          <p class="text-xs font-semibold uppercase tracking-eyebrow text-clay-700">Owning · with Veylrio</p>
-        </div>
+    <div class="mx-auto mt-12 max-w-4xl overflow-hidden rounded-2xl border border-cream/10 bg-ink-800">
+      <!-- Header (sm+) -->
+      <div class="hidden border-b border-cream/10 sm:grid sm:grid-cols-12">
+        <div class="col-span-4 px-6 py-4"></div>
+        <div class="col-span-4 px-6 py-4"><p class="text-xs font-semibold uppercase tracking-eyebrow text-paper-200/45">Vendor / network</p></div>
+        <div class="col-span-4 bg-clay-400/[0.06] px-6 py-4"><p class="text-xs font-semibold uppercase tracking-eyebrow text-clay-400">Owned with Veylrio</p></div>
       </div>
-      <!-- rows -->
+      <!-- Rows -->
       <% site.ownVsVendor.forEach(function (row, i) { %>
-        <div class="grid grid-cols-1 sm:grid-cols-2 <%= i < site.ownVsVendor.length - 1 ? 'border-b border-ink-700/10' : '' %>">
-          <div class="flex items-start gap-3 px-6 py-5 sm:border-r sm:border-ink-700/10">
-            <svg class="mt-0.5 h-4 w-4 shrink-0 text-ink-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
-            <span class="text-sm text-ink-500"><%= row.vendor %></span>
+        <div class="grid grid-cols-1 sm:grid-cols-12 <%= i < site.ownVsVendor.length - 1 ? 'border-b border-cream/10' : '' %>">
+          <div class="px-6 pt-5 pb-1 sm:col-span-4 sm:py-5">
+            <p class="text-sm font-semibold text-cream"><%= row.label %></p>
           </div>
-          <div class="flex items-start gap-3 bg-ink-700/[0.03] px-6 py-5">
-            <span class="mt-0.5 text-clay-700"><%- icon('check', 'h-4 w-4') %></span>
-            <span class="text-sm font-medium text-ink-700"><%= row.owned %></span>
+          <div class="flex items-start gap-2 px-6 pb-2 sm:col-span-4 sm:py-5 sm:pb-5">
+            <span class="mt-1 text-[11px] font-semibold uppercase tracking-wide text-paper-200/35 sm:hidden">Rent</span>
+            <span class="text-sm text-paper-200/55"><%= row.vendor %></span>
+          </div>
+          <div class="flex items-start gap-2 bg-clay-400/[0.05] px-6 pb-5 pt-1 sm:col-span-4 sm:py-5">
+            <span class="mt-1 text-[11px] font-semibold uppercase tracking-wide text-clay-400/70 sm:hidden">Own</span>
+            <span class="text-sm font-medium text-cream"><%= row.owned %></span>
           </div>
         </div>
       <% }); %>
@@ -244,71 +267,20 @@
   </div>
 </section>
 
-<!-- ══ OPTIONAL SUPPORT ════════════════════════════════════════════════════ -->
-<section class="section-y bg-paper-100">
-  <div class="container">
-    <div class="grid gap-10 lg:grid-cols-12 lg:items-end">
-      <div class="lg:col-span-7">
-        <p class="eyebrow">Optional support</p>
-        <h2 class="mt-4 text-display-sm">Help when you want it — never a dependency.</h2>
-      </div>
-      <div class="lg:col-span-5">
-        <p class="text-ink-500">
-          The core operation is yours. When it is useful, we stay available for data, dialer, caller,
-          QA, or advisory support — on your terms.
-        </p>
-      </div>
-    </div>
-
-    <div class="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-      <% site.offers.forEach(function (offer) { %>
-        <a href="/solutions#<%= offer.id %>" class="card-pad card-hover group flex h-full flex-col">
-          <span class="icon-badge icon-badge--clay"><%- icon(offer.icon, 'h-6 w-6') %></span>
-          <h3 class="mt-5 text-lg font-semibold text-ink-700"><%= offer.title %></h3>
-          <p class="mt-2 flex-1 text-sm leading-relaxed text-ink-500"><%= offer.positioning %></p>
-          <span class="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-clay-700">
-            See what’s included
-            <%- icon('arrow-right', 'arrow h-4 w-4') %>
-          </span>
-        </a>
-      <% }); %>
-
-      <div class="card-pad flex h-full flex-col justify-between bg-ink-700 text-cream">
-        <div>
-          <h3 class="text-lg font-semibold text-cream">Not sure where you fit?</h3>
-          <p class="mt-2 text-sm leading-relaxed text-paper-200/80">
-            Tell us how you get customers today. We will point to the simplest way to build the setup
-            you should own.
-          </p>
-        </div>
-        <a href="<%= site.cta.primary.href %>" class="btn-on-dark mt-6 w-full">
-          <%= site.cta.primary.label %>
-          <%- icon('arrow-right', 'arrow h-4 w-4') %>
-        </a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══ TRUST PRINCIPLES ════════════════════════════════════════════════════ -->
-<section class="section-y bg-paper">
+<!-- ══ TRUST ═══════════════════════════════════════════════════════════════ -->
+<section class="section-y">
   <div class="container">
     <div class="mx-auto max-w-3xl text-center">
-      <p class="eyebrow">What we will and won’t do</p>
-      <h2 class="mt-4 text-display-sm">Straight, operator-built, no black boxes.</h2>
+      <p class="eyebrow">How we work</p>
+      <h2 class="mt-4 text-display-sm">No black box. No fake guarantees. No bloated setup.</h2>
     </div>
     <ul class="mx-auto mt-12 grid max-w-4xl gap-4 sm:grid-cols-2">
       <% site.trustPrinciples.forEach(function (p) { %>
-        <li class="card-pad flex items-start gap-4 <%= p.kind === 'yes' ? 'sm:col-span-2 bg-ink-700 text-cream border-ink-700' : '' %>">
-          <% if (p.kind === 'yes') { %>
-            <span class="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-cream/10 text-clay-400"><%- icon('check', 'h-4 w-4') %></span>
-            <span class="font-medium text-cream"><%= p.text %></span>
-          <% } else { %>
-            <span class="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-clay-600/10 text-clay-700">
-              <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
-            </span>
-            <span class="text-ink-600"><%= p.text %></span>
-          <% } %>
+        <li class="flex items-start gap-3.5 rounded-xl border border-cream/10 bg-ink-800 px-5 py-4">
+          <span class="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-clay-400/12 text-clay-400">
+            <%- icon('check', 'h-4 w-4') %>
+          </span>
+          <span class="text-sm text-paper-200/85"><%= p %></span>
         </li>
       <% }); %>
     </ul>
@@ -316,4 +288,4 @@
 </section>
 
 <!-- ══ FINAL CTA ═══════════════════════════════════════════════════════════ -->
-<%- include('../partials/cta', { heading: 'Ready to build an outbound operation you actually own?', text: 'Tell us how you get customers today and what you have already tried. We will scope the setup — what to build, what you already have, and what you should own by the end. If it is not a fit, we will tell you.' }) %>
+<%- include('../partials/cta', { heading: 'Ready to build the outbound setup you can own?', text: 'Tell us where you are now: starting from zero, leaving a vendor, hiring your first caller, or cleaning up what you already have. We will recommend the simplest next step.' }) %>

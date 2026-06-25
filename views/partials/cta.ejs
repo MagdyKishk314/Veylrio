@@ -1,25 +1,27 @@
 <%
-  const ctaHeading = (typeof heading !== 'undefined' && heading) ? heading : 'Ready to build an outbound operation you actually own?';
-  const ctaText = (typeof text !== 'undefined' && text) ? text : 'Tell us how you get customers today and what you have already tried. We will scope the setup and reply with a clear, practical next step — no pressure, no pitch deck.';
+  const ctaHeading = (typeof heading !== 'undefined' && heading) ? heading : 'Ready to build the outbound setup you can own?';
+  const ctaText = (typeof text !== 'undefined' && text) ? text : 'Tell us where you are now: starting from zero, leaving a vendor, hiring your first caller, or cleaning up what you already have. We will recommend the simplest next step.';
 %>
-<section class="relative overflow-hidden bg-ink-800 text-cream">
-  <div class="pointer-events-none absolute inset-0 pattern-tile opacity-[0.06] mask-fade-y" aria-hidden="true"></div>
-  <div class="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-clay-600/15 blur-3xl" aria-hidden="true"></div>
+<section class="section-y">
+  <div class="container">
+    <div class="relative mx-auto max-w-4xl overflow-hidden rounded-3xl border border-clay-400/20 bg-ink-800 px-6 py-16 text-center md:px-10 md:py-20">
+      <div class="pointer-events-none absolute -right-28 -top-28 h-72 w-72 rounded-full bg-clay-500/15 blur-[100px]" aria-hidden="true"></div>
+      <div class="pointer-events-none absolute -left-28 -bottom-28 h-72 w-72 rounded-full bg-ink-500/25 blur-[100px]" aria-hidden="true"></div>
 
-  <div class="container relative">
-    <div class="mx-auto max-w-3xl py-20 text-center md:py-28">
-      <p class="eyebrow eyebrow--on-dark justify-center">Build your system</p>
-      <h2 class="mt-4 text-display-sm text-cream"><%= ctaHeading %></h2>
-      <p class="lead lead--on-dark mx-auto mt-5 max-w-2xl"><%= ctaText %></p>
-      <div class="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
-        <a href="<%= site.cta.primary.href %>" class="btn-on-dark w-full sm:w-auto">
-          <%= site.cta.primary.label %>
-          <%- icon('arrow-right', 'arrow h-4 w-4') %>
-        </a>
-        <a href="mailto:<%= site.contactEmail %>" class="btn-outline-on-dark w-full sm:w-auto">
-          <%- icon('mail', 'h-4 w-4') %>
-          Email us directly
-        </a>
+      <div class="relative">
+        <p class="eyebrow justify-center">Start a project</p>
+        <h2 class="mt-4 text-display-sm"><%= ctaHeading %></h2>
+        <p class="lead mx-auto mt-5 max-w-2xl"><%= ctaText %></p>
+        <div class="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
+          <a href="<%= site.cta.primary.href %>" class="btn-primary w-full sm:w-auto">
+            <%= site.cta.primary.label %>
+            <%- icon('arrow-right', 'arrow h-4 w-4') %>
+          </a>
+          <a href="mailto:<%= site.contactEmail %>" class="btn-secondary w-full sm:w-auto">
+            <%- icon('mail', 'h-4 w-4') %>
+            Email us directly
+          </a>
+        </div>
       </div>
     </div>
   </div>
