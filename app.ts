@@ -1,5 +1,6 @@
 import 'dotenv/config';
 
+import fs from 'fs';
 import path from 'path';
 import express from 'express';
 import expressLayouts from 'express-ejs-layouts';
@@ -28,9 +29,28 @@ const ROOT = process.cwd();
 // Never advertise the framework.
 app.disable('x-powered-by');
 
+// On Vercel (and similar serverless platforms) the app runs behind a proxy.
+// Trusting the first hop lets rate-limiting see the real client IP and lets
+// Express detect HTTPS for secure cookies.
+if (process.env.VERCEL) {
+  app.set('trust proxy', 1);
+}
+
 // ── View engine ────────────────────────────────────────────────────────────
+// Resolve the views directory robustly. cwd works for local/dist runs; the
+// __dirname-relative candidates cover serverless bundling (e.g. Vercel) where
+// the working directory may differ from where the code is executed.
+function resolveViews(): string {
+  const candidates = [
+    path.join(ROOT, 'views'),
+    path.join(__dirname, 'views'),
+    path.join(__dirname, '..', 'views'),
+  ];
+  return candidates.find((dir) => fs.existsSync(dir)) ?? candidates[0];
+}
+
 app.set('view engine', 'ejs');
-app.set('views', path.join(ROOT, 'views'));
+app.set('views', resolveViews());
 app.use(expressLayouts);
 app.set('layout', 'layout');
 
@@ -90,7 +110,9 @@ app.use(notFound);
 app.use(errorHandler);
 
 // ── Start ──────────────────────────────────────────────────────────────────
-if (require.main === module) {
+// Only listen when run directly (local/dev/self-hosted). On Vercel the app is
+// imported by api/index.ts as a serverless handler and must NOT call listen().
+if (!process.env.VERCEL && require.main === module) {
   const server = app.listen(config.port, () => {
     logger.info(`Veylrio site running`, {
       env: config.env,

@@ -4,6 +4,10 @@ import config from './index';
  * Site-wide content & structure.
  * Edit copy and navigation here — views read from this object so the
  * structure stays consistent and is easy to maintain.
+ *
+ * Positioning: "Build your own outbound operation. Stop renting one."
+ * Veylrio builds the outbound setup the client OWNS — dialer, CRM, caller
+ * workflow, data process, reporting, and operating guidance.
  */
 
 const brand = {
@@ -14,7 +18,7 @@ const brand = {
   email: config.contactEmail,
   // One-line descriptor reused across SEO + structured data.
   descriptor:
-    'Veylrio builds the outbound infrastructure, systems, tracking, QA and dashboards that outbound-heavy teams need to operate with control and momentum.',
+    'Veylrio helps businesses build their own outbound sales operation — the dialer, CRM, caller workflow, data process, reporting, and support needed to run it with control.',
 };
 
 const nav = [
@@ -34,201 +38,182 @@ const footerNav = [
 ];
 
 const cta = {
-  primary: { label: 'Start a Project', href: '/start-a-project' },
+  primary: { label: 'Build My Outbound System', href: '/start-a-project' },
   secondary: { label: 'Explore Solutions', href: '/solutions' },
 };
 
-/**
- * The five operational systems, used on Home (overview) and Solutions (detail).
- * `summary` is the short card line; `items` are the components inside each system.
- */
-const solutionGroups = [
-  {
-    id: 'outbound-infrastructure',
-    number: '01',
-    icon: 'route',
-    title: 'Outbound Infrastructure',
-    summary:
-      'The backbone of a calling operation — set up so dials, contacts and conversations actually flow.',
-    description:
-      'We design the foundation outbound teams run on: how dials connect, how campaigns are structured, how callers move through their day, and how every conversation lands cleanly in your CRM.',
-    items: [
-      { title: 'Dialer setup', text: 'Configure your dialer for connect rate, caller ID health and campaign logic.' },
-      { title: 'Campaign structure', text: 'Organise lists, dispositions and cadences so callers always know what to work next.' },
-      { title: 'Caller workflow', text: 'Define the step-by-step flow a caller follows from dial to disposition.' },
-      { title: 'CRM flow', text: 'Wire conversations, statuses and follow-ups into your CRM without leaks.' },
-      { title: 'Lead handling process', text: 'Clear rules for how leads enter, route, recycle and retire.' },
-    ],
-  },
-  {
-    id: 'performance-visibility',
-    number: '02',
-    icon: 'chart',
-    title: 'Performance Visibility',
-    summary:
-      'See what is actually happening — by team, by caller, by campaign — without digging through exports.',
-    description:
-      'You cannot manage what you cannot see. We build the dashboards and reporting rhythm that turn raw activity into decisions you can make on a Monday morning.',
-    items: [
-      { title: 'Dashboards', text: 'Operational views that show activity, output and trends at a glance.' },
-      { title: 'KPI tracking', text: 'Agree the numbers that matter and track them consistently.' },
-      { title: 'Caller performance views', text: 'Per-caller visibility into dials, talk time, conversions and quality.' },
-      { title: 'Reporting rhythm', text: 'A repeatable daily and weekly cadence, not one-off spreadsheets.' },
-      { title: 'Data clarity', text: 'One trusted source of numbers your team stops arguing about.' },
-    ],
-  },
-  {
-    id: 'quality-control',
-    number: '03',
-    icon: 'shield',
-    title: 'Quality & Control',
-    summary:
-      'Make quality measurable and coachable — so good calls are repeatable, not accidental.',
-    description:
-      'Quality should not live in a manager’s head. We build the scorecards, review flow and coaching loop that make standards visible and improvement deliberate.',
-    items: [
-      { title: 'QA scorecards', text: 'Define what a good call looks like and score it consistently.' },
-      { title: 'Call review systems', text: 'A practical workflow for reviewing calls and logging findings.' },
-      { title: 'Coaching workflows', text: 'Turn QA findings into specific, trackable coaching actions.' },
-      { title: 'Quality reporting', text: 'Trend quality over time, by caller and by campaign.' },
-      { title: 'Performance accountability', text: 'Clear standards everyone can see, own and be measured against.' },
-    ],
-  },
-  {
-    id: 'data-workflow-systems',
-    number: '04',
-    icon: 'database',
-    title: 'Data & Workflow Systems',
-    summary:
-      'Clean data in, clean process around it — sheets, trackers and automations people actually use.',
-    description:
-      'Messy data and manual busywork quietly drain outbound teams. We build the upload flows, trackers and automations that keep your operation organised and your people focused on calls.',
-    items: [
-      { title: 'Lead & data management', text: 'Structured handling for lists, contacts and outcomes.' },
-      { title: 'Upload workflows', text: 'Reliable, repeatable steps for getting data in and out cleanly.' },
-      { title: 'Sheets & trackers', text: 'Purpose-built spreadsheets that replace scattered, fragile files.' },
-      { title: 'Process automation', text: 'Remove repetitive manual steps where automation is genuinely safe.' },
-      { title: 'Clean operating documentation', text: 'Written process your team can follow and new hires can learn from.' },
-    ],
-  },
-  {
-    id: 'advisory-build-support',
-    number: '05',
-    icon: 'compass',
-    title: 'Advisory & Build Support',
-    summary:
-      'Hands-on guidance and custom builds for the parts of your operation that do not fit a template.',
-    description:
-      'Some problems need judgement, not a product. We advise on outbound operations, support hiring for caller roles, and build the custom systems your situation actually requires.',
-    items: [
-      { title: 'Outbound advisory', text: 'Practical guidance grounded in real operations, not theory.' },
-      { title: 'Caller hiring support', text: 'Optional add-on: help defining, screening and onboarding caller roles.' },
-      { title: 'Custom systems', text: 'Bespoke dashboards, sheets and tools built around your workflow.' },
-      { title: 'Operational cleanup', text: 'Untangle the processes that have grown messy over time.' },
-      { title: 'Growth support', text: 'Structure that holds up as your team and call volume scale.' },
-    ],
-  },
-];
-
-/** Short list used in the homepage "What Veylrio builds" band. */
-const buildsHighlights = [
-  { icon: 'route', title: 'Dialer & outbound setup', text: 'Configured for connect rate, caller clarity and clean CRM flow.' },
-  { icon: 'chart', title: 'Dashboards & reporting', text: 'Real visibility into activity, output and performance by caller and campaign.' },
-  { icon: 'shield', title: 'QA & quality systems', text: 'Scorecards, call review and coaching that make quality measurable.' },
-  { icon: 'database', title: 'Data, sheets & automations', text: 'Clean lead handling, trackers and the right amount of automation.' },
-];
-
-/** The operating principles, used on Home (philosophy) and Why Veylrio. */
-const principles = [
-  {
-    title: 'Operators, not theory',
-    text: 'We have run the workflows we build. The systems reflect how outbound actually works on a busy floor, not how a deck says it should.',
-  },
-  {
-    title: 'You own what we build',
-    text: 'No black boxes. Your dashboards, sheets and processes live in tools you control, documented so your team can run and change them.',
-  },
-  {
-    title: 'Clarity over complexity',
-    text: 'We remove steps before we add them. The goal is the simplest system that gives you control — not the most impressive one.',
-  },
-  {
-    title: 'Built to be used',
-    text: 'A system only counts if people use it under pressure. We design for the caller, the QA reviewer and the manager doing the work.',
-  },
-];
-
-/** Process steps, used on Home and Why Veylrio. */
-const process = [
-  {
-    number: '01',
-    title: 'Map',
-    text: 'We look at your current outbound operation as it really runs — dialer, data, CRM, QA, tracking and the gaps between them.',
-  },
-  {
-    number: '02',
-    title: 'Prioritise',
-    text: 'We agree what is costing you the most and what to fix first, so early work pays for itself in control and clarity.',
-  },
-  {
-    number: '03',
-    title: 'Build',
-    text: 'We set up and clean up the systems — infrastructure, dashboards, QA and workflows — in tools you own.',
-  },
-  {
-    number: '04',
-    title: 'Hand over',
-    text: 'We document the operation and walk your team through it, so the system keeps working long after we step back.',
-  },
-];
-
-/** Who we help — audiences. */
-const audiences = [
-  'Real estate investors',
-  'Roofing companies',
-  'Recruiters',
-  'BPOs',
-  'Cold calling agencies',
-  'Small outbound sales teams',
-  'Agencies using callers',
-  'Owners with messy outbound operations',
-];
-
-/** Symptoms / problems for the homepage problem section. */
+/** Problem section — the cost of renting a black-box outbound operation. */
 const problems = [
-  'Your dialer is set up by guesswork and nobody is sure what is actually working.',
-  'Caller performance lives in people’s heads, not in numbers you can see.',
-  'QA is informal, inconsistent, or simply not happening.',
-  'Leads and data are spread across fragile spreadsheets and lost in the gaps.',
-  'You are spending on callers and tools without knowing what each one returns.',
-  'Reporting is a weekly scramble instead of a reliable rhythm.',
+  'You pay every month but never really control the caller, CRM, recordings, or reporting.',
+  'When performance drops, you cannot tell if it is the caller, data, script, market, dialer, or follow-up.',
+  'Stop paying and the whole operation disappears — you keep nothing.',
+  'Scripts, markets, and data only change as fast as the vendor responds.',
+  'More of your spend goes to vendor margin than to the caller, the data, and the tools.',
+  'You are renting access to someone else’s system instead of owning your own.',
+];
+
+/** "What You Own" — the operating asset that stays with the business. */
+const ownItems = [
+  'Your caller workflow',
+  'Your dialer setup',
+  'Your CRM and lead stages',
+  'Your data process',
+  'Your reporting',
+  'Your call visibility',
+  'Your scripts and adjustments',
+  'Your operating process',
+  'Your decisions',
+];
+
+/** Cost advantage copy. */
+const costAdvantage = {
+  body:
+    'Cheaper does not mean weaker. In the Veylrio model you reduce dependency on recurring vendor margin and redirect more of the budget into the actual operation — stronger caller pay, better data, cleaner tech, better reporting, and systems you own.',
+  callout:
+    'The savings come from removing unnecessary middle margin — not from lowering the quality of the operation.',
+};
+
+/** Own vs Vendor comparison rows. */
+const ownVsVendor = [
+  {
+    vendor: 'You pay a recurring bundled fee.',
+    owned: 'You pay to build the operating setup you keep.',
+  },
+  {
+    vendor: 'A large share of spend goes to vendor overhead and margin.',
+    owned: 'More of the budget goes into caller quality, data, tools, and visibility.',
+  },
+  {
+    vendor: 'You may not control the caller, script, recordings, CRM, or reporting.',
+    owned: 'You own the caller workflow, CRM, dialer setup, reporting, recordings, and process.',
+  },
+  {
+    vendor: 'Stop paying and you often lose the whole operation.',
+    owned: 'The system stays an operating asset you can keep using.',
+  },
+  {
+    vendor: 'Changes depend on vendor responsiveness.',
+    owned: 'You adjust scripts, review calls, and change markets directly — fast.',
+  },
+];
+
+/** "What We Build" — the working parts of an owned outbound operation. */
+const builds = [
+  { icon: 'route', title: 'Dialer setup & campaign structure', text: 'Configured for connect rate, caller ID health, and campaign logic you control.' },
+  { icon: 'database', title: 'CRM or pipeline setup', text: 'Clear lead stages, follow-up rules, and caller usage that reflect reality.' },
+  { icon: 'users', title: 'Caller workflow & daily process', text: 'The step-by-step a caller follows from dial to disposition.' },
+  { icon: 'layers', title: 'Data sourcing & management workflow', text: 'Reliable ways to get good data in, out, and organised.' },
+  { icon: 'gauge', title: 'Lead stages & follow-up tracking', text: 'Nothing falls through the cracks between calls.' },
+  { icon: 'chart', title: 'Reporting dashboard', text: 'See activity, output, and performance at a glance.' },
+  { icon: 'shield', title: 'QA & call review structure', text: 'Make quality measurable and coachable, not accidental.' },
+  { icon: 'document', title: 'Operating instructions & training', text: 'Written process your team can run and new hires can learn.' },
+  { icon: 'compass', title: 'Optional advisory & data support', text: 'Use us when you need it — support, never dependency.' },
+];
+
+/** Who it is for. */
+const audiences = [
+  'Real estate investors & acquisition teams',
+  'Realtors',
+  'Roofing companies',
+  'Solar companies',
+  'Home service businesses',
+  'Founder-led local businesses',
+  'Agencies building their own outbound',
+  'Owners leaving a vendor or network',
+  'Businesses hiring their first caller',
+];
+
+/** How it works — engagement steps. */
+const process = [
+  { number: '01', title: 'Understand', text: 'What you sell, who you target, and whether outbound makes sense for you.' },
+  { number: '02', title: 'Design', text: 'The simplest outbound setup that fits your business — no overbuild.' },
+  { number: '03', title: 'Build', text: 'The dialer, CRM, workflow, reporting, and data process.' },
+  { number: '04', title: 'Caller', text: 'Source a caller if you need one, or structure the caller you already have.' },
+  { number: '05', title: 'Teach', text: 'Walk you through how the system works and what to watch.' },
+  { number: '06', title: 'Stay available', text: 'Advisory, data, caller, QA, or optimization support — only when useful.' },
+];
+
+/**
+ * Offers — the ways Veylrio helps you build and own outbound.
+ * Used on the Solutions page (detail) and the homepage "Optional Support" band.
+ */
+const offers = [
+  {
+    id: 'owned-outbound-setup',
+    icon: 'layers',
+    title: 'Owned Outbound Setup',
+    who: 'Businesses starting outbound, or leaving a vendor.',
+    positioning: 'We build the outbound system you own.',
+    includes: ['Dialer & campaign structure', 'CRM & lead stages', 'Caller workflow', 'Data process', 'Reporting', 'Operating instructions & training'],
+  },
+  {
+    id: 'vendor-exit-buildout',
+    icon: 'route',
+    title: 'Vendor Exit Buildout',
+    who: 'Owners who used a network or vendor and want out.',
+    positioning: 'Leave the network without losing the channel.',
+    includes: ['Client-owned dialer & CRM', 'Reporting you control', 'Caller workflow rebuilt', 'Recordings & data in your accounts'],
+  },
+  {
+    id: 'caller-system-launch',
+    icon: 'users',
+    title: 'Caller + System Launch',
+    who: 'Owners with no caller yet.',
+    positioning: 'Get the caller and the system around them.',
+    includes: ['Caller sourcing support', 'System built around the caller', 'Daily workflow & scripts', 'Onboarding structure'],
+  },
+  {
+    id: 'data-dialer-management',
+    icon: 'database',
+    title: 'Data + Dialer Management',
+    who: 'Owners who own the setup but want technical help.',
+    positioning: 'Keep the technical side handled — without giving up ownership.',
+    includes: ['Data uploads & list handling', 'Dialer checks', 'Campaign adjustments'],
+  },
+  {
+    id: 'outbound-advisory',
+    icon: 'compass',
+    title: 'Outbound Advisory Calls',
+    who: 'Owners who are up and running.',
+    positioning: 'Use us when you need help reading and improving the operation.',
+    includes: ['Review signals & scripts', 'Read data & markets', 'Caller performance review'],
+  },
+];
+
+/** Trust principles — what we will and will not do. */
+const trustPrinciples = [
+  { kind: 'no', text: 'No fake lead guarantees.' },
+  { kind: 'no', text: 'No black-box agency promises.' },
+  { kind: 'no', text: 'No bloated setup designed to keep you confused.' },
+  { kind: 'no', text: 'No pretending cold calling works without good callers, good data, and good follow-up.' },
+  { kind: 'yes', text: 'We build the system, teach you how it works, and let you own it.' },
 ];
 
 /** Reasons / trust points for the Why Veylrio page. */
 const trustPoints = [
   {
-    title: 'We understand outbound execution',
-    text: 'We are fluent in how calling operations actually run — dispositions, connect rates, list health, caller behaviour, QA realities. Strategy that ignores the floor does not survive contact with it.',
+    title: 'Operator-level outbound experience',
+    text: 'We know outbound from the ground level — callers, data, dialers, scripts, follow-up, reporting, QA, and where the leaks hide.',
   },
   {
-    title: 'Practical systems people can use',
-    text: 'We build for the person doing the work at 2pm on a hard day. If a caller, reviewer or manager cannot use it without us in the room, it is not finished.',
+    title: 'Anti-black-box by design',
+    text: 'You should control the caller, CRM, data, recordings, reporting, and changes. If you ever stop working with us, nothing breaks and nothing is hidden.',
   },
   {
-    title: 'No overcomplication',
-    text: 'We resist clever for the sake of clever. Fewer moving parts means fewer things to break and less for your team to maintain.',
+    title: 'The whole system, not isolated pieces',
+    text: 'We combine caller support, data process, dialer, CRM, reporting, and advisory into one operation you own — not a pile of disconnected fixes.',
   },
   {
-    title: 'Clarity, ownership, sustainability',
-    text: 'You should understand your own operation. We favour transparent systems and clear documentation over impressive-looking dependence on us.',
+    title: 'Built once, kept for good',
+    text: 'A vendor campaign stops when you stop paying. An owned setup stays an operating asset your business keeps using.',
   },
   {
-    title: 'No black-box traps',
-    text: 'Your systems live in tools you control. If you ever stop working with us, nothing breaks and nothing is hidden.',
+    title: 'Better budget allocation',
+    text: 'More of your spend reaches the caller, the data, and the system — not vendor margin and overhead.',
   },
   {
-    title: 'Infrastructure you can own',
-    text: 'We hand over documented, understandable systems your team can run, adjust and grow into — not a dependency you have to keep paying to access.',
+    title: 'We do not fake guarantees',
+    text: 'Results depend on offer, market, data, caller skill, follow-up, and execution. We build the foundation and the visibility that make good decisions possible.',
   },
 ];
 
@@ -236,37 +221,87 @@ const trustPoints = [
 const faqs = [
   {
     q: 'Do you provide callers?',
-    a: 'Not by default. Veylrio builds the infrastructure, systems, tracking, QA, dialer setup, dashboards, workflows and advisory that make outbound teams work properly. Caller hiring support is available as an optional add-on.',
+    a: 'If you need one, we help source a caller and build the system around them. If you already have a caller, we build the workflow, CRM, data process, and reporting they work inside. We are not a staffing agency — caller sourcing is support inside a system you own.',
   },
   {
-    q: 'What kind of businesses do you work with?',
-    a: 'Outbound-heavy operations: real estate investors, roofing companies, recruiters, BPOs, cold calling agencies, small outbound sales teams and agencies that rely on callers — typically owners and operators with messy or under-instrumented outbound.',
+    q: 'We already pay a vendor. Why change?',
+    a: 'We are not anti-vendor. The question is what you actually own: the caller, CRM, reporting, recordings, data flow, and campaign logic. If the vendor still controls those, you may be renting more than you realise.',
   },
   {
-    q: 'Do we own the systems you build?',
-    a: 'Yes. We build inside tools you control and document everything so your team can run, adjust and grow the systems without depending on us.',
+    q: 'Can you guarantee leads or appointments?',
+    a: 'No. We do not fake guarantees. Results depend on your offer, market, data, caller skill, follow-up, and execution. We build the system that gives the operation a stronger foundation and clearer visibility.',
+  },
+  {
+    q: 'This sounds expensive.',
+    a: 'Compared with renting a black-box vendor every month it is a different question. This is a setup you own and keep using — not access you lose the moment you stop paying. Often the total cost is lower because the vendor margin is removed.',
+  },
+  {
+    q: 'Why not just hire a VA or use a BPO?',
+    a: 'A VA can make calls and a BPO can staff seats — but both still need (or quietly own) the dialer, CRM, workflow, data process, and reporting. We build that operating layer so it belongs to you, not to them.',
+  },
+  {
+    q: 'Do we own everything you build?',
+    a: 'Yes. Everything lives in tools and accounts you control, documented so your team can run, adjust, and grow it without depending on us.',
   },
   {
     q: 'Which dialers and CRMs do you work with?',
-    a: 'We are tool-agnostic and work with common outbound dialers and CRMs. Tell us what you use on the Start a Project form and we will work within your stack where possible.',
+    a: 'We are tool-agnostic and work with common outbound dialers and CRMs. Tell us your stack on the Start a Project form and we work within it where possible.',
   },
   {
     q: 'How do engagements start?',
-    a: 'With a short, practical conversation about how your outbound runs today and what is costing you the most. From there we agree what to fix first. Start by filling in the Start a Project form.',
+    a: 'With a short, practical call to scope the setup: what you need, what you already have, what should be built, whether you need caller support, and what you should own by the end. If it is not a fit, we will tell you.',
+  },
+];
+
+/**
+ * Testimonials shown in the homepage slider (right after the hero).
+ *
+ * ⚠️  IMPORTANT — these are PLACEHOLDERS, not real quotes.
+ *     Veylrio's brand rule is: never publish fabricated testimonials.
+ *     Replace each entry with a REAL, permissioned client quote before launch.
+ *     Leave this array EMPTY ([]) to hide the testimonials section entirely.
+ */
+const testimonials = [
+  {
+    quote:
+      'Placeholder — replace with a real client quote about renting outbound before, what Veylrio built, and what it feels like to own it now.',
+    name: 'Client name',
+    role: 'Owner',
+    company: 'Company',
+  },
+  {
+    quote:
+      'Placeholder — a second real testimonial goes here. Keep quotes specific and honest: the vendor frustration, the system we built, the control they gained.',
+    name: 'Client name',
+    role: 'Acquisitions lead',
+    company: 'Company',
+  },
+  {
+    quote:
+      'Placeholder — a third real testimonial. Two to five short, genuine quotes work best in this slider.',
+    name: 'Client name',
+    role: 'Founder',
+    company: 'Company',
   },
 ];
 
 /** Options for the Start a Project form (kept here so they are easy to edit). */
 const form = {
   industries: [
-    'Real estate investing',
+    'Real estate investing / wholesaling',
+    'Realtor',
     'Roofing',
+    'Solar',
+    'Home services',
     'Recruiting / staffing',
-    'BPO / call center',
-    'Cold calling agency',
-    'Outbound sales team',
-    'Agency using callers',
+    'Agency building outbound',
     'Other',
+  ],
+  outboundStatus: [
+    'Starting outbound for the first time',
+    'Currently using a vendor or network',
+    'Have callers, need the system around them',
+    'Have a setup, want it cleaner',
   ],
   teamSizes: ['Just me', '2–5', '6–20', '21–50', '51–100', '100+'],
   contactMethods: ['Email', 'Phone', 'WhatsApp'],
@@ -286,14 +321,18 @@ const site = {
   nav,
   footerNav,
   cta,
-  solutionGroups,
-  buildsHighlights,
-  principles,
-  process,
-  audiences,
   problems,
+  ownItems,
+  costAdvantage,
+  ownVsVendor,
+  builds,
+  audiences,
+  process,
+  offers,
+  trustPrinciples,
   trustPoints,
   faqs,
+  testimonials,
   form,
   siteUrl: config.siteUrl,
   contactEmail: config.contactEmail,

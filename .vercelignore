@@ -1,0 +1,8 @@
+# Keep the deployment small — these are not needed at runtime on Vercel.
+Brand/
+dist/
+logs/
+*.log
+.env
+.env.*
+node_modules
