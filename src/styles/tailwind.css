@@ -145,14 +145,23 @@
   .field-label { @apply mb-1.5 block text-sm font-semibold text-paper-200; }
   .field-hint { @apply mt-1 text-xs text-paper-200/50; }
   .field-error { @apply mt-1.5 text-xs font-medium text-clay-300; }
+  /* Inputs are styled directly (not via @tailwindcss/forms) so the dark fill
+     is never overridden by the plugin's white background. */
   .input, .textarea, .select {
-    @apply form-input w-full rounded-xl border-cream/20 px-4 py-3 text-cream
+    @apply w-full appearance-none rounded-xl border border-cream/20 px-4 py-3 text-cream
            placeholder:text-paper-200/40 shadow-sm transition
-           focus:border-clay-400 focus:ring-2 focus:ring-clay-400/30;
-    background-color: rgba(6, 21, 19, 0.55);
+           focus:border-clay-400 focus:outline-none focus:ring-2 focus:ring-clay-400/30;
+    background-color: rgba(6, 21, 19, 0.6);
   }
-  .select { @apply form-select pr-10; }
-  .textarea { @apply form-textarea min-h-[7rem] leading-relaxed; }
+  .select {
+    @apply bg-no-repeat pr-10;
+    /* clay (#e0906f) chevron, visible on the dark fill */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23e0906f' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+    background-position: right 0.85rem center;
+    background-size: 1.15rem;
+  }
+  .select option { color: #0a211f; }
+  .textarea { @apply min-h-[7rem] leading-relaxed; }
   .input-invalid { @apply border-clay-400 focus:border-clay-300 focus:ring-clay-400/40; }
   .hp-field {
     position: absolute !important;
