@@ -1,0 +1,74 @@
+<% if (site.testimonials && site.testimonials.length) { const total = site.testimonials.length; %>
+<!-- ══ TESTIMONIALS ════════════════════════════════════════════════════════ -->
+<section class="relative overflow-hidden bg-ink-700 text-cream" aria-label="Client testimonials">
+  <div class="pointer-events-none absolute inset-0 pattern-tile opacity-[0.05] mask-fade-y" aria-hidden="true"></div>
+  <div class="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-clay-600/15 blur-3xl" aria-hidden="true"></div>
+
+  <div class="container relative section-y">
+    <div class="mx-auto max-w-2xl text-center">
+      <p class="eyebrow eyebrow--on-dark justify-center">In their words</p>
+      <h2 class="mt-4 text-display-sm text-cream">What the teams we work with say.</h2>
+    </div>
+
+    <div
+      class="mx-auto mt-12 max-w-4xl"
+      data-slider
+      <%= total > 1 ? 'data-slider-autoplay' : '' %>
+      role="group"
+      aria-roledescription="carousel"
+    >
+      <!-- Track -->
+      <ul class="no-scrollbar flex snap-x snap-mandatory overflow-x-auto scroll-smooth" data-slider-track>
+        <% site.testimonials.forEach(function (t, i) { %>
+          <li
+            class="flex shrink-0 basis-full snap-center justify-center px-2"
+            role="group"
+            aria-roledescription="slide"
+            aria-label="<%= (i + 1) %> of <%= total %>"
+          >
+            <figure class="mx-auto max-w-3xl text-center">
+              <span class="block font-serif text-6xl leading-none text-clay-400/50" aria-hidden="true">&ldquo;</span>
+              <blockquote class="-mt-4">
+                <p class="font-serif text-2xl italic leading-relaxed text-cream md:text-[1.7rem] md:leading-relaxed">
+                  <%= t.quote %>
+                </p>
+              </blockquote>
+              <figcaption class="mt-7 text-sm">
+                <span class="font-semibold text-cream"><%= t.name %></span>
+                <span class="text-paper-200/70">
+                  <% if (t.role) { %>— <%= t.role %><% } %><% if (t.role && t.company) { %>, <% } else if (t.company) { %>— <% } %><%= t.company || '' %>
+                </span>
+              </figcaption>
+            </figure>
+          </li>
+        <% }); %>
+      </ul>
+
+      <!-- Controls -->
+      <% if (total > 1) { %>
+        <div class="mt-10 flex items-center justify-center gap-6">
+          <button type="button" class="slider-btn" data-slider-prev aria-label="Previous testimonial">
+            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg>
+          </button>
+
+          <div class="flex items-center gap-2" role="tablist" aria-label="Choose testimonial">
+            <% site.testimonials.forEach(function (t, i) { %>
+              <button
+                type="button"
+                class="slider-dot"
+                data-slider-dot
+                aria-label="Go to testimonial <%= (i + 1) %>"
+                <%= i === 0 ? 'aria-current="true"' : 'aria-current="false"' %>
+              ></button>
+            <% }); %>
+          </div>
+
+          <button type="button" class="slider-btn" data-slider-next aria-label="Next testimonial">
+            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
+          </button>
+        </div>
+      <% } %>
+    </div>
+  </div>
+</section>
+<% } %>
