@@ -58,8 +58,35 @@
   </div>
 </section>
 
-<!-- ══ WHY OWNERSHIP MATTERS ═══════════════════════════════════════════════ -->
+<!-- ══ THE MODEL THAT FITS YOU ═════════════════════════════════════════════ -->
 <section class="section-y">
+  <div class="container">
+    <div class="mx-auto max-w-3xl text-center">
+      <p class="eyebrow">No one-size-fits-all</p>
+      <h2 class="mt-4 text-display-sm">Most providers sell you their model. We help you find yours.</h2>
+      <p class="lead mt-5">
+        Veylrio is the setup and advisory partner for owners who want outbound without unnecessary
+        dependency. We do not force every business down one path.
+      </p>
+    </div>
+    <div class="mx-auto mt-12 grid max-w-4xl gap-4 sm:grid-cols-2">
+      <% site.whyModel.forEach(function (m) { %>
+        <div class="card-pad flex items-start gap-4">
+          <span class="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-clay-400/12 text-clay-400">
+            <%- icon('check', 'h-5 w-5') %>
+          </span>
+          <div>
+            <p class="text-base font-semibold text-cream"><%= m.title %></p>
+            <p class="mt-1 text-sm text-paper-200/65"><%= m.text %></p>
+          </div>
+        </div>
+      <% }); %>
+    </div>
+  </div>
+</section>
+
+<!-- ══ WHY OWNERSHIP MATTERS ═══════════════════════════════════════════════ -->
+<section class="section-y band">
   <div class="container">
     <div class="mx-auto max-w-3xl text-center">
       <p class="eyebrow">Why ownership matters</p>
@@ -79,7 +106,7 @@
 </section>
 
 <!-- ══ WHAT MAKES VEYLRIO DIFFERENT ════════════════════════════════════════ -->
-<section class="section-y band">
+<section class="section-y">
   <div class="container">
     <div class="grid gap-12 lg:grid-cols-12">
       <div class="lg:col-span-5">
@@ -107,7 +134,7 @@
 </section>
 
 <!-- ══ FAQ ═════════════════════════════════════════════════════════════════ -->
-<section class="section-y">
+<section class="section-y band">
   <div class="container">
     <div class="grid gap-12 lg:grid-cols-12">
       <div class="lg:col-span-4">

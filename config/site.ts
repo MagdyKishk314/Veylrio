@@ -38,6 +38,7 @@ const footerNav = [
 const cta = {
   primary: { label: 'Build My Outbound System', href: '/start-a-project' },
   secondary: { label: 'See How It Works', href: '/#how-it-works' },
+  advisory: { label: 'Talk Through My Options', href: '/start-a-project' },
 };
 
 /** Problem section bullets. */
@@ -86,24 +87,36 @@ const builds = [
   { icon: 'compass', title: 'Optional advisory & data support', text: 'Use us when you want help — never a requirement.' },
 ];
 
-/** Who it is for — grouped audiences. */
+/** Who it is for — broad, outcome-led language (not "what you sell"). */
 const audiences = [
-  'Real estate investors & realtors',
-  'Roofing, solar & home services',
-  'Local service businesses',
-  'Agencies & founder-led businesses',
-  'Owners leaving vendors or networks',
-  'Businesses hiring their first caller',
+  'Real estate investors looking for sellers or acquisition opportunities',
+  'Realtors looking for sellers, buyers, or listings',
+  'Roofing and solar companies looking for homeowners or booked estimates',
+  'Home service businesses looking for local opportunities',
+  'Agencies looking for client conversations',
+  'Local businesses that want outbound without a black-box provider',
+  'Owners deciding whether to build internally or choose a vendor',
+];
+
+/** "Kept simple to run" — owning the operation does not mean doing it all alone. */
+const simplicity = [
+  'Clear caller workflow',
+  'Simple CRM or pipeline view',
+  'Easy reporting',
+  'Call visibility',
+  'Data process you understand',
+  'Practical walkthrough before handoff',
+  'Support available when needed',
 ];
 
 /** How it works — engagement steps. */
 const process = [
-  { number: '01', title: 'Understand', text: 'We learn what you sell, who you target, and what you have tried.' },
-  { number: '02', title: 'Design', text: 'We map the simplest outbound setup that fits your business.' },
+  { number: '01', title: 'Understand', text: 'We learn your market, your target audience, and the type of opportunities you want outbound to create.' },
+  { number: '02', title: 'Design', text: 'We map the simplest setup that fits your business and budget.' },
   { number: '03', title: 'Build', text: 'We set up the dialer, CRM, workflow, reporting, and data process.' },
-  { number: '04', title: 'Caller', text: 'We help source a caller if needed, or build around the one you have.' },
-  { number: '05', title: 'Teach', text: 'We walk you through how the system works and what to watch.' },
-  { number: '06', title: 'Support', text: 'We stay available for advisory, data, dialer, caller, or QA support when useful.' },
+  { number: '04', title: 'Caller', text: 'We help source a caller if needed, or build around the caller you already have.' },
+  { number: '05', title: 'Walkthrough', text: 'We show you how to read the system, what to watch, and how to make basic changes.' },
+  { number: '06', title: 'Support', text: 'We stay available for advisory, data, dialer, caller, QA, vendor guidance, or optimization — when useful.' },
 ];
 
 /** Own vs Rent comparison rows. */
@@ -149,6 +162,34 @@ const offers = [
   },
 ];
 
+/**
+ * Secondary advisory lane — for owners not ready (or not sure they want) to
+ * build their own setup. Positioned separately from the three build offers.
+ */
+const advisoryPath = {
+  id: 'vendor-outbound-advisory',
+  icon: 'compass',
+  title: 'Vendor & Outbound Advisory',
+  who: 'For owners not sure whether to build, use a vendor, replace one, or start lighter.',
+  positioning: 'If building your own setup is not the right move yet, we help you avoid bad outbound decisions.',
+  includes: [
+    'Vendor option review',
+    'Budget & value guidance',
+    'Red flags to avoid',
+    'Questions to ask vendors',
+    'Setup vs vendor recommendation',
+    'Light consulting for smaller budgets',
+  ],
+};
+
+/** Why Veylrio: the route that actually fits you (we do not force one path). */
+const whyModel = [
+  { title: 'Build your own operation', text: 'If ownership makes sense for your business.' },
+  { title: 'Use a vendor', text: 'If that is genuinely the better fit for now.' },
+  { title: 'Start with advisory', text: 'If your budget is limited, begin lighter.' },
+  { title: 'Add support when you need it', text: 'Bring us in for help only when it is useful.' },
+];
+
 /** Optional support — subordinate to the three primary paths. */
 const optionalSupport = [
   { title: 'Data + Dialer Management', text: 'We handle uploads, list health, and dialer checks.' },
@@ -186,6 +227,7 @@ const whyDifferent = [
   'We do not sell fake guarantees.',
   'We build the setup in tools you control.',
   'We help source a caller if you need one.',
+  'If a vendor is the better fit, we will tell you.',
   'We support data, dialer, QA, and advisory after setup.',
   'We know outbound from the inside.',
 ];
@@ -197,24 +239,32 @@ const faqs = [
     a: 'If you need one, we help source a caller and build the system around them. If you already have a caller, we build the workflow they run inside. We are not a staffing agency — caller sourcing is support inside a system you own.',
   },
   {
-    q: 'Do you manage data?',
-    a: 'We set up your data and upload workflow so it is clean and repeatable, and we can manage uploads and list health as optional support. The data process lives in your accounts.',
+    q: 'Do I have to run everything myself?',
+    a: 'No. We build the setup to be simple to run, show you how it works, and stay available if you want support. Owning the operation means the core system is in your control. It does not mean you have to do every task yourself.',
   },
   {
-    q: 'Do you manage the operation after setup?',
-    a: 'Only if you want us to. The operation is built to be run by you. We stay available for advisory, data, dialer, caller, or QA support when it is useful — never as a requirement.',
+    q: 'What if I still want to use a vendor?',
+    a: 'That is fine. Some businesses are a better fit for a vendor, at least at the start. We can help you understand what to look for, what to avoid, and which type of vendor is likely to give you better value.',
+  },
+  {
+    q: 'Can you work with smaller budgets?',
+    a: 'Yes. A smaller budget may not fit a full outbound buildout, but it may fit advisory, vendor guidance, setup planning, or a lighter starting point. The goal is to recommend the most practical next step, not force the largest package.',
+  },
+  {
+    q: 'Is this cheaper than using a vendor?',
+    a: 'Often, yes, because you are not paying a recurring bundled vendor margin forever. But the point is not to build a cheap operation. The point is to spend more directly on what matters: caller quality, data quality, tools, reporting, and control.',
   },
   {
     q: 'We already pay a vendor. Why change?',
     a: 'We are not anti-vendor. The question is what you actually own: the caller, CRM, reporting, recordings, data, and campaign logic. If the vendor still controls those, you may be renting more than you realise.',
   },
   {
-    q: 'Can you guarantee leads or appointments?',
-    a: 'No. We do not sell fake guarantees. Results depend on your offer, market, data, caller, and follow-up. We build the system and the visibility that give the operation a stronger foundation.',
+    q: 'Do you manage the operation after setup?',
+    a: 'Only if you want us to. The operation is built to be run by you. We stay available for advisory, data, dialer, caller, or QA support when it is useful — never as a requirement.',
   },
   {
-    q: 'Is this cheaper than using a vendor?',
-    a: 'Often, yes, because you are not paying a recurring bundled vendor margin forever. But the point is not to build a cheap, weak operation. The point is to spend more directly on what matters: caller quality, data quality, tools, reporting, and control.',
+    q: 'Can you guarantee leads or appointments?',
+    a: 'No. We do not sell fake guarantees. Results depend on your offer, market, data, caller, and follow-up. We build the system and the visibility that give the operation a stronger foundation.',
   },
   {
     q: 'Do we own everything you build?',
@@ -230,7 +280,7 @@ const faqs = [
   },
   {
     q: 'How does an engagement start?',
-    a: 'With a short, practical call to scope the setup: what you need, what you already have, what should be built, and what you should own by the end. If it is not a fit, we will tell you.',
+    a: 'With a short, practical call to scope what you need, what you already have, and what should be built. If a vendor or a lighter path is a better fit, we will tell you.',
   },
 ];
 
@@ -252,9 +302,12 @@ const form = {
   ],
   outboundStatus: [
     'Starting for the first time',
-    'Using a vendor / network now',
+    'Using a vendor or network now',
+    'Leaving a vendor or network',
     'Have a caller, need the system',
+    'Need help finding a caller',
     'Have a setup, want it cleaned up',
+    'Not sure whether to build or use a vendor',
   ],
   contactMethods: ['Email', 'Phone', 'WhatsApp'],
   timelines: ['As soon as possible', 'Within 1 month', '1–3 months', 'Just exploring'],
@@ -266,6 +319,8 @@ const form = {
     '$7,500–$15,000',
     '$15,000+',
   ],
+  budgetHelp:
+    'Budget helps us recommend the right starting point. Smaller budgets may be a better fit for advisory, vendor guidance, or a lighter setup path.',
 };
 
 const site = {
@@ -279,12 +334,15 @@ const site = {
   ownershipStack,
   builds,
   audiences,
+  simplicity,
   process,
   ownVsVendor,
   offers,
+  advisoryPath,
   optionalSupport,
   trustPrinciples,
   whyOwnership,
+  whyModel,
   whyDifferent,
   faqs,
   compliance,

@@ -15,8 +15,8 @@
       <p class="eyebrow">Start a Project</p>
       <h1 class="mt-5 text-display">Let’s build the outbound setup you can own.</h1>
       <p class="lead mt-6 max-w-2xl">
-        Tell us where you are now: starting from zero, leaving a vendor, hiring a caller, or cleaning
-        up what you already have. We will review it and recommend the simplest practical next step.
+        Tell us where you are now. You do not need to know the right dialer, CRM, caller structure, or
+        vendor path before reaching out — we will help you figure out the simplest practical next step.
       </p>
     </div>
   </div>
@@ -167,6 +167,7 @@
                 <% if (err('budget')) { %><p id="budget-error" class="field-error"><%= err('budget') %></p><% } %>
               </div>
             </div>
+            <p class="field-hint mt-1"><%= site.form.budgetHelp %></p>
           </fieldset>
 
           <div class="flex flex-col gap-4 pt-2 sm:flex-row sm:items-center sm:justify-between">

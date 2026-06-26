@@ -66,6 +66,45 @@
   </div>
 </section>
 
+<!-- ══ VENDOR & OUTBOUND ADVISORY (secondary lane) ═════════════════════════ -->
+<section class="section-y">
+  <div class="container">
+    <div class="mx-auto max-w-4xl text-center">
+      <p class="eyebrow">A lighter path</p>
+      <h2 class="mt-4 text-2xl font-semibold text-cream md:text-3xl">Not ready to build? Start with advisory.</h2>
+      <p class="mt-4 text-paper-200/70">
+        If building your own setup is not the right move yet, we can still help you avoid bad
+        outbound decisions.
+      </p>
+    </div>
+
+    <div id="<%= site.advisoryPath.id %>" class="mx-auto mt-10 max-w-4xl scroll-mt-24 overflow-hidden rounded-3xl border border-clay-400/25 bg-ink-800 p-8 md:p-10">
+      <div class="grid gap-8 lg:grid-cols-12">
+        <div class="lg:col-span-5">
+          <span class="icon-badge icon-badge--clay"><%- icon(site.advisoryPath.icon, 'h-6 w-6') %></span>
+          <h3 class="mt-5 text-xl font-semibold text-cream"><%= site.advisoryPath.title %></h3>
+          <p class="mt-2 font-serif text-base italic text-clay-400"><%= site.advisoryPath.positioning %></p>
+          <p class="mt-4 text-sm text-paper-200/65"><%= site.advisoryPath.who %></p>
+          <a href="<%= site.cta.advisory.href %>" class="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-clay-400 hover:text-clay-300">
+            <%= site.cta.advisory.label %>
+            <%- icon('arrow-right', 'arrow h-4 w-4') %>
+          </a>
+        </div>
+        <div class="lg:col-span-7">
+          <ul class="grid gap-3 sm:grid-cols-2">
+            <% site.advisoryPath.includes.forEach(function (item) { %>
+              <li class="flex items-start gap-3 rounded-xl border border-cream/10 bg-cream/[0.03] px-4 py-3">
+                <span class="mt-0.5 text-clay-400"><%- icon('check', 'h-4 w-4') %></span>
+                <span class="text-sm text-paper-200/85"><%= item %></span>
+              </li>
+            <% }); %>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ══ OPTIONAL SUPPORT (subordinate) ══════════════════════════════════════ -->
 <section class="section-y band">
   <div class="container">
